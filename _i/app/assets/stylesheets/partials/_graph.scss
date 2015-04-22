@@ -1,0 +1,89 @@
+.group-label {
+  text-anchor: end;
+}
+
+.group-sum {
+  text-anchor: end;
+}
+
+text {
+  font-size: 10px;
+}
+
+.axis {
+  font-size: 10px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  //  stroke: #000;
+  stroke: #CDCDCD;
+  shape-rendering: crispEdges;
+}
+
+//.x.axis path {
+//  display: none;
+//}
+
+path {
+  stroke: #fff;
+  fill-rule: evenodd;
+}
+
+.line {
+  fill: none;
+  /*stroke: #666;*/
+  /*stroke-width: 1px;*/
+  //  opacity: 0.6;
+  clip-path: url(#clip);
+  stroke: steelblue;
+  stroke-width: 1px;
+
+}
+
+.line.total {
+//  stroke: #1f77b4;
+  stroke: black;
+//  stroke-width: 2px;
+}
+
+.line:hover {
+  //  opacity: 1;
+  stroke-width: 2px;
+}
+
+.zerolevel {
+  stroke: #000;
+  stroke-dasharray: 1, 5
+}
+
+g.context g.brush rect.background {
+  //  fill: rgba(0, 0, 0, .1);
+  fill: rgba(245, 245, 245, 0.5);
+}
+
+.brush .extent {
+  /*stroke: #f09f8c;*/
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+g.context rect.background {
+  visibility: visible !important;
+}
+
+.graph-tooltip {
+  position: fixed;
+  padding: 3px;
+  font-size: 11px;
+  color: #000;
+  background: #bfbfbf;
+  pointer-events: none;
+
+  //  padding: 5px 10px;
+  //  font-size: 11px;
+  font-family: Arial, Helvetica, sans-serif;
+  //  font-weight: bold;
+  border-radius: 0px;
+}

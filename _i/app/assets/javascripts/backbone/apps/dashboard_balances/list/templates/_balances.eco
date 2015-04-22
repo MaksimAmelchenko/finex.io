@@ -1,0 +1,9 @@
+<table class="table table-hover table-condensed" name="accountBalances">
+    <tbody>
+    </tbody>
+</table>
+
+<table class="table table-hover table-condensed" name="debtBalances">
+    <tbody>
+    </tbody>
+</table>

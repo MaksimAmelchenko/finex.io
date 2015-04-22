@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>FINEX Восстановление пароля</title>
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+
+    <link href="/password_recovery/assets/app.css" media="screen" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">FINEX io</a>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <div class="row" name="recoveryPanel">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Забыли свой пароль?</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form">
+
+                        <div class="form-group">
+                            <p>
+                                Что бы сменить пароль, введите адрес электронной почты
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-Mail</label>
+                            <input type="email" class="form-control" name="email" id="email">
+                        </div>
+
+                        <!--<div class="form-group">-->
+                        <!--<div class="g-recaptcha" data-sitekey="6LdprwATAAAAAP1hrpz0Xb4Zw1xo3494_hJX9WmH"></div>-->
+                        <!--</div>-->
+
+                        <div class="form-group">
+                            <div class="alert alert-danger" role="alert" name="error"
+                                 style="display: none">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="commit" name="btnRecovery" class="btn btn-primary">
+                                Продолжить
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" name="confirmPanel" style="display: none">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Смена пароля</h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        На указанный электронный адрес было отправлено письмо. Пожалуйста, откройте
+                        его и нажмите на ссылку внутри его для смены пароля
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-center text-muted small">
+            <a href="/">На главную</a>
+            |
+            <a href="mailto:support@finex.io">Поддержка</a>
+        </p>
+    </div>
+</footer>
+
+<script src="/password_recovery/assets/app.js"></script>
+
+</body>
+</html>

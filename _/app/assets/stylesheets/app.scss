@@ -1,0 +1,112 @@
+$border-radius-base: 0px;
+$border-radius-small: 0px;
+$border-radius-large: 0px;
+
+$fa-font-path: ".";
+
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap.scss";
+//Core variables and mixins
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+// Reset and dependencies
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/print";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
+// Core CSS
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/type";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/code";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/grid";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/tables";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/forms";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+// Components
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/component-animations";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/button-groups";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/navs";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/navbar";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/pagination";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/pager";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/labels";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/badges";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/jumbotron";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/thumbnails";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/alerts";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/progress-bars";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/media";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/list-group";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/panels";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/wells";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/close";
+// Components w/ JavaScript
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/modals";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/tooltip";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/popovers";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/carousel";
+// Utility classes
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
+
+@import "../../../../bower_components/font-awesome/scss/font-awesome";
+
+@import "../../../../bower_components/social-likes/social-likes_birman.css";
+
+form label {
+  font-weight: normal;
+}
+
+form .form-actions {
+  background: whitesmoke;
+  margin: 0 -15px -15px -15px;
+  display: block;
+  padding: 13px 14px 15px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: right;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding-top: 70px;
+  /* Margin bottom by footer height */
+  margin-bottom: 30px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  background-color: #f5f5f5;
+}
+
+.container .text-muted {
+  margin: 6px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .container .jumbotron, .container-fluid .jumbotron {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .jumbotron {
+    padding: 10px 0;
+    margin-bottom: 10px;
+  }
+}
+
+hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

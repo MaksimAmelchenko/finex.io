@@ -1,0 +1,98 @@
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="references_accounts__edit__name" class="col-sm-3 control-label">
+            Наименование<em>*</em>
+        </label>
+
+        <div class="col-sm-9">
+            <input type="text" class="form-control" name="name"
+                   id="references_accounts__edit__name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="references_accounts__edit__accountType" class="col-sm-3 control-label"
+               style="width: 149px;">
+            Тип счета<em>*</em>
+        </label>
+
+        <div class="col-sm-9">
+            <select class="select2" name="accountType" id="references_accounts__edit__accountType">
+                <option></option>
+                <% for accountType in CashFlow.entities.accountTypes.models: %>
+                <option value="<%= accountType.id %>">
+                    <%= accountType.get('name') %>
+                </option>
+                <% end %>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="isEnabled"> Активный
+                </label>
+            </div>
+            <p class="help-block">
+                Неактивные счета скрыты при создании или редактировании транзакции
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label"
+               for="references_accounts__edit__note">
+            Примечание
+        </label>
+
+        <div class="col-sm-9">
+            <textarea class="form-control" name="note" id="references_accounts__edit__note"
+                      rows="2">
+            </textarea>
+        </div>
+    </div>
+
+    <fieldset>
+        <legend>Права доступа</legend>
+        <div class="form-group">
+            <label for="references_accounts__edit__readers" class="col-sm-3 control-label"
+                   style="width: 149px;">
+                Просмотр
+            </label>
+
+            <div class="col-sm-9">
+                <div class="select2" name="readers" id="references_accounts__edit__readers"></div>
+                <p class="help-block">
+                    Список пользователей, у которых есть право на просмотр
+                    транзакций по данному счету
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="references_accounts__edit__writers" class="col-sm-3 control-label"
+                   style="width: 149px;">
+                Изменение
+            </label>
+
+            <div class="col-sm-9">
+                <div class="select2" name="writers" id="references_accounts__edit__writers"></div>
+                <p class="help-block">
+                    Список пользователей, у которых есть право на добавление,
+                    редактирование и удаления транзакций по данному счету
+                </p>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-actions">
+        <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal">
+            Отмена
+        </button>
+        <button type="submit" name="btnSave" class="btn btn-primary">
+            Сохранить
+        </button>
+    </div>
+</form>

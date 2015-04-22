@@ -1,0 +1,18 @@
+
+Пользователь с электронным адресом  <strong><%= @emailHost %></strong> приглашает Вас присоединиться к нему для совместного ведения бухгалтерии.
+<% if @message: %>
+<br><br>
+<blockquote>
+    <p>
+        <%= @message %>
+    </p>
+    <footer><%= @emailHost %></footer>
+</blockquote>
+<% end %>
+<div class="pull-right">
+    <button type="button" name="btnReject" class="btn btn-default">Отклонить</button>
+    <button type="submit" name="btnAccept" class="btn btn-primary">Принять</button>
+</div>
+
+
+

@@ -1,0 +1,6 @@
+<td colspan="3">
+    <div class="well text-center">
+        У Вас еще нет контрагентов.
+        <a href="#" name="btnAdd">Добавить</a> первого контрагента.
+    </div>
+</td>

@@ -1,0 +1,12 @@
+<td>
+    <i class="fa fa-fw"></i>
+</td>
+<td>
+    <% if @idUser : %>
+    <a href="#">
+        <%= @name %>
+    </a>
+    <% else: %>
+    <%= @name %>
+    <% end %>
+</td>

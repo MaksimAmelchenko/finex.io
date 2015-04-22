@@ -1,0 +1,99 @@
+<% balance = @getBalance() %>
+<% moneys = @getMoneys() %>
+<td>
+    <i class="fa fa-fw"></i>
+</td>
+<td class="date">
+    <%= @formatDate(@dIE) %>
+</td>
+
+<td>
+    <%= CashFlow.entities.contractors.get(@idContractor).get('name') if _.isNumber(@idContractor) %>
+</td>
+
+<td class="hidden-xs hidden-sm">
+    <%= @accounts.join(', ') %>
+</td>
+
+<td class="hidden-xs hidden-sm">
+    <%= @categories.join(', ') %>
+</td>
+
+<td class="sum">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <!--@formatter:off-->
+            <%- @numberToMoney(balance[idMoney]['income'], idMoney) unless _.isUndefined (balance[idMoney]['income']) %>
+            <!--@formatter:on-->
+        </div>
+    </div>
+    <% end %>
+</td>
+
+<td class="symbol">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12">
+            <!--@formatter:off-->
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined (balance[idMoney]['income']) %>
+            <!--@formatter:on-->
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="sum">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <!--@formatter:off-->
+            <%- @numberToMoney(balance[idMoney]['expense'], idMoney) unless _.isUndefined (balance[idMoney]['expense']) %>
+            <!--@formatter:on-->
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="symbol">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12">
+            <!--@formatter:off-->
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined  (balance[idMoney]['expense']) %>
+            <!--@formatter:on-->
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="sum">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <!--@formatter:off-->
+            <%- @numberToMoney(balance[idMoney]['total'], idMoney) unless _.isUndefined  (balance[idMoney]['total']) %>
+            <!--@formatter:on-->
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="symbol">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12">
+            <i _class="fa fa-rub"></i>
+            <!--@formatter:off-->
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined (balance[idMoney]['total']) %>
+            <!--@formatter:on-->
+        </div>
+    </div>
+    <% end %>
+</td>
+<td>
+    <%= @note %>
+</td>
+<td>
+    <% for tag in @tags: %>
+    <span class="tag">
+        <%= tag %>
+    </span>
+    <% end %>
+</td>

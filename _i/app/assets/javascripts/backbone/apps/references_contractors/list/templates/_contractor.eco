@@ -1,0 +1,11 @@
+<td>
+    <i class="fa fa-fw"></i>
+</td>
+<td>
+    <a href="#">
+        <%= @name %>
+    </a>
+</td>
+<td>
+    <%= @note %>
+</td>

@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-xs-12">
+        <label class="radio-inline">
+            <input type="radio" name="groupBy" value="1" checked>
+            По месяцам
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="groupBy" value="2">
+            по месяцам и по категориям
+        </label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div name="graph">
+        </div>
+    </div>
+</div>
+
+<!--<div class="graph-tooltip" name="tooltip">-->
+<!--</div>-->

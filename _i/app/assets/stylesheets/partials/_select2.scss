@@ -1,0 +1,19 @@
+.select2-container {
+  width: 100% !important;
+}
+
+// Крестик на select2
+.select2-container .select2-choice abbr {
+  right: 34px;
+}
+
+abbr.select2-search-choice-close:before {
+  color: inherit;
+  content: "\f057";
+  font-size: 18px;
+}
+
+.select2-hidden-accessible {
+  display: none !important;
+  visibility: hidden !important;
+}

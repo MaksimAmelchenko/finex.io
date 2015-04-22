@@ -1,0 +1,6 @@
+<td colspan="2">
+    <div class="well text-center">
+        У Вас еще нет пользователей для совместной работы.
+        <a href="#" name="btnAdd">Пригласить</a> нового пользователя.
+    </div>
+</td>

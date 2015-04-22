@@ -1,0 +1,60 @@
+<form class="form-horizontal" role="form">
+
+    <div class="form-group toolbar">
+        <div class="btn-group">
+            <button type="button" name="btnRefresh" class="btn btn-default" data-toggle="tooltip"
+                    title="Обновить">
+                <i class="fa fa-refresh"></i>
+            </button>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" name="btnToggleParams" class="btn btn-default"
+                    data-toggle="tooltip" title="Показать/скрыть параметры">
+                <i class="fa fa-cog"></i>
+                <span class="fa fa-fw fa-caret-right"></span>
+            </button>
+        </div>
+
+    </div>
+
+    <div name="params" style="display: none;">
+        <div class="form-group form-group-sm">
+
+            <div class="col-xs-3" style="width: 150px;">
+                <div class="input-group date" name="dBegin">
+                    <input type="text" class="form-control"
+                           id="dashboard_accounts_balances_daily__params__dBegin" name="dBegin_">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                </div>
+            </div>
+
+            <div class="col-xs-3" style="width: 150px;">
+                <div class="input-group date" name="dEnd">
+                    <input type="text" class="form-control"
+                           id="dashboard_accounts_balances_daily__params__dEnd" name="dEnd_">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                </div>
+            </div>
+
+            <div class="col-xs-6" style="width: 200px">
+                <select class="select2" name="money"
+                        id="dashboard_accounts_balances_daily__params__money">
+                    <option value="" selected>
+                        В исходной валюте
+                    </option>
+                    <% for money in CashFlow.request 'enabled:money:entities':%>
+                    <option value="<%= money.id %>">
+                        Пересчитать в <%= money.get('symbol')%>
+                    </option>
+                    <% end %>
+                </select>
+            </div>
+        </div>
+
+    </div>
+</form>

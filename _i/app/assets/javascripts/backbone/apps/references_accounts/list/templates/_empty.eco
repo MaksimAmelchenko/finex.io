@@ -1,0 +1,6 @@
+<td colspan="8">
+    <div class="well text-center">
+        У Вас еще нет счетов.
+        <a href="#" name="btnAdd">Добавить</a> первый счет.
+    </div>
+</td>

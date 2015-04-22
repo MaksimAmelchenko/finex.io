@@ -1,0 +1,222 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <h3 class="page-title">
+            Отчеты <span>&gt; Распределение по категориям </span>
+        </h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+
+        <form class="form-horizontal" role="form">
+
+            <div class="form-group toolbar">
+                <div class="input-group col-xs-1" style="width: 200px">
+                    <select class="select2" name="valueType">
+                        <option value="1">Поступление</option>
+                        <option value="2">Расход</option>
+                        <option value="3">«Чистый» расход</option>
+                    </select>
+                </div>
+
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default">
+                        <input type="radio" name="viewType" autocomplete="off" value="1">
+                        <i class="fa fa-table"></i>
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="viewType" autocomplete="off" value="2">
+                        <i class="fa fa-bar-chart"></i>
+                    </label>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" name="btnToggleParams" class="btn btn-default"
+                            data-toggle="tooltip" title="Показать/скрыть параметры">
+                        <i class="fa fa-cog"></i>
+                        <span class="hidden-xs">
+                            Параметры
+                        </span>
+                        <span class="fa fa-fw fa-caret-right"></span>
+                    </button>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" name="btnRefresh" class="btn btn-default"
+                            data-toggle="tooltip" title="Обновить">
+                        <i class="fa fa-refresh"></i>
+                        <span class="hidden-xs">
+                            Обновить
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <div name="params" style="display: none;">
+                <div class="form-group form-group-sm">
+                    <label class="col-xs-2 control-label" for="reports_dynamics__params__dBegin">
+                        Период
+                    </label>
+
+                    <div class="col-xs-4" style="width: 150px;">
+                        <div class="input-group date" name="dBegin">
+                            <input type="text" class="form-control"
+                                   id="reports_dynamics__params__dBegin" name="dBegin_">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4" style="width: 150px;">
+                        <div class="input-group date" name="dEnd">
+                            <input type="text" class="form-control"
+                                   id="reports_dynamics__params__dEnd" name="dEnd_">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-4">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="isUseReportPeriod">
+                                Использовать отчетный период
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <label for="reports_dynamics__params__money" class="col-xs-2 control-label">
+                        Валюта
+                    </label>
+
+                    <div class="col-xs-6" style="width: 150px">
+                        <select class="select2" name="money"
+                                id="reports_dynamics__params__money">
+                            <% for money in CashFlow.request 'enabled:money:entities':%>
+                            <option value="<%= money.id %>">
+                                <%= money.get('symbol')%>
+                            </option>
+                            <% end %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <label for="reports_dynamics__params__contractors"
+                           class="col-xs-2 control-label">
+                        Контрагенты
+                    </label>
+
+
+                    <div class="col-xs-2 col-sm-1" style="width: 150px">
+                        <select class="select2" name="contractorsUsingType"
+                                id="reports_dynamics__params__contractorsUsingType">
+                            <option value="1">Только</option>
+                            <option value="2">Кроме</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-7">
+                        <select multiple class="select2" name="contractors"
+                                id="reports_dynamics__params__contractors">
+                            <!--<option></option>-->
+                            <% for contractor in CashFlow.entities.contractors.models: %>
+                            <option value="<%= contractor.id%>">
+                                <%= contractor.get('name')%>
+                            </option>
+                            <% end %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <label for="reports_dynamics__params__accounts" class="col-xs-2 control-label">
+                        Счета
+                    </label>
+
+                    <div class="col-xs-2 col-sm-1" style="width: 150px">
+                        <select class="select2" name="accountsUsingType"
+                                id="reports_dynamics__params__accountsUsingType">
+                            <option value="1">Только</option>
+                            <option value="2">Кроме</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-7">
+                        <select multiple class="select2" name="accounts"
+                                id="reports_dynamics__params__accounts">
+                            <!--<option></option>-->
+                            <% for account in CashFlow.entities.accounts.models: %>
+                            <option value="<%= account.id%>">
+                                <%= account.get('name')%>
+                                <%= if not account.get('isEnabled') then '[x]' else ''%>
+                            </option>
+                            <% end %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <label for="reports_dynamics__params__categories"
+                           class="col-xs-2 control-label">
+                        Категории
+                    </label>
+
+                    <div class="col-xs-2 col-sm-1" style="width: 150px">
+                        <select class="select2" name="categoriesUsingType"
+                                id="reports_dynamics__params__categoriesUsingType">
+                            <option value="1">Только</option>
+                            <option value="2">Кроме</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-7">
+                        <select multiple class="select2" name="categories"
+                                id="reports_dynamics__params__categories">
+                            <!--<option></option>-->
+                            <!--@formatter:off-->
+                            <% for category in CashFlow.request('category:filtered:entities', {isEnabled: null}): %>
+                            <option value="<%= category.id%>">
+                                <%= category.path(true)%>
+                                <%= if not category.get('isEnabled') then '[x]' else ''%>
+                            </option>
+                            <% end %>
+                            <!--@formatter:on-->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <label for="reports_dynamics__params__tags" class="col-xs-2 control-label">
+                        Теги
+                    </label>
+
+                    <div class="col-xs-2 col-sm-1" style="width: 150px">
+                        <select class="select2" name="tagsUsingType"
+                                id="reports_dynamics__params__tagsUsingType">
+                            <option value="1">Только</option>
+                            <option value="2">Кроме</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-7">
+                        <select multiple class="select2" name="tags"
+                                id="reports_dynamics__params__tags">
+                            <!--<option></option>-->
+                            <% for tag in CashFlow.entities.tags.models: %>
+                            <option value="<%= tag.id%>">
+                                <%= tag.get('name')%>
+                            </option>
+                            <% end %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<br>
+Скопировано:
+<table class="table table-hover table-condensed">
+    <tbody>
+    <tr>
+        <td>
+            Контрагенты
+        </td>
+        <td style="text-align: right">
+            <%= @contractorsCount%>
+        </td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Счета
+        </td>
+        <td style="text-align: right">
+            <%= @accountsCount%>
+        </td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Ед.измерения
+        </td>
+        <td style="text-align: right">
+            <%= @unitsCount%>
+        </td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Категории
+        </td>
+        <td style="text-align: right">
+            <%= @categoriesCount%>
+        </td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Теги
+        </td>
+        <td style="text-align: right">
+            <%= @tagsCount%>
+        </td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Валюты
+        </td>
+        <td style="text-align: right">
+            <%= @moneysCount%>
+        </td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Денежные потоки
+        </td>
+        <td style="text-align: right">
+            <%= @cashFlowsCount%>
+        </td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Транзакции
+        </td>
+        <td style="text-align: right">
+            <%= @cashFlowDetailsCount%>
+        </td>
+        </td>
+    </tr>
+    </tbody>
+</table>
+

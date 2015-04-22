@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-7 col-lg-6">
+        <table class="table table-hover table-bordered1 table-condensed">
+            <thead>
+            <tr>
+                <th>Категория</th>
+                <th>
+                    Сумма
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <%- @renderRoot()%>
+            <tr>
+                <td>
+                    Итого
+                </td>
+
+                <% total = 0 %>
+                <% for item in @items: %>
+                <% total += @getValue(item.sum) %>
+                <% end%>
+
+                <td class="sum">
+                    <%= s.numberFormat(total, 0, '.', ' ')%>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

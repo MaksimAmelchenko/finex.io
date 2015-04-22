@@ -1,0 +1,9 @@
+<!--<div class="row">-->
+    <!--<div class="col-xs-12">-->
+        <div name="graph">
+        </div>
+    <!--</div>-->
+<!--</div>-->
+
+<div class="graph-tooltip" name="tooltip" style="display: none;">
+</div>

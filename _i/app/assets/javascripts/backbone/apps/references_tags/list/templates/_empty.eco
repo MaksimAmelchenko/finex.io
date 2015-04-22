@@ -1,0 +1,6 @@
+<td colspan="2">
+    <div class="well text-center">
+        У Вас еще нет тегов.
+        <a href="#" name="btnAdd">Добавить</a> первый тег.
+    </div>
+</td>

@@ -1,0 +1,6 @@
+<a href="<%= @url %>" title="">
+    <i class="<%= @icon %>"></i>
+    <span class="menu-item-parent"> <%= @label%> </span>
+</a>
+<ul>
+</ul>

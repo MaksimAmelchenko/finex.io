@@ -1,0 +1,27 @@
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="references_projects__copy__projectFrom" class="col-sm-4 control-label" style="width: 199px;">Копируемый проект<em>*</em></label>
+
+        <div class="col-sm-8">
+            <select class="select2" name="projectFrom" id="references_projects__copy__projectFrom">
+                <option></option>
+                <% for project in CashFlow.entities.projects.models: %>
+                <option value="<%= project.id%>"><%= project.get('name')%></option>
+                <% end %>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="references_projects__copy__name" class="col-sm-4 control-label">Наименование<em>*</em></label>
+
+        <div class="col-sm-8">
+            <input type="text" class="form-control" name="name" id="references_projects__copy__name">
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        <button type="button" name="btnCopy" class="btn btn-primary">Копировать</button>
+    </div>
+</form>

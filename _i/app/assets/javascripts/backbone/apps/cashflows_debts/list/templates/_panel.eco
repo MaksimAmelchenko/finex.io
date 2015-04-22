@@ -1,0 +1,145 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <h3 class="page-title">
+            Долги
+        </h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <form class="form-horizontal" role="form">
+            <div class="form-group toolbar">
+                <div class="btn-group">
+                    <button type="button" name="btnAdd" class="btn btn-default"
+                            data-toggle="tooltip" title="Добавить">
+                        <i class="fa fa-plus"></i>
+                        <span class="hidden-xs hidden-sm">
+                            Добавить
+                        </span>
+                    </button>
+                    <button type="button" name="btnDel" class="btn btn-default">
+                        <i class="fa fa-trash-o"></i>
+                        <span class="hidden-xs hidden-sm">
+                            Удалить
+                        </span>
+                    </button>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" name="btnRefresh" class="btn btn-default"
+                            data-toggle="tooltip" title="Обновить">
+                        <i class="fa fa-refresh"></i>
+                        <span class="hidden-xs hidden-sm">
+                            Обновить
+                        </span>
+                    </button>
+                </div>
+
+                <div class="input-group col-xs-4 col-md-2 col-lg-3">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Поиск" name="searchText"
+                           data-toggle="tooltip"
+                           title="Поиск по контрагенту, примечанию или тегам">
+                </div>
+
+                <div class="input-group col-xs-1">
+                <span class="input-group-addon">
+                    <input type="checkbox" name="isUseFilters">
+                </span>
+                    <button type="button" name="btnToggleFilters" class="btn btn-default"
+                            data-toggle="tooltip" title="Показать/скрыть фильтр">
+                        <i class="fa fa-filter"></i>
+                        <span class="hidden-xs hidden-sm">
+                            Фильтр
+                        </span>
+                        <span class="fa fa-fw fa-caret-right"></span>
+                    </button>
+                </div>
+
+                <div name="pagination-region" style="display: inline-table; vertical-align: middle;"
+                     class="pull-right">
+                </div>
+            </div>
+
+            <div name="filters" style="display: none;">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label" for="cashflow_debts__filters__dBegin">
+                        Период
+                    </label>
+
+                    <div class="col-xs-6" style="width: 150px;">
+                        <div class="input-group date" name="dBegin">
+                            <input type="text" class="form-control"
+                                   id="cashflow_debts__filters__dBegin">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6" style="width: 150px;">
+                        <div class="input-group date" name="dEnd">
+                            <input type="text" class="form-control"
+                                   id="cashflow_debts__filters__dEnd">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <div class="col-sm-offset-2 col-sm-8">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="isOnlyNotPaid">
+                                Только долги с ненулевым остатком
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <label for="cashflow_debts__filters__contractors"
+                           class="col-sm-2 control-label">
+                        Контрагенты
+                    </label>
+
+                    <div class="col-sm-8">
+                        <select multiple class="select2" name="contractors"
+                                id="cashflow_debts__filters__contractors">
+                            <option></option>
+                            <% for c in CashFlow.entities.contractors.models: %>
+                            <option value="<%= c.id%>">
+                                <%= c.get('name')%>
+                            </option>
+                            <% end %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group form-group-sm">
+                    <label for="cashflow_debts__filters__tags"
+                           class="col-sm-2 control-label">
+                        Теги
+                    </label>
+
+                    <div class="col-sm-8">
+                        <select multiple class="select2" name="tags"
+                                id="cashflow_debts__filters__tags">
+                            <option></option>
+                            <% for t in CashFlow.entities.tags.models: %>
+                            <option value="<%= t.id%>">
+                                <%= t.get('name')%>
+                            </option>
+                            <% end %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

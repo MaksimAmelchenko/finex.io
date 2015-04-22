@@ -1,0 +1,180 @@
+<div class="row">
+    <div class="col-sm-9">
+        <h3 class="page-title">
+            Импорт данных из других источников в текущий проект
+        </h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="import__show__importSource" class="col-sm-3 col-lg-2 control-label">
+                    Источник данных<em>*</em>
+                </label>
+
+                <div class="col-sm-8 col-md-7 col-lg-6">
+                    <select class="select2" name="importSource" id="import__show__importSource">
+                        <option></option>
+                        <% for importSource in CashFlow.entities.importSources.models: %>
+                        <option value="<%= importSource.id%>">
+                            <%= importSource.get('name')%>
+                        </option>
+                        <% end %>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="import__show__importSourceType" class="col-sm-3 col-lg-2 control-label">
+                    Тип данных<em>*</em>
+                </label>
+
+                <div class="col-sm-8 col-md-7 col-lg-6">
+                    <select class="select2" name="importSourceType"
+                            id="import__show__importSourceType">
+                    </select>
+
+                    <!--<p class="help-block">-->
+                    <!--<a href="#" name="btnShowHelp">Показать</a> описание формата-->
+                    <!--</p>-->
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="col-sm-offset-3 col-lg-offset-2 col-sm-8 col-md-7 col-lg-6">
+                    <p class="help-block">
+                        <a href="#" name="btnShowHelp">Показать</a> описание формата
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group" name="help" style="display: none;">
+                <div class="col-sm-offset-3 col-lg-offset-2 col-sm-8 col-md-7 col-lg-6"
+                     name="helpContent">
+                    Выберите тип данных
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 col-lg-2 control-label" for="import__show__fileName">
+                    Файл<em>*</em>
+                </label>
+
+                <div class="col-sm-8 col-md-7 col-lg-6" name="uploadFileContainer">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="fileName"
+                               id="import__show__fileName" readonly>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" name="btnSelectFile">
+                                <i class="fa fa-folder-open"></i>
+                                Выбрать
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="import__show__delimiter" class="col-sm-3 col-lg-2 control-label">
+                    Разделить<em>*</em>
+                </label>
+
+                <div class="col-sm-2">
+                    <select class="select2" name="delimiter" id="import__show__delimiter">
+                        <option value=";" selected>;</option>
+                        <option value=",">,</option>
+                        <option value="\t">Tab</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-lg-offset-2 col-sm-8 col-md-7 col-lg-6">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="isGroup">
+                            Группировать в денежные потоки
+                        </label>
+                    </div>
+                    <p class="help-block">
+                        Расходные транзакции по одному счету, по одной
+                        категории за один день будут сгруппированны в один денежный поток
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="import__show__tag" class="col-sm-3 col-lg-2 control-label">
+                    Тег
+                </label>
+
+                <div class="col-sm-8 col-md-7 col-lg-6">
+                    <input type="text" class="form-control" name="tag"
+                           id="import__show__tag">
+
+                    <p class="help-block">
+                        Данный тег будет добавлен ко всем импортируемым транзакциям
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group" name="drebedengiAdditionalParameters" style="display: none">
+                <div class="col-sm-offset-3 col-lg-offset-2 col-sm-8 col-md-7 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="isConvertDebts" checked>
+                                    Заменить долговые счета на долговые денежные потоки
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="isConvertInvalidDebts" checked>
+                                    Создать долговой денежный поток для долгового счета с приходными
+                                    или расходными операциями
+                                    <p class="help-block">
+                                        <span class="label label-danger">Внимание!</span>
+                                        Начальные остатки, приходные и расходные операции
+                                        по долговому счету не переносятся в долги. В итоге долг
+                                        "разделится"
+                                        на долговой счет и на долговой денежный поток
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-lg-offset-2 col-sm-8 col-md-7 col-lg-6" name="note">
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div style="text-align: right;"
+                     class="col-sm-offset-3 col-lg-offset-2 col-sm-8 col-md-7 col-lg-6">
+                    <!--            <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal">Отмена</button> -->
+                    <button type="button" name="btnImport" class="btn btn-primary">
+                        Загрузить
+                    </button>
+                </div>
+            </div>
+
+            <div name="errorsLog">
+            </div>
+            <div name="warningsLog">
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>FINEX Регистрация</title>
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link href="/signup/assets/app.css" rel="stylesheet"/>
+</head>
+<!--@formatter:off-->
+<!--[if lt IE 9 ]><body class="lte8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><body> <!--<![endif]--><!-- Fixed navbar -->
+<!--@formatter:on-->
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">FINEX io</a>
+        </div>
+
+        <a href="/signin" type="button" class="btn btn-success navbar-btn navbar-right">
+            Вход
+        </a>
+
+    </div>
+</nav>
+
+
+<div id="content" class="container">
+
+    <div class="row" name="signUpPanel">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 col-sm-offset-2 col-md-offset-3 col-lg-offset-4">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Регистрация</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form">
+
+                        <div class="form-group">
+                            <label for="name">Имя</label>
+                            <input type="text" class="form-control" name="name" id="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register_email">E-Mail</label>
+                            <input type="email" class="form-control" name="email" id="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Пароль</label>
+                            <input type="password" class="form-control" name="password"
+                                   id="password" value="">
+                        </div>
+
+                        <!--<div class="form-group">-->
+                            <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" name="isAcceptTerms"> Я принимаю условия-->
+                                    <!--<a href="#"-->
+                                       <!--data-toggle="modal"-->
+                                       <!--data-target="#myModal">-->
+                                        <!--соглашения </a>-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <div class="form-group">
+                            <div class="g-recaptcha"
+                                 data-sitekey="6LfmngITAAAAAAqu8fccsOU39cpFeVsuQtfYOqYh"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="alert alert-danger" role="alert" name="error"
+                                 style="display: none">
+
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" name="btnSignUp" class="btn btn-primary">
+                                Зарегистрироваться
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" name="confirmPanel" style="display: none">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Пожалуйста, подтвердите свой электронный адрес</h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        На адрес <em name="email"></em> было отправлено электронное письмо.
+                        Пожалуйста, откройте его и
+                        нажмите на ссылку внутри его для подтверждения электронного адреса.
+                    </p>
+                    <!--<button type="button" name="btnSignUp" class="btn btn-primary">Отправить письмо еще раз</button>-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Terms & Conditions</h4>
+            </div>
+            <div class="modal-body custom-scroll terms-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="i-agree">
+                    <i class="fa fa-check"></i> I Agree
+                </button>
+
+                <button type="button" class="btn btn-danger pull-left" id="print">
+                    <i class="fa fa-print"></i> Print
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-center text-muted small">
+            <a href="/">На главную</a>
+            |
+            <a href="mailto:support@finex.io">Поддержка</a>
+        </p>
+    </div>
+</footer>
+
+<script src='https://www.google.com/recaptcha/api.js?hl=ru'></script>
+<script src="/signup/assets/app.js"></script>
+
+</body>
+</html>

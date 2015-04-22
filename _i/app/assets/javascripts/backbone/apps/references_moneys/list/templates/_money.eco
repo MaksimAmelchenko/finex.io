@@ -1,0 +1,17 @@
+<td>
+    <i class="fa fa-fw"></i>
+</td>
+<td>
+    <a href="#">
+        <%= @name %>
+    </a>
+</td>
+<td>
+    <%- @symbol %>
+</td>
+<td>
+    <%- if @isEnabled then '<i class="fa fa-check"></i>' %>
+</td>
+<td>
+    <%= CashFlow.entities.currencies.get(@idCurrency).get('name') if @idCurrency %>
+</td>

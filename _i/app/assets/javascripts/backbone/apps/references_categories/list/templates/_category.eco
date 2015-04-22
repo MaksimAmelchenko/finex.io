@@ -1,0 +1,9 @@
+    <td>
+        <%= @name %>
+    </td>
+    <td>
+        <%- if @isEnabled then '<i class="fa fa-check"></i>' %>
+    </td>
+    <td>
+        <%= @note %>
+    </td>

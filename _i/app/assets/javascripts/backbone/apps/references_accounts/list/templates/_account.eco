@@ -1,0 +1,45 @@
+<td>
+    <i class="fa fa-fw"></i>
+</td>
+<td>
+    <% if @permit is 7: %>
+    <a href="#">
+        <%= @name %>
+    </a>
+    <% else: %>
+    <%= @name %>
+    <% end %>
+
+</td>
+<td style="text-align: center;">
+    <%- if @isEnabled then '<i class="fa fa-check"></i>' %>
+</td>
+<td>
+    <%= if @permit is 7 then 'Я' else CashFlow.entities.users.get(@idUser).get('name') %>
+</td>
+<td>
+    <%- if @permit is 1 then '<i class="fa fa-check"></i>' %>
+    <% if @permit is 7: %>
+    <% for idUser in @readers: %>
+    <span class="tag">
+    <%= CashFlow.entities.users.get(idUser).get('name') %>
+    </span>
+    <% end %>
+    <% end %>
+</td>
+<td>
+    <%- if @permit is 3 then '<i class="fa fa-check"></i>' %>
+    <% if @permit is 7: %>
+    <% for idUser in @writers: %>
+    <span class="tag">
+    <%= CashFlow.entities.users.get(idUser).get('name') %>
+    </span>
+    <% end %>
+    <% end %>
+</td>
+<td>
+    <%= CashFlow.entities.accountTypes.get(@idAccountType).get('name') %>
+</td>
+<td>
+    <%= @note %>
+</td>

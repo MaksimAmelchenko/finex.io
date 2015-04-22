@@ -1,0 +1,156 @@
+<% balance = @getBalance() %>
+<% moneys = @getMoneys() %>
+
+<td>
+    <i class="fa fa-fw"></i>
+</td>
+<td class="date"> <%= @formatDate(@dDebt) %></td>
+<td style="width: 150px">
+    <%= CashFlow.entities.contractors.get(@idContractor).get('name') if _.isNumber(@idContractor) %>
+</td>
+<td class="sum">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <%- @numberToMoney(balance[idMoney]['debt'], idMoney) unless _.isUndefined (balance[idMoney]['debt']) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="symbol">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12">
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined (balance[idMoney]['debt']) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+
+<td class="sum">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <%- @numberToMoney(balance[idMoney]['paidDebt'], idMoney) unless _.isUndefined (balance[idMoney]['paidDebt']) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="symbol">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12">
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined (balance[idMoney]['paidDebt']) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+
+<td class="sum">
+    <% for own key, idMoney of moneys: %>
+    <% remainingDebt = (balance[idMoney]['debt'] ? 0) + (balance[idMoney]['paidDebt'] ? 0) %>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <%- @numberToMoney(remainingDebt, idMoney) unless _.isUndefined(remainingDebt) or remainingDebt is 0 %>
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="symbol">
+    <% for own key, idMoney of moneys: %>
+    <% remainingDebt = (balance[idMoney]['debt'] ? 0) + (balance[idMoney]['paidDebt'] ? 0) %>
+    <div class="row">
+        <div class="col-sm-12">
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined(remainingDebt) or remainingDebt is 0%>
+        </div>
+    </div>
+    <% end %>
+</td>
+
+<td class="sum hidden-xs hidden-sm">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <%- @numberToMoney(balance[idMoney]['paidInterest'], idMoney) unless _.isUndefined (balance[idMoney]['paidInterest']) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="symbol hidden-xs hidden-sm">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12">
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined (balance[idMoney]['paidInterest']) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+
+<td class="sum hidden-xs hidden-sm">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <%- @numberToMoney(balance[idMoney]['fine'], idMoney) unless _.isUndefined (balance[idMoney]['fine']) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="symbol hidden-xs hidden-sm">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12">
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined (balance[idMoney]['fine']) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+
+<td class="sum hidden-xs hidden-sm">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <%- @numberToMoney(balance[idMoney]['fee'], idMoney) unless _.isUndefined (balance[idMoney]['fee']) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="symbol hidden-xs hidden-sm">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-sm-12">
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined (balance[idMoney]['fee']) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+
+<td class="sum hidden-xs hidden-sm">
+    <% for own key, idMoney of moneys: %>
+    <% cost = (balance[idMoney]['paidInterest'] ? 0) + (balance[idMoney]['fine'] ? 0) + (balance[idMoney]['fee'] ? 0)%>
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <%- @numberToMoney(cost, idMoney) unless _.isUndefined (cost) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="symbol hidden-xs hidden-sm">
+    <% for own key, idMoney of moneys: %>
+    <% cost = (balance[idMoney]['paidInterest'] ? 0) + (balance[idMoney]['fine'] ? 0) + (balance[idMoney]['fee'] ? 0)%>
+    <div class="row">
+        <div class="col-sm-12">
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined (cost) %>
+        </div>
+    </div>
+    <% end %>
+</td>
+
+<td class="hidden-xs"> <%= @note %></td>
+
+<td class="hidden-xs">
+    <% for tag in @tags: %>
+    <span class="tag">
+        <%= tag %>
+    </span>
+    <% end %>
+</td>

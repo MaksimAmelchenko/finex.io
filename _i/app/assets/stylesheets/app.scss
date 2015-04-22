@@ -1,0 +1,110 @@
+//@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700);
+
+$border-radius-base: 0px;
+$border-radius-small: 0px;
+$border-radius-large: 0px;
+
+$font-family-base: 'Open Sans', sans-serif;
+$fa-font-path: ".";
+
+//Core variables and mixins
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+// Reset and dependencies
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/print";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
+// Core CSS
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/type";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/code";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/grid";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/tables";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/forms";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+// Components
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/component-animations";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/button-groups";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/navs";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/navbar";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/pagination";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/pager";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/labels";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/badges";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/jumbotron";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/thumbnails";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/alerts";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/progress-bars";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/media";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/list-group";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/panels";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/wells";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/close";
+// Components w/ JavaScript
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/modals";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/tooltip";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/popovers";
+//@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/carousel";
+// Utility classes
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
+@import "../../../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
+
+@import "../../../../bower_components/font-awesome/scss/font-awesome";
+
+@import "../../../vendor/assets/stylesheets/smartadmin/smartadmin-production-plugins";
+@import "../../../vendor/assets/stylesheets/smartadmin/smartadmin-production.scss";
+@import "../../../vendor/assets/stylesheets/smartadmin/smartadmin-skins";
+
+@import "../../../../bower_components/bootstrap-datepicker/css/datepicker3.css";
+@import '../../../../bower_components/bootstrap-notify/css/bootstrap-notify.css';
+@import "../../../../bower_components/nprogress/nprogress.css";
+
+@import "../../../vendor/assets/stylesheets/plugins/jquery.treetable.css";
+
+@import "partials/base";
+@import "partials/datapicker";
+@import "partials/footer";
+@import "partials/form";
+@import "partials/graph";
+@import "partials/input-group-btn";
+@import "partials/modal";
+@import "partials/nestable";
+@import "partials/notify";
+@import "partials/panel";
+@import "partials/select2";
+@import "partials/table";
+@import "partials/tag";
+@import "partials/treetable";
+@import "partials/validation";
+@import "partials/tooltip";
+
+//SmartAdmin меняет на 2px
+.btn {
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+}
+
+.minified .nav-demo-btn {
+  display: none !important;
+}
+
+.nav-demo-btn {
+  display: block;
+  padding: 6px 5px;
+  margin: 5px 10px;
+  width: auto;
+//  border-radius: 5px;
+//  -webkit-border-radius: 5px;
+//  -moz-border-radius: 5px;
+  font-size: 12px;
+  white-space: normal;
+
+  background-color: rgba(77, 118, 134, .5);
+  border-color: #3a7775;
+}
+

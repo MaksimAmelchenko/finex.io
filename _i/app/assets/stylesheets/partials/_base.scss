@@ -1,0 +1,256 @@
+html {
+  //  position: relative;
+  //  min-height: 100%;
+  background: none;
+}
+
+body {
+  /* Margin bottom by footer height */
+  //  margin-bottom: 60px;
+  //  font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
+  background: none;
+  //    font-size: 13px;
+}
+
+//
+//body > .container {
+//  padding: 60px 15px 0;
+//}
+//
+//.container .text-muted {
+//  margin: 20px 0;
+//}
+//
+//code {
+//  font-size: 80%;
+//}
+
+//#content {
+//  padding-top: 90px;
+//}
+
+//.fixed-ribbon #content {
+//  padding-top: 90px;
+//}
+
+//@media (max-width: 767px) {
+//  .fixed-ribbon #content {
+//    padding-top: 100px;
+//  }
+//}
+#main {
+  padding-bottom: 0px;
+}
+
+#ribbon {
+  //  min-height: 90px;
+  background: white;
+  padding: 0;
+  min-height: 0;
+
+  border-bottom: 1px solid #CFCFCF;
+  //  border-top: 1px solid #E6E6E6;
+}
+
+.form-control {
+  height: 32px;
+}
+
+.help-block {
+  margin-top: 6px;
+  padding: 0 1px;
+  font-size: 11px;
+  line-height: 15px;
+  color: #999999;
+}
+
+//Для Тегов, что бы не сливались
+.label {
+  display: inline-block;
+}
+
+.dd {
+  max-width: none;
+}
+
+.text-muted {
+  color: #999999;
+}
+
+.btn-toolbar {
+  padding-bottom: 5px;
+  padding-top: 3px;
+}
+
+.page-title {
+  margin: 10px 0 10px;
+}
+
+// fix aside padding
+.fixed-navigation nav > ul {
+  padding-right: 0;
+  width: 100%;
+  overflow-y: hidden;
+}
+
+.mobile-detected.fixed-navigation nav > ul {
+  padding-right: 0px !important;
+}
+
+//.spinner-icon {
+//  width: 18px;
+//  height: 18px;
+//  box-sizing: border-box;
+//  border: solid 2px transparent;
+//  border-top-color: #29d;
+//  border-left-color: #29d;
+//  border-radius: 50%;
+//  -webkit-animation: nprogress-spinner 400ms linear infinite;
+//  animation: nprogress-spinner 400ms linear infinite;
+//}
+
+aside {
+  overflow-y: scroll;
+}
+
+.input-group-delimiter {
+  padding: 6px 10px 6px 5px;
+  border: none;
+  background-color: inherit;
+  display: table-cell;
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+//.panel {
+//  position: fixed;
+//  top: 49px;
+//  left: 220px;
+//
+//  right: 0;
+//  z-index: 901;
+//}
+
+.ajax-loading-animation {
+  padding: 14px;
+}
+
+//.form-multiline .form-group {
+//  margin-bottom: 15px;
+//  margin-right: 30px;
+//}
+//.form-multiline label,
+//.form-multiline .form-control {
+//  margin-right: 15px;
+//}
+
+.form-horizontal {
+  .toolbar {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+.toolbar {
+  //  font-size: 13px;
+  margin-bottom: 5px;
+  .btn {
+    font-size: 13px;
+
+  }
+  .input-group {
+    display: inline-table;
+    vertical-align: middle;
+  }
+}
+
+// Для формы-фильтра
+.form-horizontal .form-group.form-group-sm {
+  margin-bottom: 5px;
+
+  .form-control {
+    height: 28px;
+    line-height: 28px;
+  }
+
+  label {
+    font-size: 12px;
+  }
+
+  input[type="checkbox"] {
+    margin-top: 2px;
+  }
+
+  .input-group-addon {
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
+
+  .select2-choices li {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+
+  .select2-container .select2-choice {
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+  }
+
+  .select2-search-field input {
+    height: 22px;
+    margin: 0px;
+  }
+}
+
+//
+//.right-caret {
+//  border-bottom: 4px solid transparent;
+//  border-top: 4px solid transparent;
+//  border-left: 4px solid #000000;
+//  display: inline-block;
+//  height: 0;
+////  opacity: 0.3;
+//  vertical-align: middle;
+//  width: 0;
+//}
+
+.fixed-navigation nav {
+  padding-bottom: 9px;
+}
+
+#header > :first-child {
+  width: auto;
+}
+
+#logo a {
+  color: #777;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.login-info {
+  font-size: 14px;
+  i {
+    margin-right: 5px;
+  }
+}
+
+.minified .login-info a i {
+  display: inherit;
+  margin-right: 0px;
+}
+
+.opacity {
+  opacity: 0.4
+}
+
+.loading-container {
+  min-height: 200px;
+}
+
+textarea {
+  resize: vertical;
+}

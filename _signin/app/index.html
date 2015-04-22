@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FINEX Вход</title>
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link href="/signin/assets/app.css" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">FINEX io</a>
+        </div>
+
+        <a href="/signup" type="button" class="btn btn-success navbar-btn navbar-right">
+            Регистрация
+        </a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Вход</h3>
+                </div>
+                <div class="panel-body">
+
+                    <form class="form">
+
+                        <div class="form-group">
+                            <label for="email">E-Mail</label>
+                            <input type="email" class="form-control" name="email" id="email"
+                                   value="">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="password">Пароль</label>
+                            <input type="password" class="form-control" name="password"
+                                   id="password"
+                                   value="">
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="pull-left">
+                                <a href="/password_recovery">Забыли пароль?</a>
+                            </div>
+                            <button type="button" name="btnSignIn" class="btn btn-primary">
+                                Войти
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-center text-muted small">
+            <a href="/">На главную</a>
+            |
+            <a href="mailto:support@finex.io">Поддержка</a>
+        </p>
+    </div>
+</footer>
+
+
+<script src="/signin/assets/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<header id="header">
+    <div id="logo-group">
+        <!-- PLACE YOUR LOGO HERE -->
+        <span id="logo"> <a href="/"> FINEX io </a></span>
+        <!--<a href="/">FINEX io</a>-->
+        <!-- END LOGO PLACEHOLDER -->
+        <!--<span id="activity" class="activity-dropdown"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>-->
+    </div>
+
+
+    <div class="pull-right">
+
+        <!-- collapse menu button -->
+        <div id="hide-menu" class="btn-header pull-right">
+            <span>
+                <a href="#" name="btnToggleMenu" title="Показать/Скрыть меню">
+                    <i class="fa fa-reorder"></i>
+                </a> </span>
+        </div>
+        <!-- end collapse menu -->
+
+        <!-- logout button -->
+        <div id="logout" class="btn-header transparent pull-right">
+            <span>
+                <a href="#" title="Выход" name="btnLogout">
+                    <i class="fa fa-sign-out"></i>
+                </a>
+            </span>
+        </div>
+        <!-- end logout button -->
+
+        <!-- fullscreen button -->
+        <!--<div id="fullscreen" class="btn-header transparent pull-right">-->
+        <!--<span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>-->
+        <!--</div>-->
+        <!-- end fullscreen button -->
+
+        <ul class="header-dropdown-list" name="project">
+        </ul>
+    </div>
+</header>

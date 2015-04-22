@@ -1,0 +1,40 @@
+<td>
+    <i class="fa fa-fw"></i>
+</td>
+<td class="date">
+    <%= @formatDate(@dTransfer) %>
+</td>
+<!--<td style="width: 200px">-->
+<td>
+    <%= CashFlow.entities.accounts.get(@idAccountFrom).get('name') unless _.isNull @idAccountFrom%>
+</td>
+<!--<td style="width: 200px">-->
+<td>
+    <%= CashFlow.entities.accounts.get(@idAccountTo).get('name') unless _.isNull @idAccountTo %>
+</td>
+<td class="sum">
+    <%- @numberToMoney(@sum, @idMoney) unless _.isNull @sum %>
+</td>
+<td class="symbol">
+    <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') unless _.isNull @idMoney %>
+</td>
+<!--<td style="width: 200px">-->
+<td>
+    <%= CashFlow.entities.accounts.get(@idAccountFee).get('name') unless _.isNull @idAccountFee %>
+</td>
+<td class="sum">
+    <%- @numberToMoney(@fee, @idMoney) unless _.isNull @fee %>
+</td>
+<td class="symbol">
+    <%- CashFlow.entities.moneys.get(@idMoneyFee).get('symbol') unless _.isNull @idMoneyFee %>
+</td>
+<td class="hidden-xs">
+    <%= @note %>
+</td>
+<td class="hidden-xs">
+    <% for tag in @tags: %>
+    <span class="tag">
+        <%= tag %>
+    </span>
+    <% end %>
+</td>

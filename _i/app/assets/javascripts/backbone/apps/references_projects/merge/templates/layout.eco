@@ -1,0 +1,51 @@
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="references_projects__merge__targetProject" class="col-sm-3 control-label" style="width: 149px;">Целевой проект<em>*</em></label>
+
+        <div class="col-sm-9">
+            <select class="select2" name="targetProject" id="references_projects__merge__targetProject">
+                <option></option>
+                <% for project in CashFlow.entities.projects.models: %>
+                <option value="<%= project.id%>"><%= project.get('name')%></option>
+                <% end %>
+            </select>
+
+            <p class="help-block">В данные проект будут перенесены данные из объединяемых проектов</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="references_projects__merge__projects" class="col-sm-3 control-label" style="width: 149px;">Объединяемые проекты<em>*</em></label>
+
+        <div class="col-sm-9">
+            <select class="select2" multiple name="projects" id="references_projects__merge__projects">
+                <option></option>
+                <% for project in CashFlow.entities.projects.models: %>
+                <% if project.get('permit') is 7 and project.id isnt CashFlow.request('active:project'): %>
+                <option value="<%= project.id%>"><%= project.get('name')%></option>
+                <% end %>
+                <% end %>
+            </select>
+            <!--<div class="alert alert-warning" role="alert">-->
+            <!--<strong>Внимание:</strong> Объединяемые проекты будут удалены-->
+            <!--</div>-->
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="isAgree"> Я понимаю, что объединяемые проекты будут удалены после переноса данных в целевой проект
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-actions">
+        <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        <button type="button" name="btnMerge" class="btn btn-primary">Объединить</button>
+    </div>
+</form>

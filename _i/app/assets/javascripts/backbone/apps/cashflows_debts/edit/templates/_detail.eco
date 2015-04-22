@@ -1,0 +1,38 @@
+<td>
+    <i class="fa fa-fw"></i>
+</td>
+
+<td class="date">
+    <%= @formatDate(@dDebtDetail) %>
+</td>
+
+<!--<td style="width: 200px">-->
+<td>
+    <%= CashFlow.entities.accounts.get(@idAccount).get('name') %>
+</td>
+
+<!--<td style="min-width: 200px">-->
+<!--<td style="width: 200px">-->
+<td>
+    <%= CashFlow.entities.categories.get(@idCategory).get('name') %>
+</td>
+
+<td class="sum">
+    <%- @numberToMoney(@sign * @sum, @idMoney) %>
+</td>
+
+<td class="symbol">
+    <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') %>
+</td>
+
+<td>
+    <%= @note %>
+</td>
+
+<td>
+    <% for tag in @tags: %>
+    <span class="tag">
+        <%- tag %>
+    </span>
+    <% end %>
+</td>

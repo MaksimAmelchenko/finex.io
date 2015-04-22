@@ -1,0 +1,22 @@
+<!--
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        sd
+    </div>
+</div>
+-->
+<p>
+</p>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+        <div name="invitations-region">
+        </div>
+        <div name="balances-region">
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
+        <div name="balancesDaily-region">
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,31 @@
+.tooltip-inner {
+  background-color: #bfbfbf;
+  color: #000;
+  font-weight: normal;
+}
+
+.tooltip.right {
+  margin-left: 0;
+  .tooltip-arrow {
+    border-right-color: #bfbfbf;
+  }
+}
+
+.tooltip.left {
+  margin-left: 0;
+  .tooltip-arrow {
+    border-left-color: #bfbfbf;
+  }
+}
+
+.tooltip.top {
+  .tooltip-arrow {
+    border-top-color: #bfbfbf;
+  }
+}
+
+.tooltip.bottom {
+  .tooltip-arrow {
+    border-top-color: #bfbfbf;
+  }
+}

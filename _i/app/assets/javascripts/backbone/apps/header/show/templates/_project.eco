@@ -1,0 +1,17 @@
+<% idProject = CashFlow.request('active:project') %>
+<% project =_.findWhere(@items, {idProject: idProject}) %>
+
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <%= project.name if project%>
+    <i class="fa fa-angle-down"></i>
+</a>
+<ul class="dropdown-menu pull-right">
+    <% for project in @items: %>
+    <li data-id-project="<%= project.idProject %>"  <%- 'class="active"' if project.idProject is idProject %> >
+        <a href="#">
+            <%= project.name %>
+        </a>
+    </li>
+    <% end %>
+
+</ul>

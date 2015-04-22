@@ -1,0 +1,74 @@
+<br>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Денежный поток
+                    <span>
+                        &gt; <%= if @idIE then 'Редактирование' else 'Добавление'%>
+                    </span>
+                </h3>
+            </div>
+
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="cashflows_ies_list__edit__contractor"
+                               class="col-sm-2 control-label">
+                            Контрагент
+                        </label>
+
+                        <div class="col-sm-8 col-md-7 col-lg-6">
+                            <div class="select2" name="contractor" id="cashflows_ies_list__edit__contractor"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cashflows_ies_list__edit__note" class="col-sm-2 control-label">
+                            Примечание
+                        </label>
+
+                        <div class="col-sm-8 col-md-7 col-lg-6">
+                            <textarea class="form-control" name="note"
+                                      id="cashflows_ies_list__edit__note" rows="2">
+                                <%= @note%>
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cashflows_ies_list__edit__tags" class="col-sm-2 control-label">
+                            Теги
+                        </label>
+
+                        <div class="col-sm-8 col-md-7 col-lg-6">
+                            <div class="select2" name="tags"
+                                 id="cashflows_ies_list__edit__tags"></div>
+                        </div>
+                    </div>
+
+                    <div name="details-region">
+
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-7 col-lg-6 col-sm-offset-2">
+                                <button type="button" name="btnCancel" class="btn btn-default">
+                                    Отмена
+                                </button>
+                                <button type="button" name="btnSave" class="btn btn-primary">
+                                    Сохранить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

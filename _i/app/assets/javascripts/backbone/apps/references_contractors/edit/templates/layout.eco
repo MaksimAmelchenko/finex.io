@@ -1,0 +1,35 @@
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="references_contractors__edit__name"
+               class="col-sm-3 control-label">
+            Наименование<em>*</em>
+        </label>
+
+        <div class="col-sm-9">
+            <input type="text" class="form-control" name="name"
+                   id="references_contractors__edit__name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label"
+               for="references_contractors__edit__note">
+            Примечание
+        </label>
+
+        <div class="col-sm-9">
+            <textarea class="form-control" name="note" id="references_contractors__edit__note"
+                      rows="2">
+            </textarea>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal">
+            Отмена
+        </button>
+        <button type="submit" name="btnSave" class="btn btn-primary">
+            Сохранить
+        </button>
+    </div>
+</form>

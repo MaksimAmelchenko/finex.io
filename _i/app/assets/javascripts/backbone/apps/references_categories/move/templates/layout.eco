@@ -1,0 +1,63 @@
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="references_categories__move__categoryFrom" class="col-sm-2 control-label"
+               style="width: 99px;">
+            Из<em>*</em>
+        </label>
+
+        <div class="col-sm-10">
+            <select class="select2" name="categoryFrom"
+                    id="references_categories__move__categoryFrom">
+                <option></option>
+                <!--@formatter:off-->
+                <% for category in CashFlow.request('category:filtered:entities', {isSystem: false, isEnabled: true, idCategory: @idCategory}): %>
+                <option value="<%= category.id%>">
+                    <%- category.path(true)%>
+                </option>
+                <% end %>
+                <!--@formatter:on-->
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="references_categories__move__categoryTo" class="col-sm-2 control-label"
+               style="width: 99px;">
+            В<em>*</em>
+        </label>
+
+        <div class="col-sm-10">
+            <select class="select2" name="categoryTo" id="references_categories__move__categoryTo">
+                <option></option>
+                <!--@formatter:off-->
+                <% for category in CashFlow.request('category:filtered:entities', {isSystem: false, isEnabled: true}): %>
+                <option value="<%= category.id%>">
+                    <%- category.path(true)%>
+                </option>
+                <% end %>
+                <!--@formatter:on-->
+            </select>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="isRecursive">
+                    Переносить транзакции из подкатегорий
+                </label>
+            </div>
+            <!--<p class="help-block">Рекурсивный перенос транзакций из всех дочерних статей в указанную статью</p>-->
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal">
+            Отмена
+        </button>
+        <button type="button" name="btnMove" class="btn btn-primary">
+            Перенести
+        </button>
+    </div>
+</form>

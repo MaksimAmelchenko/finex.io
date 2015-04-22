@@ -1,0 +1,30 @@
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+    </button>
+
+    <table class="table table-hover table-condensed has-tickbox">
+        <thead>
+        <tr style="background: inherit;">
+            <th>Номер строки</th>
+            <th>Ошибка</th>
+            <th>Строка</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for error in this: %>
+        <tr>
+            <td>
+                <%= error.nLine%>
+            </td>
+            <td>
+                <%= error.message%>
+            </td>
+            <td>
+                <%= error.text%>
+            </td>
+        </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>

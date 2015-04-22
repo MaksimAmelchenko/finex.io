@@ -1,0 +1,69 @@
+<br>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Долг <span> &gt; <%= if @idDebt then 'Редактирование' else 'Добавление'%></span>
+                </h3>
+            </div>
+
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="cashflows_debts__edit__contractor">
+                            Контрагент<em>*</em>
+                        </label>
+
+                        <div class="col-sm-8 col-md-7 col-lg-6">
+                            <select class="select2" name="contractor" id="cashflows_debts__edit__contractor">
+                                <option></option>
+                                <% for c in CashFlow.request('contractor:entities').models: %>
+                                <option value="<%= c.id %>"><%= c.get('name') %></option>
+                                <% end %>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="cashflows_debts__edit__note">
+                            Примечание
+                        </label>
+
+                        <div class="col-sm-8 col-md-7 col-lg-6">
+                            <textarea class="form-control" name="note" id="cashflows_debts__edit__note" rows="2">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cashflows_debts__edit__tags" class="col-sm-2 control-label">
+                            Теги
+                        </label>
+
+                        <div class="col-sm-8 col-md-7 col-lg-6">
+                            <div class="select2" name="tags" id="cashflows_debts__edit__tags"></div>
+                        </div>
+                    </div>
+
+                    <div name="details-region"></div>
+
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-7 col-lg-6 col-sm-offset-2">
+                                <button type="button" name="btnCancel" class="btn btn-default">
+                                    Отмена
+                                </button>
+                                <button type="button" name="btnSave" class="btn btn-primary">
+                                    Сохранить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

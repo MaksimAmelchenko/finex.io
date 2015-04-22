@@ -1,0 +1,219 @@
+<% isNew = @idIEDetail is null%>
+<form class="form-horizontal">
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-xs-6" style="width: 160px;">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="sign" value="1" <%= if @sign is 1 then 'checked'%> >
+                    Приход
+                </label>
+            </div>
+        </div>
+
+        <div class="col-xs-6" style="width: 160px;">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="sign" value="-1" <%= if @sign is -1 then 'checked'%>>
+                    Расход
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-2 col-sm-3 control-label" style="width: 149px;"
+               for="cashflow_ies_details__edit__dIEDetail">
+            Дата и период<em>*</em>
+        </label>
+
+        <div class="col-xs-10 col-sm-9">
+            <div class="row">
+
+                <div class="col-xs-6" style="width: 170px;">
+                    <div class="input-group date" name="dIEDetail" data-provide="datepicker">
+                        <input type="text" class="form-control"
+                               id="cashflow_ies_details__edit__dIEDetail" name="dIEDetail_">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-xs-6" style="width: 190px;">
+                    <div class="input-group date" name="reportPeriod" data-provide="datepicker"
+                         data-date-format="MM yyyy" data-date-min-view-mode="1"
+                         data-is-linked="true">
+                        <input type="text" class="form-control"
+                               id="cashflow_ies_details__edit__reportPeriod" name="reportPeriod_"
+                               data-toggle="tooltip"
+                               title="Отчетный период">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label" style="width: 149px;"
+               for="cashflow_ies_details__edit__account">
+            Счет<em>*</em>
+        </label>
+
+        <div class="col-sm-9">
+            <select class="select2" name="account" id="cashflow_ies_details__edit__account">
+                <option></option>
+                <% for account in CashFlow.request 'enabled:account:entities', @idAccount: %>
+                <option value="<%= account.id %>"><%= account.get('name') %></option>
+                <% end %>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label" style="width: 149px;"
+               for="cashflow_ies_details__edit__category">
+            Категория<em>*</em>
+        </label>
+
+        <div class="col-sm-9">
+            <div class="input-group">
+                <select class="select2" name="category" id="cashflow_ies_details__edit__category">
+                    <option></option>
+                    <!--@formatter:off-->
+                    <% for category in CashFlow.request('category:filtered:entities', {isEnabled: true, isSystem: false, idCategory: @idCategory}): %>
+                    <option value="<%= category.id %>">
+                        <%= category.path(true) %>
+                    </option>
+                    <% end %>
+                    <!--@formatter:on-->
+                </select>
+                <span class="input-group-delimiter"></span>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" name="btnAddCategory">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-2 col-sm-3 control-label" style="width: 149px;"
+               for="cashflow_ies_details__edit__quantity">
+            Количество<em>*</em>
+        </label>
+
+        <div class="col-xs-10 col-sm-9">
+            <div class="row">
+                <div class="col-xs-6" style="width:140px">
+                    <input type="number" class="form-control number" name="quantity"
+                           id="cashflow_ies_details__edit__quantity">
+                </div>
+                <div class="col-xs-6" style="width: 120px">
+                    <select class="select2" name="unit">
+                        <option></option>
+                        <% for unit in CashFlow.entities.units.models: %>
+                        <option value="<%= unit.id %>">
+                            <%= unit.get('name') %>
+                        </option>
+                        <% end %>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-2 col-sm-3 control-label" style="width: 149px;"
+               for="cashflow_ies_details__edit__sum">
+            Сумма<em>*</em>
+        </label>
+
+        <div class="col-xs-10 col-sm-9">
+            <div class="row">
+
+                <div class="col-xs-6" style="width:140px">
+                    <input type="text" class="form-control number" name="sum"
+                           id="cashflow_ies_details__edit__sum">
+                </div>
+
+                <div class="col-xs-6" style="width: 120px">
+                    <select class="select2" name="money">
+                        <% for money in CashFlow.request 'enabled:money:entities', @idMoney: %>
+                        <option value="<%= money.id %>">
+                            <%= money.get('symbol') %>
+                        </option>
+                        <% end %>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="isNotConfirmed">
+                    Непотверждённая транзакция
+                </label>
+
+                <a href="javascript:void(0)" tabindex="0" data-toggle="popover" data-trigger="focus"
+                   data-content="<p>Неподтвержённые транзации будут выделены в журнале операций
+                   <span class='bg-warning'> желтым фоном </span>
+                   (простроченные неподтверждённые &mdash;
+                   <span class='bg-danger'> красным </span>).</p>
+                   <p>В остальном они ничем не отличаются от обычных транзакций.</p>">
+                    <i class="fa fa-question-circle"></i>
+                </a>
+
+            </div>
+            <!--<p class="help-block">Неподтвержённые транзации будут выделены в журнале операций. В остальном они ничем не отличаются</p>-->
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label" style="width: 149px;"
+               for="cashflow_ies_details__edit__note">
+            Примечание
+        </label>
+
+        <div class="col-sm-9">
+            <textarea class="form-control" name="note" id="cashflow_ies_details__edit__note"
+                      rows="2">
+            </textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label" style="width: 149px;"
+               for="cashflow_ies_details__edit__tags">
+            Теги
+        </label>
+
+        <div class="col-sm-9">
+            <div class="select2" name="tags" id="cashflow_ies_details__edit__tags"></div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal">
+            Отмена
+        </button>
+        <button type="<%= if isNew then 'button' else 'submit' %>" name="btnSave"
+                class="btn <%= if isNew then 'btn-default' else 'btn-primary'%>">
+            Сохранить
+        </button>
+        <button type="<%= if isNew then 'submit' else 'button' %>" name="btnMore"
+                class="btn <%= if isNew then 'btn-primary' else 'btn-default'%>"
+                data-toggle="tooltip"
+                title="Сохранить данные и внести новые">
+            Еще
+        </button>
+    </div>
+
+</form>

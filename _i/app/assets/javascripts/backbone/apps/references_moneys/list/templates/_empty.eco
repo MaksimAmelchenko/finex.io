@@ -1,0 +1,6 @@
+<td colspan="5">
+    <div class="well text-center">
+        У Вас еще нет валют.
+        <a href="#" name="btnAdd">Добавить</a> первую валюту.
+    </div>
+</td>

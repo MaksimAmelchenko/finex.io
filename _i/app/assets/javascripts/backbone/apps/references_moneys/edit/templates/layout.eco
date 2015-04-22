@@ -1,0 +1,73 @@
+<form class="form-horizontal">
+
+    <div class="form-group">
+        <label for="references_moneys__edit__currency" class="col-sm-3 control-label"
+               style="width: 149px;">
+            Стандартная валюта
+        </label>
+
+        <div class="col-sm-9">
+            <select class="select2" name="currency" id="references_moneys__edit__currency">
+                <option></option>
+                <% for currency in CashFlow.entities.currencies.models: %>
+                <option value="<%= currency.id %>">
+                    <%= "#{currency.get('name')} [#{currency.get('code')}]" %>
+                </option>
+                <% end %>
+            </select>
+            <p class="help-block">
+                Укажите стандартную валюту для автоматического обновления курса
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="references_moneys__edit__name" class="col-sm-3 control-label">
+            Наименование<em>*</em>
+        </label>
+
+        <div class="col-sm-9">
+            <input type="text" class="form-control" name="name"
+                   id="references_moneys__edit__name">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="references_moneys__edit__name" class="col-sm-3 control-label">
+            Символ<em>*</em>
+        </label>
+
+        <div class="col-sm-3">
+            <input type="text" class="form-control" name="symbol"
+                   id="references_moneys__edit__symbol">
+            <p class="help-block">
+                Отображаемый знак валюты
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="isEnabled">
+                    Активная
+                </label>
+            </div>
+            <p class="help-block">
+                Неактивные валюты скрыты при создании или редактировании транзакции
+            </p>
+        </div>
+    </div>
+
+
+    <div class="form-actions">
+        <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal">
+            Отмена
+        </button>
+        <button type="submit" name="btnSave" class="btn btn-primary">
+            Сохранить
+        </button>
+    </div>
+</form>

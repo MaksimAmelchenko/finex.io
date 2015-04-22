@@ -1,0 +1,30 @@
+<div class="btn-toolbar" role="toolbar">
+    <div class="btn-group">
+        <button type="button" name="btnAdd" class="btn btn-default">
+            <i class="fa fa-plus"></i>
+            Добавить
+        </button>
+        <button type="button" name="btnDel" class="btn btn-default">
+            <i class="fa fa-trash-o"></i>
+            Удалить
+        </button>
+    </div>
+</div>
+
+<table class="table table-hover table-condensed has-tickbox">
+    <thead>
+    <tr>
+        <th style="font-size: 14px">
+            <i class="fa fa-fw fa-square-o"></i>
+        </th>
+        <th>Дата</th>
+        <th>Счет</th>
+        <th>Категория</th>
+        <th colspan="2">Сумма</th>
+        <th>Примечание</th>
+        <th>Теги</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

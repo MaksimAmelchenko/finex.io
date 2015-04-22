@@ -1,0 +1,26 @@
+<aside id="left-panel">
+
+    <div class="login-info">
+	    <span>
+            <a href="#profile">
+                <i class="fa fa-lg fa-fw fa-user"></i>
+                <span name="userName">
+                    Максим
+                </span>
+            </a>
+		</span>
+    </div>
+
+    <div name="list-region">
+
+    </div>
+
+    <a href="#" class="btn btn-primary nav-demo-btn feedback" title="Оставить отзыв, пожелание или сообщение об ошибке">
+        <i class="fa fa-lg fa-fw fa-comments"></i>
+        Обратная связь
+    </a>
+
+  <span class="minifyme">
+    <i class="fa fa-arrow-circle-left hit"></i>
+  </span>
+</aside>

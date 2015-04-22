@@ -1,0 +1,26 @@
+<td>
+    <% if @permit is 7: %>
+    <a href="#">
+        <%= @name %>
+    </a>
+    <% else: %>
+    <%= @name %>
+    <% end %>
+
+</td>
+<td>
+    <%= if @permit is 7 then 'Я' else CashFlow.entities.users.get(@idUser).get('name') %>
+</td>
+<td>
+    <%- if @permit is 3 then '<i class="fa fa-check"></i>' %>
+    <% if @permit is 7: %>
+    <% for idUser in @writers: %>
+    <span class="tag">
+    <%= CashFlow.entities.users.get(idUser).get('name') %>
+    </span>
+    <% end %>
+    <% end %>
+</td>
+<td>
+    <%= @note %>
+</td>

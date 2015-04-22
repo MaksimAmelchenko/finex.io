@@ -1,0 +1,55 @@
+<td>
+    <i class="fa fa-fw"></i>
+</td>
+<td class="date">
+    <%= @formatDate(@dIEDetail) %>
+</td>
+<td>
+    <%= CashFlow.entities.accounts.get(@idAccount).get('name') %>
+</td>
+<td style="width: 200px">
+    <div class="row">
+        <div class="col-sm-12">
+            <%= CashFlow.entities.categories.get(@idCategory).get('name') %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <span class="text-muted">
+                <%- CashFlow.entities.categories.get(@idCategory).path() %>
+            </span>
+        </div>
+    </div>
+</td>
+<td class="hidden-xs hidden-sm">
+    <%= @quantity %> <%= CashFlow.entities.units.get(@idUnit).get('name') unless _.isNull(@idUnit) %>
+</td>
+<td class="sum hidden-xs hidden-sm">
+    <%- @numberToMoney(@sign * @sum, @idMoney) if @sign is 1 %>
+</td>
+<td class="symbol hidden-xs hidden-sm">
+    <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') if @sign is 1%>
+</td>
+<td class="sum hidden-xs hidden-sm">
+    <%- @numberToMoney(@sign * @sum, @idMoney) if @sign is -1%>
+</td>
+<td class="symbol hidden-xs hidden-sm">
+    <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') if @sign is -1%>
+</td>
+
+<td class="sum hidden-md hidden-lg">
+    <%- @numberToMoney(@sign * @sum, @idMoney)%>
+</td>
+<td class="symbol hidden-md hidden-lg">
+    <%- CashFlow.entities.moneys.get(@idMoney).get('symbol')%>
+</td>
+<td class="hidden-xs">
+    <%= @note %>
+</td>
+<td class="hidden-xs">
+    <% for tag in @tags: %>
+    <span class="tag">
+        <%= tag %>
+    </span>
+    <% end %>
+</td>
