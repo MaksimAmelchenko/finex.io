@@ -155,16 +155,19 @@
             </div>
 
             <div class="form-group">
-                <div class="col-sm-offset-3 col-lg-offset-2 col-sm-8 col-md-7 col-lg-6" name="note">
-
-                </div>
-            </div>
-
-
-            <div class="form-group">
                 <div style="text-align: right;"
                      class="col-sm-offset-3 col-lg-offset-2 col-sm-8 col-md-7 col-lg-6">
-                    <!--            <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal">Отмена</button> -->
+
+                    <p class="help1-block text-left" name="note">
+
+                    </p>
+
+                    <p class="help1-block text-left">
+                        <span class="label label-info">Примечание</span>
+                        Рекомендуем перед импортом создать копию рабочего проекта и выполнить
+                        пробный импорт в него.
+                    </p>
+
                     <button type="button" name="btnImport" class="btn btn-primary">
                         Загрузить
                     </button>

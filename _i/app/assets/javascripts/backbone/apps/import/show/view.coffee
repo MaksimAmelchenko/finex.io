@@ -250,6 +250,9 @@
                   @ui.warningsLog.empty()
 
                 # update references
+                if res.references.moneys
+                  App.entities.moneys.reset res.references.moneys
+
                 if res.references.accounts
                   App.entities.accounts.reset res.references.accounts
 
