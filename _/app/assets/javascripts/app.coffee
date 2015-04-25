@@ -27,4 +27,6 @@ do ($) ->
 
         alert message
 
+  $(document).on 'popup_opened.social-likes', (event, service) ->
+    ga('send', 'social', service, 'share', location.href)
 
