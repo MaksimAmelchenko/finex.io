@@ -3,6 +3,8 @@ do ($) ->
     btnDemoSignIn: $('[name=btnDemoSignIn]')
 
   ui.btnDemoSignIn.on 'click', ->
+    ga('send', 'event', 'button', 'click', 'demo')
+
     ui.btnDemoSignIn.amkDisable()
     $.ajax
       url: 'http://dev.finex.io:3000/v1/signin'
