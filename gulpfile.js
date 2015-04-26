@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var argv = require('yargs').argv;
+var p = require('./package.json');
 
 var plugins = require('gulp-load-plugins')(
   {
@@ -330,6 +331,7 @@ function construct_html(app) {
     var manifest = gulp.src("./" + app.tasks.html.dest + "/assets/rev-manifest.json");
     return gulp.src(app.tasks.html.src)
       .pipe(plugins.if(argv.production, plugins.rigger()))
+      .pipe(plugins.replace('{version}', p.version))
       .pipe(plugins.if(argv.production, plugins.revReplace({manifest: manifest})))
       .pipe(gulp.dest(app.tasks.html.dest));
   });
