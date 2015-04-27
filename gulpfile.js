@@ -46,6 +46,34 @@ var apps = [
     build: ['scripts:', 'styles:', ['html:', 'fonts:', 'cp:']]
   },
   {
+    name: 'about',
+    tasks: {
+      scripts: {
+        src: [
+          'bower_components/jquery1x/dist/jquery.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js',
+          'bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js',
+          'lib/assets/javascripts/**/*.+(coffee|js)',
+          '_about/app/assets/javascripts/**/*.+(coffee|js)'
+        ],
+        dest: 'public/about/assets'
+      },
+      styles: {
+        src: ['_about/app/assets/stylesheets/app.scss'],
+        dest: 'public/about/assets'
+      },
+      html: {
+        src: ['_about/app/index.html'],
+        dest: 'public/about'
+      },
+      fonts: {
+        src: ['bower_components/font-awesome/fonts/fontawesome-webfont.*'],
+        dest: 'public/about/assets'
+      },
+    },
+    build: ['scripts:about', 'styles:about', ['html:about', 'fonts:about']]
+  },
+  {
     name: 'i',
     tasks: {
       scripts: {

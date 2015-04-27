@@ -170,7 +170,7 @@
                 </label>
 
                 <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus"
-                   data-content="<p>Неподтвержённые операции будут выделены в журнале операций
+                   data-content="<p><strong>Неподтвержённые операции</strong> будут выделены в журнале операций
                    <span class='bg-warning'> желтым фоном </span>
                    (простроченные неподтверждённые &mdash;
                    <span class='bg-danger'> красным </span>).</p>
