@@ -269,7 +269,8 @@ function construct_scripts(app) {
         )
       }))
 
-      .pipe(plugins.if(argv.production, plugins.replace('http://dev.finex.io:3000', 'https://api.finex.io')))
+      .pipe(plugins.if(argv.production, plugins.replace('{server}',  p.productionServer)))
+      .pipe(plugins.if(!argv.production, plugins.replace('{server}', p.devServer)))
 
       .pipe(plugins.if(/[.]coffee$/, plugins.coffeelint({max_line_length: {value: 200}})))
       .pipe(plugins.if(/[.]coffee$/, plugins.coffeelint.reporter()))

@@ -31,7 +31,7 @@ do ($) ->
     ui.btnSignIn.amkDisable()
 
     $.ajax
-      url: 'http://dev.finex.io:3000/v1/signin'
+      url: '{server}/v1/signin'
       type: 'POST'
       contentType: 'application/json'
       dataType: 'json'

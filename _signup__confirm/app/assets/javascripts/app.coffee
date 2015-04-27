@@ -3,7 +3,7 @@ do ($) ->
 
   if token
     $.ajax
-      url: 'http://dev.finex.io:3000/v1/signup/confirm'
+      url: '{server}/v1/signup/confirm'
       type: 'POST'
       contentType: 'application/json'
       dataType: 'json'

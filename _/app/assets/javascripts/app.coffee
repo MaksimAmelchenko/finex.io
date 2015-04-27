@@ -3,11 +3,10 @@ do ($) ->
     btnDemoSignIn: $('[name=btnDemoSignIn]')
 
   ui.btnDemoSignIn.on 'click', ->
-    ga('send', 'event', 'button', 'click', 'demo')
 
     ui.btnDemoSignIn.amkDisable()
     $.ajax
-      url: 'http://dev.finex.io:3000/v1/signin'
+      url: '{server}/v1/signin'
       type: 'POST'
       contentType: 'application/json'
       dataType: 'json'
@@ -29,6 +28,8 @@ do ($) ->
 
         alert message
 
+    ga?('send', 'event', 'button', 'click', 'demo')
+
   $(document).on 'popup_opened.social-likes', (event, service) ->
-    ga('send', 'social', service, 'share', location.href)
+    ga?('send', 'social', service, 'share', location.href)
 

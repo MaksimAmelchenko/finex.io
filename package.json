@@ -1,8 +1,14 @@
 {
   "name": "finex.io",
   "version": "0.9.2",
+  "devServer": "http://dev.finex.io:3000",
+  "productionServer": "https://api.finex.io",
   "description": "Frontend for a Personal Financial Management Services FINEX.io",
-  "author": "",
+  "author": "Maksim Amelchenko <m.amelchenko@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maksim-amko/finex.io.git"
+  },
   "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=development http-server -a localhost -p 8080 & gulp"

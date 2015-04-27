@@ -38,7 +38,7 @@ do ($) ->
     ui.btnRecovery.amkDisable()
 
     $.ajax
-      url: 'http://dev.finex.io:3000/v1/password_recovery'
+      url: '{server}/v1/password_recovery'
       type: 'POST'
       contentType: 'application/json'
       dataType: 'json'
