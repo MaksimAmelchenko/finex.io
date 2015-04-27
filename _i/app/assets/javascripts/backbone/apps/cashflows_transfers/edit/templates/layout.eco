@@ -1,4 +1,4 @@
-<form class="form-horizontal">
+<form class="form-horizontal" autocomplete="off">
     <div class="form-group">
         <label class="col-xs-2 col-sm-3 control-label" style="width: 149px;"
                for="cashflow_transfers__edit__dTransfer">
