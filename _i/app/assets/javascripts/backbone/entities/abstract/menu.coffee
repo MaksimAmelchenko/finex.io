@@ -21,10 +21,10 @@
           label: 'Денежные потоки', id: 'cashFlows', url: '#', icon: 'fa fa-lg fa-fw fa-random',
           items: [
             {
-              label: 'Приход и расход', id: 'ies', url: '#', icon: 'fa fa-fw fa-flag'
+              label: 'Приходы и расходы', id: 'ies', url: '#', icon: 'fa fa-fw fa-flag'
               items: [
-                {label: 'Cписок', id: 'ies_list', url: '#cashflows/ies/list', icon: 'fa fa-fw fa-th-list'}
-                {label: 'Детализация', id: 'ies_details', url: '#cashflows/ies/details', icon: 'fa fa-lg fa-fw fa-list'}
+                {label: 'Потоки', id: 'ies_list', url: '#cashflows/ies/list', icon: 'fa fa-fw fa-th-list'}
+                {label: 'Операции', id: 'ies_details', url: '#cashflows/ies/details', icon: 'fa fa-lg fa-fw fa-list'}
               ]
             }
             {label: 'Долги', id: 'debts', url: '#cashflows/debts', icon: 'fa fa-lg fa-fw fa-gift'}
@@ -59,9 +59,7 @@
 #            {label: 'Экспорт', id: ' export', url: '#export', icon: 'fa fa-lg fa-fw fa-cloud-download'}
           ]
         }
-#        {label: 'Профиль', id: 'profile', url: '#profile', icon: 'fa fa-lg fa-fw fa-user'}
         {label: 'Пользователи', id: 'users', url: '#users', icon: 'fa fa-lg fa-fw fa-users'}
-#        {label: 'Обратная связь', id: 'feedback', url: '#feedback', icon: 'fa fa-lg fa-fw fa-comments', title: "Оставить отзыв, пожелание или сообщение об ошибке"}
       ]
 
   App.reqres.setHandler 'menu:entities', ->

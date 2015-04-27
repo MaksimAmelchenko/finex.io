@@ -159,15 +159,15 @@
             <div class="checkbox">
                 <label>
                     <input type="checkbox" name="isNotConfirmed">
-                    Непотверждённая транзакция
+                    Непотверждённая операция
                 </label>
 
                 <a href="javascript:void(0)" tabindex="0" data-toggle="popover" data-trigger="focus"
-                   data-content="<p>Неподтвержённые транзации будут выделены в журнале операций
+                   data-content="<p>Неподтвержённые операции будут выделены в журнале операций
                    <span class='bg-warning'> желтым фоном </span>
                    (простроченные неподтверждённые &mdash;
                    <span class='bg-danger'> красным </span>).</p>
-                   <p>В остальном они ничем не отличаются от обычных транзакций.</p>">
+                   <p>В остальном они ничем не отличаются от обычных операций.</p>">
                     <i class="fa fa-question-circle"></i>
                 </a>
 

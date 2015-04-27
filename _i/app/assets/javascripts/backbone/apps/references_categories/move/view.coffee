@@ -19,7 +19,7 @@
       idCategory: @config.idCategoryFrom
 
     dialog: ->
-      title: 'Перенос транзакций из одной категории в другую'
+      title: 'Перенос операций из одной категории в другую'
       keyboard: false
       backdrop: 'static'
 
@@ -36,7 +36,7 @@
       if @ui.categoryFrom.select2('data').id is @ui.categoryTo.select2('data').id and not @ui.isRecursive.prop('checked')
         showError """
           Нельзя переносить данные в тут же самую категорию без использования <br>
-          опции "Переносить транзакции из подкатегорий"'
+          опции "Переносить операции из подкатегорий"'
         """
         return
 
@@ -50,7 +50,7 @@
           isRecursive: _data.isRecursive
         success: (res, textStatus, jqXHR) =>
           @addOpacityWrapper(false)
-          showInfo "Перенесено: #{res.count} транзакций"
+          showInfo "Перенесено: #{res.count} операций"
           @trigger 'form:after:save'
         error: =>
           @addOpacityWrapper(false)

@@ -67,7 +67,7 @@
     </tr>
     <tr>
         <td>
-            Транзакции
+            Операции
         </td>
         <td style="text-align: right">
             <%= @cashFlowDetailsCount%>
