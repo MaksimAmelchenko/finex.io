@@ -128,6 +128,10 @@
                                 <label>
                                     <input type="checkbox" name="isConvertDebts" checked>
                                     Заменить долговые счета на долговые денежные потоки
+                                    <p class="help-block">
+                                        Будут заменены <strong>только</strong> долговые счета без
+                                        приходных и расходных операций
+                                    </p>
 
                                 </label>
                             </div>
@@ -137,15 +141,14 @@
                         <div class="col-xs-12">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="isConvertInvalidDebts" checked>
+                                    <input type="checkbox" name="isConvertInvalidDebts">
                                     Создать долговой денежный поток для долгового счета с приходными
                                     или расходными операциями
                                     <p class="help-block">
                                         <span class="label label-danger">Внимание!</span>
                                         Начальные остатки, приходные и расходные операции
                                         по долговому счету не переносятся в долги. В итоге долг
-                                        "разделится"
-                                        на долговой счет и на долговой денежный поток
+                                        "разделится" на долговой счет и на долговой денежный поток
                                     </p>
                                 </label>
                             </div>
