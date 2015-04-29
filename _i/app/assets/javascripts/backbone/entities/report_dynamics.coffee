@@ -10,7 +10,7 @@
       # 1 - expenditure, 2 - incomings, 3 - cost: max(expenditure - incomings, 0)
       @valueType = 3
       # 1 - table, 2 - graph
-      @viewType = 1
+      @viewType = 2
 
       @cache = {}
 
