@@ -84,14 +84,26 @@
 
     initialize: ->
       new Backbone.SingleChooser(@)
-      @on 'change:parent change:name', =>
+      @on 'change:parent change:name change:isEnabled', =>
         @sort()
       @on 'reset', =>
         @_debtCategory = @findWhere({idCategoryPrototype: 1}).get('idCategory')
 
-    comparator: (category) ->
-#      _.trim(category.path(true),'&nbsp;')
-      category.path(true)
+#    comparator: (category) ->
+#      category.path(true)
+
+    comparator: (category1, category2) ->
+      if category1.get('isEnabled') > category2.get('isEnabled')
+        -1
+      else
+        if  category1.get('isEnabled') < category2.get('isEnabled')
+          1
+        else
+          if category1.path(true) < category2.path(true)
+            -1
+          else
+            1
+
 
     filterBy: (options = {})->
       _.defaults options,

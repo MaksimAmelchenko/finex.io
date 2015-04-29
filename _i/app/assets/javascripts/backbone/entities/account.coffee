@@ -30,11 +30,23 @@
 
     initialize: ->
       new Backbone.MultiChooser(@)
-      @.on 'change:name', =>
+      @.on 'change:name change:isEnabled', =>
         @sort()
 
-    comparator: (account) ->
-      account.get('name')
+#    comparator: (account) ->
+#      account.get('name')
+
+    comparator: (account1, account2) ->
+      if account1.get('isEnabled') > account2.get('isEnabled')
+        -1
+      else
+        if  account1.get('isEnabled') < account2.get('isEnabled')
+          1
+        else
+          if account1.get('name') < account2.get('name')
+            -1
+          else
+            1
 
 
   API =
