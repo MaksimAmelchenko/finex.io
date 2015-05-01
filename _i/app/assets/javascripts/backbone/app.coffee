@@ -48,7 +48,8 @@
     showError message if message
 
 
-  App.rootRoute = '/dashboard'
+#  App.rootRoute = '/dashboard'
+  App.rootRoute = '/cashflows/ies/details'
 
   App.addRegions
     headerRegion: '#header-region'
