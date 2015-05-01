@@ -7,7 +7,7 @@
       idContractor: null,
       idIEDetail: null
       idAccount: null
-      idCurrency: null
+      idMoney: null
       idCategory: null
       idUnit: null
       sign: null
