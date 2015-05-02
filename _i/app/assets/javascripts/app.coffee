@@ -3,8 +3,7 @@ do($) ->
   if authorization
     CashFlow.start
       authorization: authorization
-#      idProject: Number sessionStorage.getItem 'idProject'
-#      environment: sessionStorage.getItem 'env' || 'production'
-      environment: sessionStorage.getItem 'env' || 'development'
+      environment: sessionStorage.getItem('env') || 'development'
+#      environment: sessionStorage.getItem('env') || 'production'
   else
     window.location.href = '/'
