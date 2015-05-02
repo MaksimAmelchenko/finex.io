@@ -166,7 +166,7 @@
             <div class="checkbox">
                 <label>
                     <input type="checkbox" name="isNotConfirmed">
-                    Непотверждённая операция
+                    Неподтверждённая операция
                 </label>
 
                 <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus"
