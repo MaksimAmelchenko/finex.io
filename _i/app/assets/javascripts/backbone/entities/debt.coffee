@@ -29,30 +29,27 @@
       response
 
     getMoneys: ->
-      _.uniq _.pluck(@get('debtDetails'), 'idMoney')
-#      currencies = []
-#      _.each @get('debtDetails'), (detail) ->
-#        currencies.push detail.idCurrency if currencies.indexOf(detail.idCurrency) == -1
-#
-#      currencies
+      App.Entities.sortListByMoney(_.uniq(_.pluck(@get('debtDetails'), 'idMoney')))
 
     getBalance: ->
       balance = {}
 
       _.each @get('debtDetails'), (detail) ->
-        #        if _.isUndefined(balance[detail.idMoney])
-        #          balance[detail.idMoney] = {}
         balance[detail.idMoney] ?= {}
 
-        b = balance[detail.idMoney]
+        # @formatter:off
         switch App.entities.categories.get(detail.idCategory).get('idCategoryPrototype')
-          when 2 then b['debt'] = (b['debt'] ? 0) + detail.sign * detail.sum
-          when 3 then b['paidDebt'] = (b['paidDebt'] ? 0) + detail.sign * detail.sum
-          when 4 then b['paidInterest'] = (b['paidInterest'] ? 0) + detail.sign * detail.sum
-          when 5 then b['fine'] = (b['fine'] ? 0) + detail.sign * detail.sum
-          when 6 then b['fee'] = (b['fee'] ? 0) + detail.sign * detail.sum
+          when 2 then category = 'debt'
+          when 3 then category = 'paidDebt'
+          when 4 then category = 'paidInterest'
+          when 5 then category = 'fine'
+          when 6 then category = 'fee'
           else
             alert "Unknown 'idCategoryPrototype': #{detail.idCategory}"
+        # @formatter:on
+
+        balance[detail.idMoney][category] ?= 0
+        balance[detail.idMoney][category] += detail.sign * detail.sum
 
       balance
 

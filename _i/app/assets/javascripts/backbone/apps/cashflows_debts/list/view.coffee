@@ -21,7 +21,7 @@
     onDestroy: ->
       @addOpacityWrapper(false)
 
-  #-----------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
 
   class List.Pagination extends App.Views.ItemView
     template: 'cashflows_debts/list/_pagination'
@@ -140,7 +140,9 @@
         complete: =>
           App.vent.trigger 'cashflows_debts:panel:resize', @$el.height()
 
-      $('.fa-caret-down, .fa-caret-right', @ui.btnToggleFilters).toggleClass('fa-caret-down').toggleClass('fa-caret-right')
+      $('.fa-caret-down, .fa-caret-right', @ui.btnToggleFilters)
+      .toggleClass('fa-caret-down')
+      .toggleClass('fa-caret-right')
 
     changeIsUseFilters: ->
       @collection.filters.isUseFilters = @ui.isUseFilters.prop 'checked'
@@ -154,10 +156,12 @@
       @ui.isUseFilters.prop('checked', @collection.isUseFilters)
 
       @ui.dBegin.datepicker()
-      @ui.dBegin.datepicker('setDate', moment(@collection.filters.dBegin, 'YYYY-MM-DD').toDate()) if @collection.filters.dBegin
+      if @collection.filters.dBegin
+        @ui.dBegin.datepicker('setDate', moment(@collection.filters.dBegin, 'YYYY-MM-DD').toDate())
 
       @ui.dEnd.datepicker()
-      @ui.dEnd.datepicker('setDate', moment(@collection.filters.dEnd, 'YYYY-MM-DD').toDate()) if @collection.filters.dEnd
+      if @collection.filters.dEnd
+        @ui.dEnd.datepicker('setDate', moment(@collection.filters.dEnd, 'YYYY-MM-DD').toDate())
 
       @ui.isOnlyNotPaid.prop 'checked', @collection.filters.isOnlyNotPaid
 
@@ -179,14 +183,14 @@
       @paginationRegion.show paginationView
 
       # Пусть будет стандартная подсказка
-#      @$('[data-toggle="tooltip"]').tooltip
-#        container: '#ribbon'
-#        delay:
-#          show: 1000
+      #      @$('[data-toggle="tooltip"]').tooltip
+      #        container: '#ribbon'
+      #        delay:
+      #          show: 1000
 
       App.vent.trigger 'cashflows_debts:panel:resize', @$el.height()
 
-  #-----------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
 
   class List.Debt extends App.Views.ItemView
     template: 'cashflows_debts/list/_debt'
@@ -209,7 +213,10 @@
     onRender: ->
       isChosen = @model.isChosen()
       @$el.toggleClass('info', isChosen)
-      $('i', @ui.tickbox).toggleClass('fa-square-o', !isChosen).toggleClass('fa-check-square-o', isChosen)
+
+      $('i', @ui.tickbox)
+      .toggleClass('fa-square-o', !isChosen)
+      .toggleClass('fa-check-square-o', isChosen)
 
     templateHelpers: ->
       _.extend super,
@@ -219,14 +226,97 @@
           @model.getBalance()
 
 
-  #-----------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
+
+  class List.DebtTotal extends App.Views.ItemView
+    template: 'cashflows_debts/list/_debt_total'
+    tagName: 'tr'
+
+    collectionEvents:
+      'add remove sync': 'render'
+
+    templateHelpers: ->
+      _.extend super,
+        moneys: =>
+          moneys = []
+          _.each @collection.models, (model) ->
+            moneys = moneys.concat(_.pluck(model.get('debtDetails'), 'idMoney'))
+          App.Entities.sortListByMoney(_.uniq(moneys))
+
+        balance: =>
+          balance = {}
+
+          _.each @collection.models, (model) ->
+            _.each model.get('debtDetails'), (detail) ->
+              balance[detail.idMoney] or= {}
+
+              # @formatter:off
+              switch App.entities.categories.get(detail.idCategory).get('idCategoryPrototype')
+                when 2 then category = 'debt'
+                when 3 then category = 'paidDebt'
+                when 4 then category = 'paidInterest'
+                when 5 then category = 'fine'
+                when 6 then category = 'fee'
+                else
+                  alert "Unknown 'idCategoryPrototype': #{detail.idCategory}"
+              # @formatter:on
+
+              balance[detail.idMoney][category] or= 0
+              balance[detail.idMoney][category] += detail.sign * detail.sum
+
+          balance
+
+
+  #--------------------------------------------------------------------------------
+
+  class List.DebtSelectedTotal extends App.Views.ItemView
+    template: 'cashflows_debts/list/_debt_selected_total'
+    tagName: 'tr'
+
+    collectionEvents:
+      'add remove sync collection:chose:some collection:chose:all collection:chose:none': 'render'
+
+    templateHelpers: ->
+      _.extend super,
+        moneys: =>
+          moneys = []
+          _.each @collection.models, (model) ->
+            if model.isChosen()
+              moneys = moneys.concat(_.pluck(model.get('debtDetails'), 'idMoney'))
+          App.Entities.sortListByMoney(_.uniq(moneys))
+
+        balance: =>
+          balance = {}
+
+          _.each @collection.models, (model) ->
+            if model.isChosen()
+              _.each model.get('debtDetails'), (detail) ->
+                balance[detail.idMoney] or= {}
+
+                # @formatter:off
+                switch App.entities.categories.get(detail.idCategory).get('idCategoryPrototype')
+                  when 2 then category = 'debt'
+                  when 3 then category = 'paidDebt'
+                  when 4 then category = 'paidInterest'
+                  when 5 then category = 'fine'
+                  when 6 then category = 'fee'
+                  else
+                    alert "Unknown 'idCategoryPrototype': #{detail.idCategory}"
+                # @formatter:on
+
+                balance[detail.idMoney][category] or= 0
+                balance[detail.idMoney][category] += detail.sign * detail.sum
+
+          balance
+
+  #--------------------------------------------------------------------------------
 
   class List.Empty extends App.Views.ItemView
     template: 'cashflows_debts/list/_empty'
     tagName: 'tr'
 
 
-  #-----------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
 
   class List.Debts extends App.Views.CompositeView
     template: 'cashflows_debts/list/_debts'
@@ -237,11 +327,14 @@
 
     ui:
       tickbox: 'th:first-child'
+      selectedTotal: 'tr[name=selectedTotal]'
+      total: 'tr[name=total]'
 
     events:
       'click @ui.tickbox': (e) ->
         e.stopPropagation()
-        if $('i', @ui.tickbox).toggleClass('fa-square-o').toggleClass('fa-check-square-o').hasClass('fa-square-o')
+        i = $('i', @ui.tickbox).toggleClass('fa-square-o').toggleClass('fa-check-square-o')
+        if i.hasClass('fa-square-o')
           @collection.chooseNone()
         else
           @collection.chooseAll()
@@ -255,3 +348,23 @@
       @$el.css
         'padding-top': '84px'
 
+    onRender: ->
+      @total = new List.DebtTotal
+        collection: @collection
+
+      @listenTo @total, 'render', (view) =>
+        @ui.total.html view.$el.html()
+
+      @total.render()
+
+      @selectedTotal = new List.DebtSelectedTotal
+        collection: @collection
+
+      @listenTo @selectedTotal, 'render', (view) =>
+        @ui.selectedTotal.html view.$el.html()
+
+      @selectedTotal.render()
+
+    onDestroy: ->
+      @total.destroy()
+      @selectedTotal.destroy()

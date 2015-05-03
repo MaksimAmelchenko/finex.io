@@ -1,16 +1,8 @@
-<% balance = @getBalance() %>
-<% moneys = @getMoneys() %>
+<% balance = @balance() %>
+<% moneys = @moneys() %>
 
-<td>
-    <i class="fa fa-fw"></i>
-</td>
-
-<td class="date">
-    <%= @formatDate(@dDebt) %>
-</td>
-
-<td style="width: 150px">
-    <%= CashFlow.entities.contractors.get(@idContractor).get('name') if _.isNumber(@idContractor) %>
+<td colspan="3">
+    Итого:
 </td>
 
 <td class="sum">
@@ -182,6 +174,7 @@
     <% cost = balance[idMoney]['paidInterest'] ? 0 %>
     <% cost += balance[idMoney]['fine'] ? 0 %>
     <% cost += balance[idMoney]['fee'] ? 0 %>
+
     <div class="row">
         <div class="col-xs-12 text-right">
             <!--@formatter:off -->
@@ -212,13 +205,7 @@
 </td>
 
 <td class="hidden-xs">
-    <%= @note %>
 </td>
 
 <td class="hidden-xs">
-    <% for tag in @tags: %>
-    <span class="tag">
-        <%= tag %>
-    </span>
-    <% end %>
 </td>

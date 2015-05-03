@@ -21,6 +21,10 @@
             </thead>
             <tbody>
             </tbody>
+            <tfoot>
+            <tr name="selectedTotal"></tr>
+            <tr name="total"></tr>
+            </tfoot>
         </table>
     </div>
 </div>
