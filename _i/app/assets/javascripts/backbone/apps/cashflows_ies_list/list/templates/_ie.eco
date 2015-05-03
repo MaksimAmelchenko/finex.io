@@ -8,7 +8,9 @@
 </td>
 
 <td>
-    <%= CashFlow.entities.contractors.get(@idContractor).get('name') if _.isNumber(@idContractor) %>
+    <% if not _.isNull(@idContractor): %>
+    <%= CashFlow.entities.contractors.get(@idContractor).get('name')%>
+    <% end %>
 </td>
 
 <td class="hidden-xs hidden-sm">
@@ -22,10 +24,12 @@
 <td class="sum">
     <% for own key, idMoney of moneys: %>
     <div class="row">
-        <div class="col-sm-12 text-right">
-            <!--@formatter:off-->
-            <%- @numberToMoney(balance[idMoney]['income'], idMoney) unless _.isUndefined (balance[idMoney]['income']) %>
-            <!--@formatter:on-->
+        <div class="col-xs-12 text-right">
+            <% if not _.isUndefined(balance[idMoney]['income']): %>
+            <%- @numberToMoney(balance[idMoney]['income'], idMoney) %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
@@ -34,10 +38,12 @@
 <td class="symbol">
     <% for own key, idMoney of moneys: %>
     <div class="row">
-        <div class="col-sm-12">
-            <!--@formatter:off-->
-            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined (balance[idMoney]['income']) %>
-            <!--@formatter:on-->
+        <div class="col-xs-12">
+            <% if not _.isUndefined(balance[idMoney]['income']): %>
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
@@ -45,10 +51,12 @@
 <td class="sum">
     <% for own key, idMoney of moneys: %>
     <div class="row">
-        <div class="col-sm-12 text-right">
-            <!--@formatter:off-->
-            <%- @numberToMoney(-balance[idMoney]['expense'], idMoney) unless _.isUndefined (balance[idMoney]['expense']) %>
-            <!--@formatter:on-->
+        <div class="col-xs-12 text-right">
+            <% if not _.isUndefined(balance[idMoney]['expense']): %>
+            <%- @numberToMoney(balance[idMoney]['expense'], idMoney) %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
@@ -56,10 +64,12 @@
 <td class="symbol">
     <% for own key, idMoney of moneys: %>
     <div class="row">
-        <div class="col-sm-12">
-            <!--@formatter:off-->
-            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined  (balance[idMoney]['expense']) %>
-            <!--@formatter:on-->
+        <div class="col-xs-12">
+            <% if not _.isUndefined(balance[idMoney]['expense']): %>
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
@@ -67,10 +77,12 @@
 <td class="sum">
     <% for own key, idMoney of moneys: %>
     <div class="row">
-        <div class="col-sm-12 text-right">
-            <!--@formatter:off-->
-            <%- @numberToMoney(balance[idMoney]['total'], idMoney) unless _.isUndefined  (balance[idMoney]['total']) %>
-            <!--@formatter:on-->
+        <div class="col-xs-12 text-right">
+            <% if not _.isUndefined(balance[idMoney]['total']): %>
+            <%- @numberToMoney(balance[idMoney]['total'], idMoney) %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
@@ -78,11 +90,12 @@
 <td class="symbol">
     <% for own key, idMoney of moneys: %>
     <div class="row">
-        <div class="col-sm-12">
-            <i _class="fa fa-rub"></i>
-            <!--@formatter:off-->
-            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') unless _.isUndefined (balance[idMoney]['total']) %>
-            <!--@formatter:on-->
+        <div class="col-xs-12">
+            <% if not _.isUndefined(balance[idMoney]['total']): %>
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
