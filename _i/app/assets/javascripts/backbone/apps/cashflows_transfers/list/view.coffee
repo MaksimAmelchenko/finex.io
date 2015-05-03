@@ -21,7 +21,7 @@
     onDestroy: ->
       @addOpacityWrapper(false)
 
-  #-----------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
 
   class List.Pagination extends App.Views.ItemView
     template: 'cashflows_transfers/list/_pagination'
@@ -55,6 +55,7 @@
       @ui.btnPrevious.amkDisable() if @collection.isFirstPage()
       @ui.btnNext.amkDisable() if @collection.isLastPage()
 
+  #--------------------------------------------------------------------------------
 
   class List.Panel extends App.Views.Layout
     template: 'cashflows_transfers/list/_panel'
@@ -143,7 +144,9 @@
         complete: =>
           App.vent.trigger 'cashflows_transfers:panel:resize', @$el.height()
 
-      $('.fa-caret-down, .fa-caret-right', @ui.btnToggleFilters).toggleClass('fa-caret-down').toggleClass('fa-caret-right')
+      $('.fa-caret-down, .fa-caret-right', @ui.btnToggleFilters)
+      .toggleClass('fa-caret-down')
+      .toggleClass('fa-caret-right')
 
     changeIsUseFilters: ->
       @collection.isUseFilters = @ui.isUseFilters.prop('checked')
@@ -157,9 +160,12 @@
       @ui.isUseFilters.prop('checked', @collection.isUseFilters)
 
       @ui.dBegin.datepicker()
-      @ui.dBegin.datepicker('setDate', moment(@collection.filters.dBegin, 'YYYY-MM-DD').toDate()) if @collection.filters.dBegin
+      if @collection.filters.dBegin
+        @ui.dBegin.datepicker('setDate', moment(@collection.filters.dBegin, 'YYYY-MM-DD').toDate())
+
       @ui.dEnd.datepicker()
-      @ui.dEnd.datepicker('setDate', moment(@collection.filters.dEnd, 'YYYY-MM-DD').toDate()) if @collection.filters.dEnd
+      if @collection.filters.dEnd
+        @ui.dEnd.datepicker('setDate', moment(@collection.filters.dEnd, 'YYYY-MM-DD').toDate())
 
       @ui.accountsFrom.select2()
       @ui.accountsFrom.select2('val', @collection.filters.accountsFrom)
@@ -182,15 +188,15 @@
       @paginationRegion.show paginationView
 
       # Пусть будет стандартная подсказка
-#      @$('[data-toggle="tooltip"]').tooltip
-#        container: '#ribbon'
-#        delay:
-#          show: 1000
+      #      @$('[data-toggle="tooltip"]').tooltip
+      #        container: '#ribbon'
+      #        delay:
+      #          show: 1000
 
       App.vent.trigger 'cashflows_transfers:panel:resize', @$el.height()
 
 
-  #-----------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
 
   class List.Transfer extends App.Views.ItemView
     template: 'cashflows_transfers/list/_transfer'
@@ -213,14 +219,86 @@
     onRender: ->
       isChosen = @model.isChosen()
       @$el.toggleClass('info', isChosen)
-      $('i', @ui.tickbox).toggleClass('fa-square-o', !isChosen).toggleClass('fa-check-square-o', isChosen)
 
-  #-----------------------------------------------------------------------
+      $('i', @ui.tickbox)
+      .toggleClass('fa-square-o', !isChosen)
+      .toggleClass('fa-check-square-o', isChosen)
+
+  #--------------------------------------------------------------------------------
+
+  class List.TransferTotal extends App.Views.ItemView
+    template: 'cashflows_transfers/list/_transfer_total'
+    tagName: 'tr'
+
+    collectionEvents:
+      'add remove sync': 'render'
+
+    templateHelpers: ->
+      _.extend super,
+        moneys: =>
+          moneysFee = @collection.pluck('idMoneyFee').filter (item) ->
+            item isnt null
+
+          App.Entities.sortListByMoney(_.uniq(@collection.pluck('idMoney').concat(moneysFee)))
+
+        balance: =>
+          balance = {}
+
+          _.each @collection.models, (model) ->
+            idMoney = model.get('idMoney')
+            balance[idMoney] or= {transfer: 0}
+            balance[idMoney]['transfer'] += model.get('sum')
+
+            if model.get('isFee')
+              idMoneyFee = model.get('idMoneyFee')
+              balance[idMoneyFee] or= {fee: 0}
+              balance[idMoneyFee]['fee'] += model.get('fee')
+
+          balance
+
+  #--------------------------------------------------------------------------------
+
+  class List.TransferSelectedTotal extends App.Views.ItemView
+    template: 'cashflows_transfers/list/_transfer_selected_total'
+    tagName: 'tr'
+
+    collectionEvents:
+      'add remove sync collection:chose:some collection:chose:all collection:chose:none': 'render'
+
+    templateHelpers: ->
+      _.extend super,
+        moneys: =>
+          moneys = []
+          _.each @collection.models, (model) ->
+            if model.isChosen()
+              moneys.push(model.get('idMoney'))
+              moneys.push(model.get('idMoneyFee')) if model.get('isFee')
+
+          App.Entities.sortListByMoney(_.uniq(moneys))
+
+        balance: =>
+          balance = {}
+
+          _.each @collection.models, (model) ->
+            if model.isChosen()
+              idMoney = model.get('idMoney')
+              balance[idMoney] or= {transfer: 0}
+              balance[idMoney]['transfer'] += model.get('sum')
+
+              if model.get('isFee')
+                idMoneyFee = model.get('idMoneyFee')
+                balance[idMoneyFee] or= {fee: 0}
+                balance[idMoneyFee]['fee'] += model.get('fee')
+
+          balance
+
+  #--------------------------------------------------------------------------------
 
   class List.Empty extends App.Views.ItemView
     template: 'cashflows_transfers/list/_empty'
     tagName: 'tr'
-  #-----------------------------------------------------------------------
+
+  #--------------------------------------------------------------------------------
 
   class List.Transfers extends App.Views.CompositeView
     template: 'cashflows_transfers/list/_transfers'
@@ -234,11 +312,18 @@
 
     ui:
       tickbox: 'th:first-child'
+      selectedTotal: 'tr[name=selectedTotal]'
+      total: 'tr[name=total]'
 
     events:
       'click @ui.tickbox': (e) ->
         e.stopPropagation()
-        if $('i', @ui.tickbox).toggleClass('fa-square-o').toggleClass('fa-check-square-o').hasClass('fa-square-o')
+
+        i = $('i', @ui.tickbox)
+        .toggleClass('fa-square-o')
+        .toggleClass('fa-check-square-o')
+
+        if i.hasClass('fa-square-o')
           @collection.chooseNone()
         else
           @collection.chooseAll()
@@ -248,6 +333,27 @@
         @$el.css
           'padding-top': (height + 5) + 'px'
 
+    onRender: ->
+      @total = new List.TransferTotal
+        collection: @collection
+
+      @listenTo @total, 'render', (view) =>
+        @ui.total.html view.$el.html()
+
+      @total.render()
+
+      @selectedTotal = new List.TransferSelectedTotal
+        collection: @collection
+
+      @listenTo @selectedTotal, 'render', (view) =>
+        @ui.selectedTotal.html view.$el.html()
+
+      @selectedTotal.render()
+
+    onDestroy: ->
+      @total.destroy()
+      @selectedTotal.destroy()
+
     onBeforeShow: ->
       @$el.css
-        'padding-top': '84px'
+        'padding-top': '88px'

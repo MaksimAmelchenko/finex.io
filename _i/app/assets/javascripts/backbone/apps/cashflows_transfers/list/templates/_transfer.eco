@@ -6,27 +6,27 @@
 </td>
 <!--<td style="width: 200px">-->
 <td>
-    <%= CashFlow.entities.accounts.get(@idAccountFrom).get('name') unless _.isNull @idAccountFrom%>
+    <%= CashFlow.entities.accounts.get(@idAccountFrom).get('name') %>
 </td>
 <!--<td style="width: 200px">-->
 <td>
-    <%= CashFlow.entities.accounts.get(@idAccountTo).get('name') unless _.isNull @idAccountTo %>
+    <%= CashFlow.entities.accounts.get(@idAccountTo).get('name') %>
 </td>
 <td class="sum">
-    <%- @numberToMoney(@sum, @idMoney) unless _.isNull @sum %>
+    <%- @numberToMoney(@sum, @idMoney) %>
 </td>
 <td class="symbol">
-    <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') unless _.isNull @idMoney %>
+    <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') %>
 </td>
 <!--<td style="width: 200px">-->
 <td>
-    <%= CashFlow.entities.accounts.get(@idAccountFee).get('name') unless _.isNull @idAccountFee %>
+    <%= CashFlow.entities.accounts.get(@idAccountFee).get('name') if @isFee %>
 </td>
 <td class="sum">
-    <%- @numberToMoney(@fee, @idMoney) unless _.isNull @fee %>
+    <%- @numberToMoney(@fee, @idMoneyFee) if @isFee %>
 </td>
 <td class="symbol">
-    <%- CashFlow.entities.moneys.get(@idMoneyFee).get('symbol') unless _.isNull @idMoneyFee %>
+    <%- CashFlow.entities.moneys.get(@idMoneyFee).get('symbol') if @isFee %>
 </td>
 <td class="hidden-xs">
     <%= @note %>

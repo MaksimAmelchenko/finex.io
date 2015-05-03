@@ -1,0 +1,67 @@
+<% balance = @balance() %>
+<% moneys = @moneys() %>
+
+<td colspan="4">
+    Итого по выделенным переводам:
+</td>
+
+<td class="sum">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-xs-12 text-right">
+            <% if not _.isUndefined(balance[idMoney]?['transfer']): %>
+            <%- @numberToMoney(balance[idMoney]['transfer'], idMoney) %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="symbol">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-xs-12">
+            <% if not _.isUndefined(balance[idMoney]?['transfer']): %>
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
+        </div>
+    </div>
+    <% end %>
+</td>
+<td>
+</td>
+<td class="sum">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-xs-12 text-right">
+            <% if not _.isUndefined(balance[idMoney]?['fee']): %>
+            <%- @numberToMoney(balance[idMoney]['fee'], idMoney) %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
+        </div>
+    </div>
+    <% end %>
+</td>
+<td class="symbol">
+    <% for own key, idMoney of moneys: %>
+    <div class="row">
+        <div class="col-xs-12">
+            <% if not _.isUndefined(balance[idMoney]?['fee']): %>
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
+        </div>
+    </div>
+    <% end %>
+</td>
+
+<td class="hidden-xs">
+</td>
+
+<td class="hidden-xs">
+</td>
