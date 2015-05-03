@@ -22,7 +22,8 @@
     onDestroy: ->
       @addOpacityWrapper(false)
 
-  #-----------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
+
   class List.Pagination extends App.Views.ItemView
     template: 'cashflows_ies_details/list/_pagination'
 
@@ -55,6 +56,7 @@
       @ui.btnPrevious.amkDisable() if @collection.isFirstPage()
       @ui.btnNext.amkDisable() if @collection.isLastPage()
 
+  #--------------------------------------------------------------------------------
 
   class List.Panel extends App.Views.Layout
     template: 'cashflows_ies_details/list/_panel'
@@ -221,7 +223,7 @@
 
       App.vent.trigger 'cashflows_ies_details:panel:resize', @$el.height()
 
-  #-----------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
 
   class List.IEDetail extends App.Views.ItemView
     template: 'cashflows_ies_details/list/_ie_detail'
@@ -250,15 +252,7 @@
       @$el.toggleClass 'warning', @model.get('isNotConfirmed')
       @$el.toggleClass 'danger', @model.isExpired()
 
-  #    templateHelpers: ->
-  #      _.extend super,
-  #        getCurrencies: () =>
-  #          @model.getCurrencies()
-  #        getBalance: () =>
-  #          @model.getBalance()
-
-
-  #-----------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
 
   class List.IEDetailTotal extends App.Views.ItemView
     template: 'cashflows_ies_details/list/_ie_detail_total'
@@ -290,7 +284,7 @@
             balance[idMoney]['total'] += model.get('sign') * model.get('sum')
           balance
 
-  #-----------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
 
   class List.IEDetailSelectedTotal extends App.Views.ItemView
     template: 'cashflows_ies_details/list/_ie_detail_selected_total'
@@ -326,13 +320,14 @@
 
               balance[idMoney]['total'] += model.get('sign') * model.get('sum')
           balance
-  #-----------------------------------------------------------------------
+
+  #--------------------------------------------------------------------------------
 
   class List.Empty extends App.Views.ItemView
     template: 'cashflows_ies_details/list/_empty'
     tagName: 'tr'
 
-  #-----------------------------------------------------------------------
+  #--------------------------------------------------------------------------------
 
   class List.IEDetails extends App.Views.CompositeView
     template: 'cashflows_ies_details/list/_ie_details'

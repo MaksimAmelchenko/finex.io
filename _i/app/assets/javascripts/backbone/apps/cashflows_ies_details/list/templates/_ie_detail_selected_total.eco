@@ -5,15 +5,15 @@
     Итого по выделенным операциям:
 </td>
 
-
-
 <td class="sum hidden-xs hidden-sm">
     <% for own key, idMoney of moneys: %>
     <div class="row">
-        <div class="col-sm-12 text-right">
-            <!--@formatter:off-->
-            <%- if not _.isUndefined(balance[idMoney]['income']) then @numberToMoney(balance[idMoney]['income'], idMoney) else '&nbsp;'  %>
-            <!--@formatter:on-->
+        <div class="col-xs-12 text-right">
+            <% if not _.isUndefined(balance[idMoney]['income']): %>
+            <%- @numberToMoney(balance[idMoney]['income'], idMoney) %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
@@ -22,10 +22,12 @@
 <td class="symbol hidden-xs hidden-sm">
     <% for own key, idMoney of moneys: %>
     <div class="row">
-        <div class="col-sm-12">
-            <!--@formatter:off-->
-            <%- if not _.isUndefined(balance[idMoney]['income']) then CashFlow.entities.moneys.get(idMoney).get('symbol') else '&nbsp;'  %>
-            <!--@formatter:on-->
+        <div class="col-xs-12">
+            <% if not _.isUndefined(balance[idMoney]['income']): %>
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
@@ -35,9 +37,11 @@
     <% for own key, idMoney of moneys: %>
     <div class="row">
         <div class="col-xs-12 text-right">
-            <!--@formatter:off-->
-            <%- if not _.isUndefined(balance[idMoney]['expense']) then @numberToMoney(-balance[idMoney]['expense'], idMoney) else '&nbsp;'  %>
-            <!--@formatter:on-->
+            <% if not _.isUndefined(balance[idMoney]['expense']): %>
+            <%- @numberToMoney(-balance[idMoney]['expense'], idMoney) %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
@@ -46,10 +50,12 @@
 <td class="symbol hidden-xs hidden-sm">
     <% for own key, idMoney of moneys: %>
     <div class="row">
-        <div class="col-sm-12">
-            <!--@formatter:off-->
-            <%- if not _.isUndefined(balance[idMoney]['expense']) then CashFlow.entities.moneys.get(idMoney).get('symbol') else '&nbsp;' %>
-            <!--@formatter:on-->
+        <div class="col-xs-12">
+            <% if not _.isUndefined(balance[idMoney]['expense']): %>
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
@@ -58,10 +64,12 @@
 <td class="sum hidden-md hidden-lg">
     <% for own key, idMoney of moneys: %>
     <div class="row">
-        <div class="col-sm-12 text-right">
-            <!--@formatter:off-->
-            <%- if not _.isUndefined(balance[idMoney]['total']) then @numberToMoney(balance[idMoney]['total'], idMoney) else '&nbsp;'  %>
-            <!--@formatter:on-->
+        <div class="col-xs-12 text-right">
+            <% if not _.isUndefined(balance[idMoney]['total']): %>
+            <%- @numberToMoney(balance[idMoney]['total'], idMoney) %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
@@ -71,9 +79,11 @@
     <% for own key, idMoney of moneys: %>
     <div class="row">
         <div class="col-xs-12">
-            <!--@formatter:off-->
-            <%- if not _.isUndefined(balance[idMoney]['total']) then CashFlow.entities.moneys.get(idMoney).get('symbol') else '&nbsp;'  %>
-            <!--@formatter:on-->
+            <% if not _.isUndefined(balance[idMoney]['total']): %>
+            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') %>
+            <% else: %>
+            <%- '&nbsp;' %>
+            <% end %>
         </div>
     </div>
     <% end %>
