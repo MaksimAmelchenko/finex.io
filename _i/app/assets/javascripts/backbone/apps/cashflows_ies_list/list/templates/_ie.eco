@@ -47,7 +47,7 @@
     <div class="row">
         <div class="col-sm-12 text-right">
             <!--@formatter:off-->
-            <%- @numberToMoney(balance[idMoney]['expense'], idMoney) unless _.isUndefined (balance[idMoney]['expense']) %>
+            <%- @numberToMoney(-balance[idMoney]['expense'], idMoney) unless _.isUndefined (balance[idMoney]['expense']) %>
             <!--@formatter:on-->
         </div>
     </div>

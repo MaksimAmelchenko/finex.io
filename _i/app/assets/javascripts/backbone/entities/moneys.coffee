@@ -74,5 +74,9 @@
   # list - array of objects like this: {idMoney: <idMoney>, ...}
   @sortListByMoney = (list) ->
     moneys = App.entities.moneys.pluck 'idMoney'
-    _.sortBy list, (item) ->
-      _.indexOf(moneys, item.idMoney)
+    if _.isNumber(list[0])
+      _.sortBy list, (item) ->
+        _.indexOf(moneys, item)
+    else
+      _.sortBy list, (item) ->
+        _.indexOf(moneys, item.idMoney)
