@@ -246,12 +246,14 @@
 
           _.each @collection.models, (model) ->
             idMoney = model.get('idMoney')
-            balance[idMoney] or= {transfer: 0}
+            balance[idMoney] or= {}
+            balance[idMoney]['transfer'] or= 0
             balance[idMoney]['transfer'] += model.get('sum')
 
             if model.get('isFee')
               idMoneyFee = model.get('idMoneyFee')
-              balance[idMoneyFee] or= {fee: 0}
+              balance[idMoneyFee] or= {}
+              balance[idMoneyFee]['fee'] or= 0
               balance[idMoneyFee]['fee'] += model.get('fee')
 
           balance
