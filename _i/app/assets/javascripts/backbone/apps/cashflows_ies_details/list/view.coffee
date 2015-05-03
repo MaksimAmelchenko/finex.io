@@ -270,23 +270,24 @@
     templateHelpers: ->
       _.extend super,
         moneys: =>
-          App.Entities.sortListByMoney(_.uniq(_.pluck(@collection.toJSON(), 'idMoney')))
+          App.Entities.sortListByMoney(_.uniq(@collection.pluck('idMoney')))
 
         balance: =>
           balance = {}
 
-          _.each @collection.toJSON(), (item) ->
-            balance[item.idMoney] or= {total: 0}
+          _.each @collection.models, (model) ->
+            idMoney = model.get('idMoney')
+            balance[idMoney] or= {total: 0}
 
-            if item.sign is 1
-              balance[item.idMoney]['income'] or= 0
-              balance[item.idMoney]['income'] += item.sum
+            if model.get('sign') is 1
+              balance[idMoney]['income'] or= 0
+              balance[idMoney]['income'] += model.get('sum')
 
-            if item.sign is -1
-              balance[item.idMoney]['expense'] or= 0
-              balance[item.idMoney]['expense'] += item.sum
+            if model.get('sign') is -1
+              balance[idMoney]['expense'] or= 0
+              balance[idMoney]['expense'] += model.get('sum')
 
-            balance[item.idMoney]['total'] += item.sign * item.sum
+            balance[idMoney]['total'] += model.get('sign') * model.get('sum')
           balance
 
   #-----------------------------------------------------------------------
@@ -302,27 +303,28 @@
       _.extend super,
         moneys: =>
           items = []
-          _.each @collection.models, (item) ->
-            if item.get('chosen') then items.push(item.get('idMoney'))
+          _.each @collection.models, (model) ->
+            if model.isChosen() then items.push(model.get('idMoney'))
 
           App.Entities.sortListByMoney(_.uniq(items))
 
         balance: =>
           balance = {}
 
-          _.each @collection.toJSON(), (item) ->
-            if item.chosen
-              balance[item.idMoney] or= {total: 0}
+          _.each @collection.models, (model) ->
+            if model.isChosen()
+              idMoney = model.get('idMoney')
+              balance[idMoney] or= {total: 0}
 
-              if item.sign is 1
-                balance[item.idMoney]['income'] or= 0
-                balance[item.idMoney]['income'] += item.sum
+              if model.get('sign') is 1
+                balance[idMoney]['income'] or= 0
+                balance[idMoney]['income'] += model.get('sum')
 
-              if item.sign is -1
-                balance[item.idMoney]['expense'] or= 0
-                balance[item.idMoney]['expense'] += item.sum
+              if model.get('sign') is -1
+                balance[idMoney]['expense'] or= 0
+                balance[idMoney]['expense'] += model.get('sum')
 
-              balance[item.idMoney]['total'] += item.sign * item.sum
+              balance[idMoney]['total'] += model.get('sign') * model.get('sum')
           balance
   #-----------------------------------------------------------------------
 
