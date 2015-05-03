@@ -71,7 +71,7 @@
                         <option></option>
                         <% for money in CashFlow.request 'enabled:money:entities', @idMoneyFrom: %>
                         <option value="<%= money.id %>">
-                            <%= money.get('symbol') %>
+                            <%- money.get('symbol') %>
                         </option>
                         <% end %>
                     </select>
@@ -116,7 +116,7 @@
                         <option></option>
                         <% for money in CashFlow.request 'enabled:money:entities', @idMoneyTo: %>
                         <option value="<%= money.id %>">
-                            <%= money.get('symbol') %>
+                            <%- money.get('symbol') %>
                         </option>
                         <% end %>
                     </select>
@@ -176,7 +176,7 @@
                             <!--@formatter:off-->
                             <% for money in CashFlow.request 'enabled:money:entities', @idMoneyFee: %>
                             <option value="<%= money.id %>">
-                                <%= money.get('symbol') %>
+                                <%- money.get('symbol') %>
                             </option>
                             <% end %>
                             <!--@formatter:on-->

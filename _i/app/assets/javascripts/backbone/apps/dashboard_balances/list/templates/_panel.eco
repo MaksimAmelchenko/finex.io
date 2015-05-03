@@ -39,7 +39,7 @@
                     </option>
                     <% for money in CashFlow.request 'enabled:money:entities':%>
                     <option value="<%= money.id %>">
-                        Пересчитать в <%= money.get('symbol')%>
+                        Пересчитать в <%- money.get('symbol')%>
                     </option>
                     <% end %>
                 </select>

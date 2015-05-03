@@ -108,7 +108,7 @@
                         <option></option>
                         <% for money in CashFlow.request 'enabled:money:entities', @idMoney: %>
                         <option value="<%= money.id %>">
-                            <%= money.get('symbol') %>
+                            <%- money.get('symbol') %>
                         </option>
                         <% end %>
                     </select>

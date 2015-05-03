@@ -101,7 +101,7 @@
                                 id="reports_dynamics__params__money">
                             <% for money in CashFlow.request 'enabled:money:entities':%>
                             <option value="<%= money.id %>">
-                                <%= money.get('symbol')%>
+                                <%- money.get('symbol')%>
                             </option>
                             <% end %>
                         </select>
