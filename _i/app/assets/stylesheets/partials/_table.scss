@@ -21,14 +21,16 @@ table tr.system {
   cursor: default;
 }
 
-.table > tbody > tr > td.sum {
+.table > tbody > tr > td.sum,
+.table > tfoot > tr > td.sum {
   text-align: right;
   padding-right: 2px !important;
   width: 90px;
   white-space: nowrap;
 }
 
-.table > tbody > tr > td.symbol {
+.table > tbody > tr > td.symbol,
+.table > tfoot > tr > td.symbol {
   padding-left: 2px !important;
   width: 40px;
   color: #808080;
@@ -38,3 +40,7 @@ table tr.system {
 //  border-top: 0px;
 //  border-bottom: 1px solid #dddddd;
 //}
+
+.table > tfoot {
+  font-weight: bolder;
+}

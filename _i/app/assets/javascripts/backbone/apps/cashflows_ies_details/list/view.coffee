@@ -130,7 +130,7 @@
       @collection.filters.dBegin = if dBegin.isValid() then dBegin.format('YYYY-MM-DD') else null
       dEnd = moment @ui.dEnd.datepicker('getDate')
       @collection.filters.dEnd = if dEnd.isValid() then dEnd.format('YYYY-MM-DD') else null
-      @collection.filters.sign =  if @ui.sign.select2('val') then +@ui.sign.select2('val') else null
+      @collection.filters.sign = if @ui.sign.select2('val') then +@ui.sign.select2('val') else null
 
       @collection.filters.contractors = _.map @ui.contractors.select2('val'), (item) ->
         parseInt item
@@ -260,6 +260,72 @@
 
   #-----------------------------------------------------------------------
 
+  class List.IEDetailTotal extends App.Views.ItemView
+    template: 'cashflows_ies_details/list/_ie_detail_total'
+    tagName: 'tr'
+
+    collectionEvents:
+      'add remove sync': 'render'
+
+    templateHelpers: ->
+      _.extend super,
+        moneys: =>
+          App.Entities.sortListByMoney(_.uniq(_.pluck(@collection.toJSON(), 'idMoney')))
+
+        balance: =>
+          balance = {}
+
+          _.each @collection.toJSON(), (item) ->
+            balance[item.idMoney] or= {total: 0}
+
+            if item.sign is 1
+              balance[item.idMoney]['income'] or= 0
+              balance[item.idMoney]['income'] += item.sum
+
+            if item.sign is -1
+              balance[item.idMoney]['expense'] or= 0
+              balance[item.idMoney]['expense'] += item.sum
+
+            balance[item.idMoney]['total'] += item.sign * item.sum
+          balance
+
+  #-----------------------------------------------------------------------
+
+  class List.IEDetailSelectedTotal extends App.Views.ItemView
+    template: 'cashflows_ies_details/list/_ie_detail_selected_total'
+    tagName: 'tr'
+
+    collectionEvents:
+      'add remove sync collection:chose:some collection:chose:all collection:chose:none': 'render'
+
+    templateHelpers: ->
+      _.extend super,
+        moneys: =>
+          items = []
+          _.each @collection.models, (item) ->
+            if item.get('chosen') then items.push(item.get('idMoney'))
+
+          App.Entities.sortListByMoney(_.uniq(items))
+
+        balance: =>
+          balance = {}
+
+          _.each @collection.toJSON(), (item) ->
+            if item.chosen
+              balance[item.idMoney] or= {total: 0}
+
+              if item.sign is 1
+                balance[item.idMoney]['income'] or= 0
+                balance[item.idMoney]['income'] += item.sum
+
+              if item.sign is -1
+                balance[item.idMoney]['expense'] or= 0
+                balance[item.idMoney]['expense'] += item.sum
+
+              balance[item.idMoney]['total'] += item.sign * item.sum
+          balance
+  #-----------------------------------------------------------------------
+
   class List.Empty extends App.Views.ItemView
     template: 'cashflows_ies_details/list/_empty'
     tagName: 'tr'
@@ -275,6 +341,8 @@
 
     ui:
       tickbox: 'th:first-child'
+      selectedTotal: 'tr[name=selectedTotal]'
+      total: 'tr[name=total]'
 
     events:
       'click @ui.tickbox': (e) ->
@@ -292,5 +360,26 @@
 
     onBeforeShow: ->
       @$el.css
-        'padding-top': '84px'
+        'padding-top': '88px'
 
+    onRender: ->
+      @total = new List.IEDetailTotal
+        collection: @collection
+
+      @listenTo @total, 'render', (view) =>
+        @ui.total.html view.$el.html()
+
+      @total.render()
+
+
+      @selectedTotal = new List.IEDetailSelectedTotal
+        collection: @collection
+
+      @listenTo @selectedTotal, 'render', (view) =>
+        @ui.selectedTotal.html view.$el.html()
+
+      @selectedTotal.render()
+
+    onDestroy: ->
+      @total.destroy()
+      @selectedTotal.destroy()
