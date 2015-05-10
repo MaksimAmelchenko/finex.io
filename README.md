@@ -11,7 +11,7 @@
  4. Установка зависимостей: `npm install`, `bower install`
  5. В файле `package.json` поменять `devServer` на `https://api.finex.io`
  6. Сборка: `gulp build`
- 7. Скопировать папку public на локальный web-сервер или использовать http-server: `localhost -p 8080`
+ 7. Скопировать папку public на локальный web-сервер или использовать http-server
 
 ### Контакты
 По любым вопросам можно обращаться на адрес dev@finex.io
