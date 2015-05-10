@@ -51,6 +51,7 @@
 #  App.rootRoute = '/dashboard'
   App.rootRoute = '/cashflows/ies/details'
 
+  # TODO Application Regions is deprecated. Use a Layout View
   App.addRegions
     headerRegion: '#header-region'
 #    menuRegion: '#menu-region'
