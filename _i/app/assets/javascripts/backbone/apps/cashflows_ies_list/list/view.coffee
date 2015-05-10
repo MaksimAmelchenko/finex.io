@@ -158,11 +158,12 @@
       @ui.isUseFilters.prop('checked', @collection.isUseFilters)
 
       @ui.dBegin.datepicker()
-      @ui.dBegin.datepicker('setDate',
-        moment(@collection.filters.dBegin, 'YYYY-MM-DD').toDate()) if @collection.filters.dBegin
+      if @collection.filters.dBegin
+        @ui.dBegin.datepicker('setDate', moment(@collection.filters.dBegin, 'YYYY-MM-DD').toDate())
+
       @ui.dEnd.datepicker()
-      @ui.dEnd.datepicker('setDate',
-        moment(@collection.filters.dEnd, 'YYYY-MM-DD').toDate()) if @collection.filters.dEnd
+      if @collection.filters.dEnd
+        @ui.dEnd.datepicker('setDate', moment(@collection.filters.dEnd, 'YYYY-MM-DD').toDate())
 
       @ui.contractors.select2()
       @ui.contractors.select2('val', @collection.filters.contractors)
@@ -214,8 +215,9 @@
     onRender: ->
       isChosen = @model.isChosen()
       @$el.toggleClass('info', isChosen)
-      $('i', @ui.tickbox).toggleClass('fa-square-o', !isChosen).toggleClass('fa-check-square-o',
-        isChosen)
+      $('i', @ui.tickbox)
+      .toggleClass('fa-square-o', !isChosen)
+      .toggleClass('fa-check-square-o', isChosen)
 
 
     templateHelpers: ->
@@ -242,8 +244,8 @@
     events:
       'click @ui.tickbox': (e) ->
         e.stopPropagation()
-        if $('i',
-          @ui.tickbox).toggleClass('fa-square-o').toggleClass('fa-check-square-o').hasClass('fa-square-o')
+        i = $('i', @ui.tickbox).toggleClass('fa-square-o').toggleClass('fa-check-square-o')
+        if i.hasClass('fa-square-o')
           @collection.chooseNone()
         else
           @collection.chooseAll()
@@ -255,13 +257,4 @@
 
     onBeforeShow: ->
       @$el.css
-        'padding-top': '84px'
-
-
-###
-    itemViewOptions: (model, index)->
-      {
-      currencies: @collection.currencies
-      balance: model.getBalance()
-      }
-###
+        'padding-top': '88px'

@@ -77,8 +77,6 @@
           error: =>
             @addOpacityWrapper(false)
 
-
-
     refresh: ->
       App.request 'project:entities',
         force: true
@@ -123,7 +121,6 @@
         if @model.get('permit') is 7
           @model.choose()
           App.request 'project:edit', @model
-
         false
 
     onRender: ->

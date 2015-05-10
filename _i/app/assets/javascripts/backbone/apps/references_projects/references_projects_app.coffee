@@ -3,12 +3,8 @@
     appRoutes:
       'references/projects': 'list'
 
-    before: ->
-#      App.vent.trigger 'nav:main:choose', 'references'
-
   API =
     list: ->
-#      App.execute 'references:list', 'accounts'
       ReferencesProjectsApp.list()
 
   App.addInitializer ->
@@ -36,8 +32,7 @@
       config: config
       region: region
 
-  # -- Exchange Edit ----------------------
-
+  # --------------------------------------------------------------------------------
 
   App.reqres.setHandler 'project:edit', (project, region = App.request 'dialog:region') ->
     isNew = project.isNew()
@@ -52,11 +47,8 @@
 
     editController
 
-  #  App.vent.on 'nav:references:choose:accounts', (region) ->
-  #    App.navigate 'references/accounts'
-  #    ReferencesAccountsApp.list region
+  # --------------------------------------------------------------------------------
 
-  # -----------------------------------------------------
   # config:
   # idProjectFrom - копируемый проект
   App.reqres.setHandler 'project:copy', (config, region = App.request 'dialog:region') ->
@@ -68,7 +60,8 @@
     copyController
 
 
-  # -----------------------------------------------------
+  # --------------------------------------------------------------------------------
+
   # config:
   # idTargetProject - целевой проект, куда будут копироваться остальные проекты
   App.reqres.setHandler 'project:merge', (config, region = App.request 'dialog:region') ->
