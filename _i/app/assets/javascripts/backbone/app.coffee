@@ -48,7 +48,7 @@
     showError message if message
 
 
-#  App.rootRoute = '/dashboard'
+  #  App.rootRoute = '/dashboard'
   App.rootRoute = '/cashflows/ies/details'
 
   # TODO Application Regions is deprecated. Use a Layout View
@@ -110,6 +110,12 @@
     App.xhrRequest
       url: 'entities'
       success: (res, textStatus, jqXHR) ->
+        if res.messages.welcome
+          App.request 'message:show', 'Добро пожаловать!', res.messages.welcome
+        else
+          if res.messages.changeLog
+            App.request 'message:show', 'История изменений', res.messages.changeLog
+
         App.entities.profile.set res.profile
         App.entities.projects.reset res.projects
 
@@ -244,3 +250,4 @@
 
 
   App
+
