@@ -1,4 +1,10 @@
 .modal-header {
   background-color: whitesmoke;
   cursor: move;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.modal-header .close {
+  margin-top: 2px;
 }
