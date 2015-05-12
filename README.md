@@ -2,6 +2,8 @@
 
    Документация по API: [api.finex.io](https://api.finex.io)
 
+   [Описание архитектуры приложения на Megamozg.ru](http://megamozg.ru/company/finex/blog/15264/)
+
 
 ### Начало работы
 
@@ -11,10 +13,10 @@
  4. Установка зависимостей: `npm install`, `bower install`
  5. В файле `package.json` поменять `devServer` на `https://api.finex.io`
  6. Сборка: `gulp build`
- 7. Скопировать папку public на локальный web-сервер или использовать http-server
+ 7. Скопировать папку public на локальный web-сервер или использовать `http-server`
 
 ### Контакты
-По любым вопросам можно обращаться на адрес dev@finex.io
+По любым вопросам можно обращаться на адрес [dev@finex.io](mailto:support@finex.io)
 
 
 
