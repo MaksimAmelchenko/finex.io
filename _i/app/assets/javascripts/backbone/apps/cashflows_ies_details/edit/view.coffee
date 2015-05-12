@@ -79,7 +79,7 @@
 
 
     getTitle: ->
-      "Детализация денежного потока &gt; #{if @model.isNew() then 'Добавление' else 'Редактирование'}"
+      "Операция &gt; #{if @model.isNew() then 'Добавление' else 'Редактирование'}"
 
     onRender: ->
       @ui.dIEDetail.datepicker('setDate', moment(@model.get('dIEDetail'), 'YYYY-MM-DD').toDate())
