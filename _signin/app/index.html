@@ -39,23 +39,23 @@
 
                         <div class="form-group">
                             <label for="email">E-Mail</label>
-                            <input type="email" class="form-control" name="email" id="email"
-                                   value="">
+                            <input type="text" class="form-control" name="email" id="email"
+                                   tabindex="1" required>
                         </div>
 
 
                         <div class="form-group">
                             <label for="password">Пароль</label>
                             <input type="password" class="form-control" name="password"
-                                   id="password"
-                                   value="">
+                                   id="password" tabindex="2" required>
                         </div>
 
                         <div class="form-actions">
                             <div class="pull-left">
                                 <a href="/password_recovery">Забыли пароль?</a>
                             </div>
-                            <button type="button" name="btnSignIn" class="btn btn-primary">
+                            <button type="commit" name="btnSignIn" class="btn btn-primary"
+                                    tabindex="3">
                                 Войти
                             </button>
                         </div>

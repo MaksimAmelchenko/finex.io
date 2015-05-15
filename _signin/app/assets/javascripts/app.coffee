@@ -5,6 +5,11 @@ do ($) ->
     password: $('[name=password]')
     btnSignIn: $('[name=btnSignIn]')
 
+  ui.form.submit (e) ->
+    e.preventDefault()
+
+  ui.email.focus()
+
   ui.form.validate
     highlight: (element) ->
       $(element).closest('.form-group').addClass('has-error')
@@ -15,7 +20,6 @@ do ($) ->
     rules:
       email:
         required: true,
-        email: true
       password:
         required: true
     messages:
@@ -25,7 +29,9 @@ do ($) ->
         required: 'Пожалуйста, введите свой пароль'
 
 
-  ui.btnSignIn.on 'click', ->
+  ui.btnSignIn.on 'click', (e) ->
+    e.preventDefault()
+
     return if not ui.form.valid()
 
     ui.btnSignIn.amkDisable()
@@ -60,4 +66,3 @@ do ($) ->
           $('#password-error').html(message).show()
         else
           element.append "<span id='password-error' class='help-block'>#{message}</span>"
-
