@@ -37,6 +37,7 @@
 
       if error.code is 'authorization_expired'
         callback = ->
+          sessionStorage.clear()
           window.location.href = '/signin'
         setTimeout callback, 2000
 
@@ -110,11 +111,12 @@
     App.xhrRequest
       url: 'entities'
       success: (res, textStatus, jqXHR) ->
-        if res.messages.welcome
-          App.request 'message:show', 'Добро пожаловать!', res.messages.welcome
-        else
-          if res.messages.changeLog
-            App.request 'message:show', 'История изменений', res.messages.changeLog
+        if res.messages
+          if res.messages.welcome
+            App.request 'message:show', 'Добро пожаловать!', res.messages.welcome
+          else
+            if res.messages.changeLog
+              App.request 'message:show', 'История изменений', res.messages.changeLog
 
         App.entities.profile.set res.profile
         App.entities.projects.reset res.projects
