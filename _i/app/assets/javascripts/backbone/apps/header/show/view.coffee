@@ -25,7 +25,7 @@
 
         App.xhrRequest
           type: 'PUT'
-          url: "logout"
+          url: 'logout'
 
         callback = ->
           window.location.href = '/'
