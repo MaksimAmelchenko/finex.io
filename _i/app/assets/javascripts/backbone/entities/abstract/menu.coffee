@@ -21,7 +21,7 @@
           label: 'Денежные потоки', id: 'cashFlows', url: '#', icon: 'fa fa-lg fa-fw fa-random',
           items: [
             {
-              label: 'Приходы и расходы', id: 'ies', url: '#', icon: 'fa fa-fw fa-flag'
+              label: 'Доходы и расходы', id: 'ies', url: '#', icon: 'fa fa-fw fa-flag'
               items: [
                 {label: 'Потоки', id: 'ies_list', url: '#cashflows/ies/list', icon: 'fa fa-fw fa-th-list'}
                 {label: 'Операции', id: 'ies_details', url: '#cashflows/ies/details', icon: 'fa fa-lg fa-fw fa-list'}
