@@ -44,8 +44,8 @@ do ($) ->
         required: 'Пожалуйста, введите адрес электронной почты'
       password:
         required: 'Пожалуйста, введите пароль'
-#      isAcceptTerms:
-#        required: 'Необходимо принять условия соглашения'
+  #      isAcceptTerms:
+  #        required: 'Необходимо принять условия соглашения'
 
 
   ui.btnSignUp.on 'click', ->
@@ -76,7 +76,7 @@ do ($) ->
         ui.confirmPanel.show()
 
       error: (jqXHR, textStatus, errorThrown)->
-        $('.pls-container').remove()
+#        $('.pls-container').remove()
         grecaptcha.reset()
 
         ui.btnSignUp.amkEnable()
