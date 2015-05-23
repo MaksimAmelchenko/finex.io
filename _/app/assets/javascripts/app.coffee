@@ -16,7 +16,7 @@ do ($) ->
         password: 'kd9T2QHjSb5Y'
       success: (res, textStatus, jqXHR)->
         sessionStorage.setItem('authorization', res.authorization)
-        window.location.href = '/i'
+        window.location.href = '/i/'
       error: (jqXHR, textStatus, errorThrown)->
         ui.btnDemoSignIn.amkEnable()
 

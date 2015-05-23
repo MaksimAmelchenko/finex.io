@@ -45,7 +45,7 @@ do ($) ->
             <p>
               Пароль изменен
             </p>
-            <a href="/signin" name="btnSignIn" type="button" class="btn btn-primary">Войти</a>
+            <a href="/signin/" name="btnSignIn" class="btn btn-primary">Войти</a>
           """
         error: (jqXHR, textStatus, errorThrown)->
           ui.btnReset.amkEnable()

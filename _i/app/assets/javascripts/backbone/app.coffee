@@ -38,7 +38,7 @@
       if error.code is 'authorization_expired'
         callback = ->
           sessionStorage.clear()
-          window.location.href = '/signin'
+          window.location.href = '/signin/'
         setTimeout callback, 2000
 
 

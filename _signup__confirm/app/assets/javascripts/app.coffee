@@ -12,7 +12,7 @@ do ($) ->
       success: (res, textStatus, jqXHR)->
         $('.panel-body').html """
           Спасибо, Ваш электронный адрес подтверждён.
-          Перейтите <a href="/signin">сюда</a> для входа
+          Перейтите <a href="/signin/">сюда</a> для входа
         """
 
       error: (jqXHR, textStatus, errorThrown)->

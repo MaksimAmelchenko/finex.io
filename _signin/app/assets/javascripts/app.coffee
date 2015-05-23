@@ -47,7 +47,7 @@ do ($) ->
       success: (res, textStatus, jqXHR)->
         ui.btnSignIn.amkEnable()
         sessionStorage.setItem('authorization', res.authorization)
-        window.location.href = '/i'
+        window.location.href = '/i/'
       error: (jqXHR, textStatus, errorThrown)->
         ui.btnSignIn.amkEnable()
 
