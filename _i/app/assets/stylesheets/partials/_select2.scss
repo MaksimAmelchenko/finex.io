@@ -2,9 +2,15 @@
   width: 100% !important;
 }
 
+.select2-container.select2.form-control {
+  padding: 0;
+  border: 0;
+}
+
 // Крестик на select2
 .select2-container .select2-choice abbr {
   right: 34px;
+  top: 6px;
 }
 
 abbr.select2-search-choice-close:before {
