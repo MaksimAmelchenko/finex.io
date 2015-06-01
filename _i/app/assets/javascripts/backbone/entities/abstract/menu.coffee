@@ -32,6 +32,7 @@
             {label: 'Обмен валюты', id: 'exchanges', url: '#cashflows/exchanges', icon: 'fa fa-lg fa-fw fa-exchange'}
           ]
         }
+        {label: 'Планирование', id: 'plans', url: '#plans', icon: 'fa fa-lg fa-fw fa-calendar'}
 #        {label: 'Бюджет', id: 'budget', url: '#budget', icon: 'fa fa-lg fa-fw fa-suitcase'}
         {
           label: 'Отчеты', id: 'reports', url: '#', icon: 'fa fa-lg fa-fw fa-file-text-o',

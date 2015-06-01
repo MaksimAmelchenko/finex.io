@@ -1,0 +1,19 @@
+<!--<p></p>-->
+<div class="row">
+    <div class="col-xs-12">
+        <div name="cashFlowItems-region">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div name="transfers-region">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div name="exchanges-region">
+        </div>
+    </div>
+</div>
