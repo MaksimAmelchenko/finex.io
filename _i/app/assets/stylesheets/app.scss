@@ -68,7 +68,7 @@ $fa-font-path: ".";
 @import "partials/footer";
 @import "partials/form";
 @import "partials/graph";
-@import "partials/input-group-btn";
+@import "partials/input-group";
 @import "partials/modal";
 @import "partials/nestable";
 @import "partials/notify";
@@ -79,6 +79,7 @@ $fa-font-path: ".";
 @import "partials/treetable";
 @import "partials/validation";
 @import "partials/tooltip";
+@import "partials/dropdowns";
 
 //SmartAdmin меняет на 2px
 .btn {

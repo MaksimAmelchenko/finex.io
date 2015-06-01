@@ -1,0 +1,14 @@
+// dropdown в виде ссылки
+a.dropdown-toggle {
+  display: inline-block;
+  cursor: pointer;
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.btn-group.open a.dropdown-toggle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
