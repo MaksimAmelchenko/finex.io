@@ -57,7 +57,7 @@ do ($) ->
 
 
   window.numToJSON = (value) ->
-    if (!value)
+    if (value is null or value is undefined or value is '')
       null
     else
       if (typeof value is 'string') then Number(value.replace(',', '.')) else Number(value)
