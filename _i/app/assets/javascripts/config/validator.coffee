@@ -20,3 +20,7 @@ do ($) ->
   $.validator.addMethod 'notEqualTo', (value, element, param) ->
     @.optional(element) || value != param
 
+  $.validator.addMethod 'dateMoreThan', (value, element, param) ->
+    @.optional(element) ||
+      moment(value, 'DD.MM.YYYY').toDate().getTime() >
+        moment(param, 'DD.MM.YYYY').toDate().getTime()
