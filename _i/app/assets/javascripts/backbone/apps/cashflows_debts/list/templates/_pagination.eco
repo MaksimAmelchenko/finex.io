@@ -5,10 +5,12 @@
 <% end %>
 
 <div class="btn-group">
-    <button type="button" class="btn btn-default btn-sm" name="btnPreviousPage" data-toggle="tooltip" title="Предыдущая">
+    <button type="button" class="btn btn-default btn-sm no-border-transparent"
+            name="btnPreviousPage" data-toggle="tooltip" title="Предыдущая">
         <i class="fa fa-angle-left fa-lg"></i>
     </button>
-    <button type="button" class="btn btn-default btn-sm" name="btnNextPage" data-toggle="tooltip" title="Следующая">
+    <button type="button" class="btn btn-default btn-sm no-border-transparent"
+            name="btnNextPage" data-toggle="tooltip" title="Следующая">
         <i class="fa fa-angle-right fa-lg"></i>
     </button>
 </div>
