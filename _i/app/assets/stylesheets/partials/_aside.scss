@@ -1,0 +1,137 @@
+aside {
+  background: #4d5a75;
+  overflow-y: scroll;
+  font-size: 15px;
+
+  .login-info {
+    font-size: 15px;
+    //height: auto;
+    border: none;
+    box-shadow: none;
+    width: initial;
+
+    & > span {
+      //height: 39px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-bottom: none;
+
+      a {
+        color: $white;
+        line-height: normal;
+        margin-top: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 100%;
+        border-bottom: 1px solid #717b91;
+        i {
+          margin-right: 5px;
+        }
+        span {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  .dropdown {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: block;
+    color: $white;
+    margin: 0px !important;
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  .dropdown > a {
+    text-decoration: none !important;
+    display: inline-block;
+    //height: 40px;
+    line-height: normal;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #717b91;
+  }
+
+  // Текст
+  .dropdown > a span {
+    display: inline-block;
+    text-decoration: none;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+  }
+
+  // Стрелочка вниз
+  .dropdown > a span + i {
+    float: right;
+    padding-top: 5px;
+    margin-right: 0;
+  }
+
+  .dropdown > a:hover {
+    color: $white;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+  }
+
+
+  nav ul li a {
+    color: $white;
+    font-size: 15px;
+  }
+
+  nav ul ul {
+    background: inherit;
+    li > a {
+      padding-left: 36px;
+    }
+  }
+
+
+  nav ul li > a:hover, nav ul ul li > a:hover {
+    background-color: #717b91;
+  }
+  nav ul li.active {
+    background-color: #f49d57;
+  }
+
+}
+
+.fixed-navigation nav {
+  padding-bottom: 9px;
+  & > ul {
+    padding-right: 0;
+    width: 100%;
+    overflow-y: hidden;
+  }
+}
+
+.minified aside {
+  nav > ul > li {
+    border-bottom: none;
+    border-top: none;
+  }
+
+  .login-info {
+    border-bottom: none;
+    span {
+      padding: 0 10px;
+    }
+    a i {
+      display: inherit;
+      margin-right: 0;
+    }
+  }
+  .dropdown > a > span, .dropdown > a > span + i {
+    display: none;
+  }
+}
+
