@@ -16,7 +16,7 @@
   API =
     getMenu: ->
       new Entities.MenuItems [
-        {label: ' Панель', id: 'dashboard', url: '#dashboard', icon: 'fa fa-lg fa-fw fa-tachometer'}
+        {label: 'Итоги', id: 'dashboard', url: '#dashboard', icon: 'fa fa-lg fa-fw fa-tachometer'}
         {
           label: 'Денежные потоки', id: 'cashFlows', url: '#', icon: 'fa fa-lg fa-fw fa-random',
           items: [
