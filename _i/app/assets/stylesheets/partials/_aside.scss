@@ -82,6 +82,9 @@ aside {
     width: 100%;
   }
 
+  nav > ul > li > ul > li > a {
+    padding-left: 36px;
+  }
 
   nav ul li a {
     color: $white;
@@ -89,12 +92,9 @@ aside {
   }
 
   nav ul ul {
-    background: inherit;
-    li > a {
-      padding-left: 36px;
-    }
+    //background: inherit;
+    background: #4d5a75;
   }
-
 
   nav ul li > a:hover, nav ul ul li > a:hover {
     background-color: #717b91;
