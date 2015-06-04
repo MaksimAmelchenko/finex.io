@@ -1,6 +1,6 @@
 <div class="btn-toolbar" role="toolbar">
     <div class="btn-group">
-        <button type="button" name="btnAdd" class="btn btn-default">
+        <button type="button" name="btnAdd" class="btn btn-success">
             <i class="fa fa-plus"></i>
             Добавить
         </button>

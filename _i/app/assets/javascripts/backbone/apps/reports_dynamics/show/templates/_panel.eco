@@ -1,10 +1,10 @@
 <% params = @params()%>
 <div class="row">
     <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-        <h3 class="page-title">
+        <h1 class="page-title">
             <!--Отчеты <span>&gt; Динамика [<%= moment(params.dBegin, 'YYYY-MM-DD').format('DD.MM.YYYY') %> - <%= moment(params.dEnd, 'YYYY-MM-DD').format('DD.MM.YYYY') %>]</span>-->
             Отчеты <span>&gt; Динамика</span>
-        </h3>
+        </h1>
     </div>
 </div>
 
