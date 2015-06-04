@@ -4,6 +4,7 @@
 
     regions:
       listRegion: '[name=list-region]'
+      projectRegion: '[name=project-region]'
 
     ui:
       btnMinify: '.minifyme'
@@ -80,3 +81,20 @@
       })
 
 
+
+  class List.Project extends App.Views.ItemView
+    template: 'menu/list/_project'
+#    tagName: 'li'
+
+    collectionEvents:
+      'add change:name remove reset': 'render'
+
+    events:
+      'click li > a': (e) ->
+        idProject = Number $(e.currentTarget).parent().data('idProject')
+        App.execute 'use:project', idProject if idProject isnt App.request 'active:project'
+        e.preventDefault()
+
+    initialize: ->
+      App.vent.on 'change:active:project', =>
+        @render()

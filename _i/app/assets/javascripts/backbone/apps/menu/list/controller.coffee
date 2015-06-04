@@ -3,9 +3,11 @@
 
     initialize: (options) ->
       menu = App.request 'menu:entities'
+      projects = App.request 'project:entities'
 
       @layout = @getLayoutView menu
       @listenTo @layout, 'show', =>
+        @showProjectsList projects
         @showList menu
 
       @show @layout
@@ -23,5 +25,16 @@
     getListView: (menu)->
       new List.Menu
         collection: menu
+
+    showProjectsList: (projects) ->
+      listView = @getProjectListView projects
+
+      @show listView,
+        region: @layout.projectRegion
+
+    getProjectListView: (projects) ->
+      new List.Project
+        collection: projects
+
 
 
