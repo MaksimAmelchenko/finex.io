@@ -8,3 +8,84 @@ form .form-actions {
 input.number {
   text-align: right;
 }
+
+// Для формы-фильтра
+.form-horizontal .form-group.form-group-sm {
+  margin-bottom: 5px;
+
+  .form-control {
+    height: 28px;
+    line-height: 28px;
+  }
+
+  label {
+    font-size: 12px;
+  }
+
+  input[type="checkbox"] {
+    margin-top: 2px;
+  }
+
+  .input-group-addon {
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
+
+  .select2-choices li {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+
+  .select2-container .select2-choice {
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+  }
+
+  .select2-search-field input {
+    height: 22px;
+    margin: 0;
+  }
+}
+
+.form-horizontal {
+  .toolbar {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.toolbar {
+  //  font-size: 13px;
+  margin-bottom: 5px;
+  .btn {
+    font-size: 13px;
+
+  }
+  .input-group {
+    display: inline-table;
+    vertical-align: middle;
+  }
+}
+
+.form-control {
+  height: 32px;
+}
+
+.help-block {
+  margin-top: 6px;
+  padding: 0 1px;
+  font-size: 11px;
+  line-height: 15px;
+  color: #999999;
+}
+
+.btn-toolbar {
+  padding-bottom: 5px;
+  padding-top: 3px;
+}
+
+textarea {
+  resize: vertical;
+}

@@ -1,0 +1,15 @@
+// кнопка "Обратная связь"
+.btn-feedback {
+  display: block;
+  padding: 6px 5px;
+  margin: 5px 10px;
+  width: auto;
+  font-size: 12px;
+  white-space: normal;
+  background-color: rgba(77, 118, 134, .5);
+  border-color: #3a7775;
+}
+
+.minified .btn-feedback {
+  display: none !important;
+}
