@@ -10,7 +10,7 @@
                 <th>Контрагент</th>
                 <th class="hidden-xs hidden-sm"> Счета</th>
                 <th class="hidden-xs hidden-sm"> Категории</th>
-                <th colspan="2">Приход</th>
+                <th colspan="2">Доход</th>
                 <th colspan="2">Расход</th>
                 <th colspan="2">Итого</th>
                 <th>Примечание</th>

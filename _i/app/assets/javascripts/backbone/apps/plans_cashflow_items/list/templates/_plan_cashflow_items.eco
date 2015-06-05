@@ -9,9 +9,9 @@
                 <th>Дата</th>
                 <th>Счет | Контрагент</th>
                 <th>Категория</th>
-                <th class="hidden-xs hidden-sm" colspan="2">Приход</th>
+                <th class="hidden-xs hidden-sm" colspan="2">Доход</th>
                 <th class="hidden-xs hidden-sm" colspan="2">Расход</th>
-                <th class="hidden-md hidden-lg" colspan="2">Приход/расход</th>
+                <th class="hidden-md hidden-lg" colspan="2">Доход/расход</th>
                 <th>Расписание</th>
                 <th class="hidden-xs hidden-sm">Примечание</th>
                 <th class="hidden-xs hidden-sm">Теги</th>

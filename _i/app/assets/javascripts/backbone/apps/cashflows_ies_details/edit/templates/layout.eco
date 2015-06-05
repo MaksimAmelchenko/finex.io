@@ -6,7 +6,7 @@
                 <label>
                     <input type="radio" name="sign" value="1" tabindex="1"
                     <%= if @sign is 1 then 'checked'%> >
-                    Приход
+                    Доход
                 </label>
             </div>
         </div>

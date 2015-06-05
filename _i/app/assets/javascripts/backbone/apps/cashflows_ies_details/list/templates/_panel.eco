@@ -107,7 +107,7 @@
                         <select class="select2" name="sign"
                                 id="cashflow_ies_details__filters__sign">
                             <option value="">Все</option>
-                            <option value="1">Приход</option>
+                            <option value="1">Доход</option>
                             <option value="-1">Расход</option>
                         </select>
                     </div>

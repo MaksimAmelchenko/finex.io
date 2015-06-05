@@ -5,7 +5,7 @@
                 <label>
                     <input type="radio" name="sign" value="1"
                     <%= if @sign is 1 then 'checked'%> >
-                    Приход
+                    Доход
                 </label>
             </div>
         </div>
@@ -170,7 +170,7 @@
                             <li data-id-unit="null"
                                 data-text="">
                                 <a href="#">
-                                    &lt;нет&gt;
+                                    &lt;без ед.измерения&gt;
                                 </a>
                             </li>
                             <!--@formatter:off-->

@@ -21,7 +21,7 @@
         <th>Счет</th>
         <th>Категория</th>
         <th class="hidden-xs hidden-sm"></th>
-        <th colspan="2" class="hidden-xs hidden-sm">Приход</th>
+        <th colspan="2" class="hidden-xs hidden-sm">Доход</th>
         <th colspan="2" class="hidden-xs hidden-sm">Расход</th>
         <th colspan="2" class="hidden-md hidden-lg">Сумма</th>
         <th class="hidden-xs">Примечание</th>
