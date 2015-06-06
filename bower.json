@@ -31,6 +31,7 @@
     "plupload": "~2.1.2",
     "select2": "~3.5.2",
     "moment": "~2.9.0",
-    "social-likes": "~3.0.14"
+    "social-likes": "~3.0.14",
+    "fontfaceobserver": "~1.4.12"
   }
 }

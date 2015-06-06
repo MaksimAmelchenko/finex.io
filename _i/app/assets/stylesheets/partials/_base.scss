@@ -4,6 +4,10 @@ html {
 
 body {
   background: none;
+  font-family: sans-serif;
+  &.fontOneLoad {
+    font-family: 'Open Sans', sans-serif;
+  }
 }
 
 #ribbon {

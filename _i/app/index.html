@@ -87,5 +87,13 @@
 
 </script>
 
+<script>
+    var fontOneLoad = new FontFaceObserver('Open Sans', {});
+    fontOneLoad.check().then(function () {
+        document.body.className += ' fontOneLoad';
+    }, function () {
+    });
+</script>
+
 </body>
 </html>

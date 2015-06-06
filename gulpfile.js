@@ -78,6 +78,8 @@ var apps = [
     tasks: {
       scripts: {
         src: [
+          'bower_components/fontfaceobserver/fontfaceobserver.js',
+
           'bower_components/jquery/dist/jquery.js',
 
           'bower_components/jquery-ui/ui/core.js',
