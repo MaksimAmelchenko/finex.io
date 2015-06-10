@@ -23,7 +23,7 @@
     url: 'cashflows/transfers'
     initialize: ->
       new Backbone.MultiChooser(@)
-      @.on 'model:change', =>
+      @on 'change:dTransfer', =>
         @sort()
 
       @searchText = ''

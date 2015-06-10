@@ -24,7 +24,7 @@
 
     initialize: ->
       new Backbone.MultiChooser(@)
-      @.on 'model:change', =>
+      @on 'change:dDebtDetail', =>
         @sort()
 
 #    comparator: (debtDetail) ->

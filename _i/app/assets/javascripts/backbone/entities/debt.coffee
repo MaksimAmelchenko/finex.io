@@ -62,7 +62,7 @@
 
     initialize: ->
       new Backbone.MultiChooser(@)
-      @.on 'model:change', =>
+      @on 'change:debtDetails', =>
         @sort()
 
       @searchText = ''

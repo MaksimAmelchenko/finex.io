@@ -9,10 +9,7 @@
     mutators:
       dIE: ->
         ieDetail = _.max @get('ieDetails'), (ieDetail) ->
-#          (new Date(ieDetail.dIEDetail)).getTime()
-#          Date.parseExact(ieDetail.dIEDetail, 'yyyy-MM-dd HH:mm:ss').getTime()
           moment(ieDetail.dIEDetail, 'YYYY-MM-DD').toDate().getTime()
-        #        if ieDetail.dIEDetail then ieDetail.dIEDetail else @get('dSet')
         if ieDetail.dIEDetail
           ieDetail.dIEDetail
         else
@@ -66,7 +63,7 @@
 
       balance
 
-  #-----------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class Entities.IEs extends Entities.Collection
     model: Entities.IE
@@ -74,7 +71,7 @@
 
     initialize: ->
       new Backbone.MultiChooser(@)
-      @.on 'model:change', =>
+      @on 'change:ieDetails', =>
         @sort()
 
       @searchText = ''
@@ -91,9 +88,6 @@
       @filters.contractors = []
       @filters.accounts = []
       @filters.tags = []
-
-#    comparator: (ie) ->
-#      -Date.parseExact(ie.get('dIE'), 'yyyy-MM-dd').getTime()
 
     comparator: (ie1, ie2) ->
       dIE1 = moment(ie1.get('dIE'), 'YYYY-MM-DD').toDate().getTime()
@@ -131,6 +125,8 @@
           accounts: @filters.accounts.toString()
           tags: @filters.tags.toString()
       result
+
+  # --------------------------------------------------------------------------------
 
   API =
     newIEEntity: ->
