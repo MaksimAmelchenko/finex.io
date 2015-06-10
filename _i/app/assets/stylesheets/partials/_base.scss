@@ -69,3 +69,17 @@ span.minifyme {
   -webkit-box-shadow: none;
 }
 
+//select color
+.btn-select-tick i {
+  display: none;
+}
+
+.btn-select-tick .btn:hover i {
+  opacity: .3;
+  display: block;
+}
+
+.btn-select-tick .active i {
+  display: block;
+  opacity: 1 !important;
+}
