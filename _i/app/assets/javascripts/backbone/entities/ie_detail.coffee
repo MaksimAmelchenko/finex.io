@@ -19,6 +19,8 @@
       note: ''
       tags: []
       permit: null
+      idPlan: null
+      nRepeat: null
 
     urlRoot: App.getServer() + '/cashflows/ie_details'
 
@@ -31,16 +33,18 @@
       response
 
     isExpired: ->
-      @get('isNotConfirmed') and moment(@get('dIEDetail'), 'YYYY-MM-DD').toDate().getTime() < Date.now()
+      @get('isNotConfirmed') and moment(@get('dIEDetail'),
+        'YYYY-MM-DD').toDate().getTime() < Date.now()
 
-  #-----------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
   class Entities.IEDetails extends Entities.Collection
     model: Entities.IEDetail
     url: 'cashflows/ie_details'
 
     initialize: ->
       new Backbone.MultiChooser(@)
-      @.on 'model:change', =>
+
+      @on 'change:dIEDetail', =>
         @sort()
 
       @searchText = ''
@@ -61,30 +65,37 @@
       @filters.categories = []
       @filters.tags = []
 
-    #    comparator: (ieDetail) ->
-    #      -Date.parseExact(ieDetail.get('dIEDetail'), 'yyyy-MM-dd').getTime()
-    comparator: (ieDetail1, ieDetail2) ->
-      dIEDetail1 = moment(ieDetail1.get('dIEDetail'), 'YYYY-MM-DD').toDate().getTime()
-      dIEDetail2 = moment(ieDetail2.get('dIEDetail'), 'YYYY-MM-DD').toDate().getTime()
-      if dIEDetail1 > dIEDetail2
-        -1
-      else
-        if dIEDetail1 < dIEDetail2
-          1
+    comparator: (ieItem1, ieItem2) ->
+      isPlan1 = if ieItem1.get('idPlan') then true else false
+      isPlan2 = if ieItem2.get('idPlan') then true else false
+
+      if isPlan1 is isPlan2
+        dIEItem1 = moment(ieItem1.get('dIEDetail'), 'YYYY-MM-DD').toDate().getTime()
+        dIEItem2 = moment(ieItem2.get('dIEDetail'), 'YYYY-MM-DD').toDate().getTime()
+        if dIEItem1 > dIEItem2
+          -1
         else
-          if ieDetail1.id and ieDetail2.id and ieDetail1.id > ieDetail2.id
-            -1
+          if dIEItem1 < dIEItem2
+            1
           else
-            if ieDetail1.id and ieDetail2.id and ieDetail1.id < ieDetail2.id
-              1
+            if ieItem1.id and ieItem2.id and ieItem1.id > ieItem2.id
+              -1
             else
-              if ieDetail1.cid > ieDetail2.cid
-                -1
+              if ieItem1.id and ieItem2.id and ieItem1.id < ieItem2.id
+                1
               else
-                if ieDetail1.cid < ieDetail2.cid
-                  1
+                if ieItem1.cid > ieItem2.cid
+                  -1
                 else
-                  0
+                  if ieItem1.cid < ieItem2.cid
+                    1
+                  else
+                    0
+      else
+        if isPlan1
+          -1
+        else
+          1
 
     parse: (response, options)->
       @total = response.metadata.total
@@ -116,7 +127,7 @@
         dIEDetail: App.request 'default:date'
         reportPeriod: App.request 'default:reportPeriod'
         quantity: 1
-#        idUnit: 1 # шт
+  #        idUnit: 1 # шт
 
     getIEDetailEntities: (options = {})->
       _.defaults options,
