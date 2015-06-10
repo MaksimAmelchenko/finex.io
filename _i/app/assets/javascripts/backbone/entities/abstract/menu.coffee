@@ -1,7 +1,7 @@
 @CashFlow.module 'Entities', (Entities, App, Backbone, Marionette, $, _) ->
   class Entities.MenuItem extends  Entities.Model
     initialize: ->
-#      new Backbone.Chooser(@)
+      #      new Backbone.Chooser(@)
       items = @get 'items'
       if items
         @items = new Entities.MenuItems items
@@ -14,6 +14,7 @@
 
 
   API =
+  # @formatter:off
     getMenu: ->
       new Entities.MenuItems [
         {label: 'Итоги', id: 'dashboard', url: '#dashboard', icon: 'fa fa-lg fa-fw fa-tachometer'}
@@ -62,6 +63,7 @@
         }
         {label: 'Пользователи', id: 'users', url: '#users', icon: 'fa fa-lg fa-fw fa-users'}
       ]
+  # @formatter:on
 
   App.reqres.setHandler 'menu:entities', ->
     API.getMenu()

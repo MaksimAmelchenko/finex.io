@@ -22,11 +22,6 @@
     parse: (response, options)->
       response.users
 
-#    initialize: ->
-#      new Backbone.MultiChooser(@)
-#      @.on 'model:change', =>
-#        @sort()
-
     comparator: (user) ->
       user.get('name')
 
