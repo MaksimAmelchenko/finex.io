@@ -11,6 +11,10 @@ th {
 .table-condensed.table > thead > tr > td,
 .table-condensed.table > thead > tr > th {
   padding: 5px !important;
+  &.color-mark {
+    padding: 5px 4px 5px 4px !important;
+    width: 8px;
+  }
 }
 
 // Для системных элементов в справочниках
@@ -28,7 +32,7 @@ table tr.system {
 .table > tfoot > tr > td.sum {
   text-align: right;
   padding-right: 2px !important;
-  width: 90px;
+  //width: 90px;
   font-size: 15px;
   white-space: nowrap;
   div.col-xs-12 {
@@ -48,4 +52,9 @@ table tr.system {
 
 .table > tfoot {
   font-weight: bolder;
+}
+
+thead tr th.tickbox {
+  width: 18px;
+  font-size: 14px;
 }
