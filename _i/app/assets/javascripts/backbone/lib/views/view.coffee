@@ -45,7 +45,11 @@
       numberToMoney: (value, idMoney) ->
         '<nobr>' + s.numberFormat(value, 2, '.', ' ') + '</nobr>'
 
-      formatDate: (value) ->
-        moment(value, 'YYYY-MM-DD').format('DD.MM.YYYY') if value
+      formatDate: (value, isShort = false) ->
+        if value
+          if isShort
+            moment(value, 'YYYY-MM-DD').format('DD.MM.YY')
+          else
+            moment(value, 'YYYY-MM-DD').format('DD.MM.YYYY')
 
 
