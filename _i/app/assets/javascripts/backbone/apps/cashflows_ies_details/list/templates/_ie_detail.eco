@@ -1,4 +1,7 @@
-<td>
+<td class="color-mark <%= @colorMark%>">
+</td>
+
+<td class="tickbox">
     <i class="fa fa-fw"></i>
 </td>
 
@@ -6,7 +9,8 @@
     <%= @formatDate(@dIEDetail) %>
 </td>
 
-<td style="width: 200px">
+<!--<td style1="width: 200px">-->
+<td>
     <div class="row">
         <div class="col-xs-12">
             <%= CashFlow.entities.accounts.get(@idAccount).get('name') %>
@@ -19,10 +23,10 @@
             </span>
         </div>
     </div>
-
 </td>
 
-<td style="width: 200px">
+<!--<td style="width: 200px">-->
+<td>
     <div class="row">
         <div class="col-xs-12">
             <%= CashFlow.entities.categories.get(@idCategory).get('name') %>
@@ -39,24 +43,24 @@
 
 <!--<td> <%= @quantity %> <%= CashFlow.entities.units.get(@idUnit).get('name') unless _.isNull(@idUnit) %></td>-->
 
-<td class="sum hidden-xs hidden-sm">
+<td class="sum hidden-xs hidden-sm hidden-md">
     <%- @numberToMoney(@sign * @sum, @idMoney) if @sign is 1 %>
 </td>
-<td class="symbol hidden-xs hidden-sm">
+<td class="symbol hidden-xs hidden-sm hidden-md">
     <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') if @sign is 1%>
 </td>
 
-<td class="sum hidden-xs hidden-sm">
+<td class="sum hidden-xs hidden-sm hidden-md">
     <%- @numberToMoney(@sign * @sum, @idMoney) if @sign is -1%>
 </td>
-<td class="symbol hidden-xs hidden-sm">
+<td class="symbol hidden-xs hidden-sm hidden-md">
     <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') if @sign is -1%>
 </td>
 
-<td class="sum hidden-md hidden-lg">
+<td class="sum hidden-lg">
     <%- @numberToMoney(@sign * @sum, @idMoney) %>
 </td>
-<td class="symbol hidden-md hidden-lg">
+<td class="symbol hidden-lg">
     <%- CashFlow.entities.moneys.get(@idMoney).get('symbol')%>
 </td>
 

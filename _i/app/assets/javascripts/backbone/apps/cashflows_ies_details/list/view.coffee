@@ -1,5 +1,4 @@
 @CashFlow.module 'CashFlowsIEsDetailsApp.List', (List, App, Backbone, Marionette, $, _) ->
-  #@startWithParent = false
   class List.Layout extends App.Views.Layout
     template: 'cashflows_ies_details/list/layout'
 
@@ -22,7 +21,7 @@
     onDestroy: ->
       @addOpacityWrapper(false)
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.Pagination extends App.Views.ItemView
     template: 'cashflows_ies_details/list/_pagination'
@@ -56,7 +55,7 @@
       @ui.btnPrevious.amkDisable() if @collection.isFirstPage()
       @ui.btnNext.amkDisable() if @collection.isLastPage()
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.Panel extends App.Views.Layout
     template: 'cashflows_ies_details/list/_panel'
@@ -110,8 +109,8 @@
       'click @ui.btnToggleFilters': 'toggleFilters'
 
 
-#    collectionEvents:
-#      'sync': 'render'
+    #    collectionEvents:
+    #      'sync': 'render'
 
     add: ->
       model = App.request 'ie:detail:new:entity'
@@ -223,7 +222,7 @@
 
       App.vent.trigger 'cashflows_ies_details:panel:resize', @$el.height()
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.IEDetail extends App.Views.ItemView
     template: 'cashflows_ies_details/list/_ie_detail'
@@ -236,12 +235,12 @@
       'change': 'render'
 
     events:
-      'click td:first-child, .date': (e) ->
+      'click td.color-mark, td.tickbox, td.date': (e) ->
         e.stopPropagation()
         @model.toggleChoose()
 
     onRender: ->
-      icon = @$('td:first-child > i')
+      icon = @$('td.tickbox > i')
       if @model.isChosen()
         @$el.addClass 'info'
         icon.addClass('fa-check-square-o')
@@ -252,7 +251,7 @@
       @$el.toggleClass 'warning', @model.get('isNotConfirmed')
       @$el.toggleClass 'danger', @model.isExpired()
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.IEDetailTotal extends App.Views.ItemView
     template: 'cashflows_ies_details/list/_ie_detail_total'
@@ -284,7 +283,7 @@
             balance[idMoney]['total'] += model.get('sign') * model.get('sum')
           balance
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.IEDetailSelectedTotal extends App.Views.ItemView
     template: 'cashflows_ies_details/list/_ie_detail_selected_total'
@@ -321,13 +320,13 @@
               balance[idMoney]['total'] += model.get('sign') * model.get('sum')
           balance
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.Empty extends App.Views.ItemView
     template: 'cashflows_ies_details/list/_empty'
     tagName: 'tr'
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.IEDetails extends App.Views.CompositeView
     template: 'cashflows_ies_details/list/_ie_details'
@@ -337,7 +336,7 @@
     className: 'container-fluid'
 
     ui:
-      tickbox: 'th:first-child'
+      tickbox: 'th.tickbox'
       selectedTotal: 'tr[name=selectedTotal]'
       total: 'tr[name=total]'
 
@@ -380,3 +379,33 @@
     onDestroy: ->
       @total.destroy()
       @selectedTotal.destroy()
+
+
+# --------------------------------------------------------------------------------
+
+#  class List.IEItemPlanned extends App.Views.ItemView
+#    template: 'cashflows_ies_details/list/_ie_item_planned'
+#    tagName: 'tr'
+#
+#    #    triggers:
+#    #      'click': 'ie:detail:clicked'
+#
+#    modelEvents:
+#      'change': 'render'
+
+#    events:
+#      'click td:first-child, .date': (e) ->
+#        e.stopPropagation()
+#        @model.toggleChoose()
+
+#    onRender: ->
+#      icon = @$('td:first-child > i')
+#      if @model.isChosen()
+#        @$el.addClass 'info'
+#        icon.addClass('fa-check-square-o')
+#      else
+#        @$el.removeClass 'info'
+#        icon.addClass('fa-square-o')
+#
+#      @$el.toggleClass 'warning', @model.get('isNotConfirmed')
+#      @$el.toggleClass 'danger', @model.isExpired()

@@ -64,7 +64,7 @@
                     <button type="button" name="btnToggleFilters" class="btn btn-default"
                             title="Показать/скрыть фильтр">
                         <i class="fa fa-filter"></i>
-                        <span class="hidden-xs hidden-sm">
+                        <span class="hidden-xs hidden-sm hidden-md">
                             Фильтр
                         </span>
                         <span class="fa fa-fw fa-caret-right"></span>
