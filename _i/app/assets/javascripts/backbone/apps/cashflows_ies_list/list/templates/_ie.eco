@@ -8,13 +8,18 @@
 </td>
 
 <td>
-    <% if not _.isNull(@idContractor): %>
-    <%= CashFlow.entities.contractors.get(@idContractor).get('name')%>
-    <% end %>
-</td>
-
-<td class="hidden-xs hidden-sm">
-    <%= @accounts.join(', ') %>
+    <div class="row">
+        <div class="col-xs-12">
+            <%= @accounts.join(', ') %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <span class="text-muted">
+                <%= CashFlow.entities.contractors.get(@idContractor).get('name') if @idContractor%>
+            </span>
+        </div>
+    </div>
 </td>
 
 <td class="hidden-xs hidden-sm">

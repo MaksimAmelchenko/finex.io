@@ -7,8 +7,7 @@
                     <i class="fa fa-fw fa-square-o"></i>
                 </th>
                 <th>Дата</th>
-                <th>Контрагент</th>
-                <th class="hidden-xs hidden-sm"> Счета</th>
+                <th>Счета | Контрагент</th>
                 <th class="hidden-xs hidden-sm"> Категории</th>
                 <th colspan="2">Доход</th>
                 <th colspan="2">Расход</th>
