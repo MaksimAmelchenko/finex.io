@@ -1,0 +1,12 @@
+.datepicker {
+  z-index: 2151;
+}
+
+.datepicker,
+.datepicker table tr td,
+.datepicker table tr th,
+.datepicker.dropdown-menu,
+.datepicker table tr td span
+{
+  border-radius: 0;
+}
