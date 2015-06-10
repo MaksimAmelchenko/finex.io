@@ -115,7 +115,7 @@
       'change': 'render'
 
     events:
-      'click td:first-child, .date': (e) ->
+      'click td:first-child, td.tickbox, td.dplan': (e) ->
         e.stopPropagation()
         @model.toggleChoose()
 
@@ -124,7 +124,7 @@
         schedule: @model.getSchedule()
 
     onRender: ->
-      icon = @$('td:first-child > i')
+      icon = @$('td.tickbox > i')
       if @model.isChosen()
         @$el.addClass 'info'
         icon.addClass('fa-check-square-o')
@@ -153,7 +153,7 @@
 #    className: 'container-fluid'
 
     ui:
-      tickbox: 'th:first-child'
+      tickbox: 'th.tickbox'
 
     events:
       'click @ui.tickbox': (e) ->
@@ -164,6 +164,6 @@
         else
           @collection.chooseAll()
 
-    onBeforeShow: ->
-      @$el.css
-        'padding-top': '88px'
+#    onBeforeShow: ->
+#      @$el.css
+#        'padding-top': '88px'

@@ -16,13 +16,15 @@
       quantity: null
       sum: null
       note: ''
-      tags: []
       repeatType: null
-      repeatRate: null
+#      repeatRate: null
       repeatDays: null
       endType: null
       reportCount: null
       dEnd: null
+      operationNote: ''
+      operationTags: []
+      colorMark: null
 
     urlRoot: App.getServer() + '/plans/cashflow_items'
 
@@ -37,35 +39,39 @@
     getSchedule: ->
       days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
       result = ''
+      dBegin = moment(@get('dBegin'), 'YYYY-MM-DD')
       # @formatter:off
       switch @get('repeatType')
         when 1
           d = _.map @get('repeatDays'), (day) ->
-            days[day-1]
+            days[day - 1]
 
           result =
             "
-            Каждую #{if @get('repeatRate') is 1 then '' else '<strong>' + @get('repeatRate') + '</strong> '}
-            неделю в <strong>#{d.join(', ')}</strong>.
+            Еженедельно в <strong>#{d.join(', ')}</strong>.
             "
         when 2
           result =
             "
-            Каждый #{if @get('repeatRate') is 1 then '' else '<strong>' + @get('repeatRate') + '</strong> '}
-            месяц <strong>#{@get('repeatDays').join(', ')}</strong> числа.
+            Ежемесячно <strong>#{@get('repeatDays').join(', ')}</strong> числа.
             "
         when 3
           result =
             "
-            Каждый год <strong>#{moment(@get('dBegin'), 'YYYY-MM-DD').format('DD MMMM')}</strong>
+            Ежеквартально <strong>#{dBegin.format('DD')}</strong> числа <strong>#{((dBegin.month() + 1) % 3)+ 1}-го </strong> месяца.
             "
-      # @formatter:on
+        when 4
+          result =
+            "
+            Ежегодно <strong>#{dBegin.format('DD MMMM')}</strong>.
+            "
 
-      if @get('endType') is 1
-        result = result + ' Закончить после ' + @get('repeatCount') + 'выполнений.'
-      else
-        if @get('endType') is 2
-          result = result + ' Закончить ' + moment(@get('dEnd'), 'YYYY-MM-DD').format('DD.MM.YYYY')
+      switch @get('endType')
+        when 1
+          result += '<br>Закончить после <strong>' + @get('repeatCount') + '</strong> выполнений.'
+        when 2
+          result += '<br>Закончить <strong>' + moment(@get('dEnd'), 'YYYY-MM-DD').format('DD.MM.YYYY') + '</strong>'
+      # @formatter:on
 
       result
 
@@ -78,11 +84,41 @@
 
     initialize: ->
       new Backbone.MultiChooser(@)
-      @.on 'model:change', =>
+      @on 'change:dNextExecute', =>
+        console.log '###'
         @sort()
 
-#    comparator: (cashFlowItem1, cashFlowItem2) ->
-#      0
+    comparator: (plan1, plan2) ->
+      m1 = moment(plan1.get('dNextExecute'), 'YYYY-MM-DD')
+      m2 = moment(plan2.get('dNextExecute'), 'YYYY-MM-DD')
+
+      if m1.isValid() then e1 = m1.toDate().getTime() else e1 = 0
+      if m2.isValid() then e2 = m2.toDate().getTime() else e2 = 0
+
+      if e1 > 0 and e2 > 0
+        if e1 > e2
+          1
+        else
+          if e1 < e2
+            -1
+          else
+            0
+      else
+        if e1 is 0 and e2 is 0
+          dBegin1 = moment(plan1.get('dBegin'), 'YYYY-MM-DD').toDate().getTime()
+          dBegin2 = moment(plan2.get('dBegin'), 'YYYY-MM-DD').toDate().getTime()
+          if dBegin1 > dBegin2
+            1
+          else
+            if dBegin1 < dBegin2
+              -1
+            else
+              0
+        else
+          if e1 > 0
+            -1
+          else
+            1
 
     parse: (response, options)->
       @total = response.metadata.total
@@ -104,6 +140,7 @@
         dBegin: App.request 'default:date'
         reportPeriod: App.request 'default:reportPeriod'
         repeatType: 0
+        color: 'bg-color-green'
 
     getPlanCashFlowItemEntities: (options = {})->
       _.defaults options,

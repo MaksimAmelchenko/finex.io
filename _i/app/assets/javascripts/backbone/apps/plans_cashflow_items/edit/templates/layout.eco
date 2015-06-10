@@ -1,326 +1,463 @@
 <form class="form-horizontal" autocomplete="off">
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-4 col-xs-6">
-            <div class="radio">
-                <label>
-                    <input type="radio" name="sign" value="1"
-                    <%= if @sign is 1 then 'checked'%> >
-                    Доход
-                </label>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xs-6">
-            <div class="radio">
-                <label>
-                    <input type="radio" name="sign" value="-1"
-                    <%= if @sign is -1 then'checked'%>>
-                    Расход
-                </label>
-            </div>
-        </div>
-    </div>
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="mainTab" class="active">
+                <a href="#mainTab" aria-controls="mainTab" role="tab" data-toggle="tab">
+                    Основное
+                </a>
+            </li>
+            <li role="moreTab">
+                <a href="#moreTab" aria-controls="moreTab" role="tab" data-toggle="tab">
+                    Дополнительные поля
+                </a>
+            </li>
+            <li role="excludeTab">
+                <a href="#excludeTab" aria-controls="moreTab" role="tab" data-toggle="tab">
+                    Исключенные периоды
+                </a>
+            </li>
+        </ul>
 
-    <div class="form-group">
-        <label class="col-xs-12 col-sm-3  control-label" for="plan_cashflow_item__edit__dBegin">
-            Дата и период<em>*</em>
-        </label>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="mainTab">
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-4 col-xs-6">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="sign" value="1"
+                                <%= if @sign is 1 then 'checked'%> >
+                                Доход
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-6">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="sign" value="-1"
+                                <%= if @sign is -1 then'checked'%>>
+                                Расход
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="col-xs-6 col-sm-4">
-            <div class="input-group date" name="dBegin" data-provide="datepicker">
-                <input type="text" class="form-control"
-                       id="plan_cashflow_item__edit__dBegin" name="dBegin_">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3  control-label"
+                           for="plan_cashflow_item__edit__dBegin">
+                        Дата и период<em>*</em>
+                    </label>
+
+                    <div class="col-xs-6 col-sm-4">
+                        <div class="input-group date" name="dBegin" data-provide="datepicker">
+                            <input type="text" class="form-control"
+                                   id="plan_cashflow_item__edit__dBegin" name="dBegin_">
                         <span class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </span>
-            </div>
-        </div>
+                        </div>
+                    </div>
 
-        <div class="col-xs-6 col-sm-4">
-            <div class="input-group date" name="reportPeriod"
-                 data-provide="datepicker"
-                 data-date-format="MM yyyy" data-date-min-view-mode="1"
-                 data-is-linked="true">
-                <input type="text" class="form-control"
-                       id="plan_cashflow_item__edit__reportPeriod"
-                       name="reportPeriod_"
-                       data-toggle="tooltip"
-                       title="Отчетный период">
-                        <span class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-            </div>
-        </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-xs-12 col-sm-3 control-label" style="width: 149px;"
-               for="plan_cashflow_item__edit__contractor">
-            Контрагент
-        </label>
-
-        <div class="col-xs-12 col-sm-9">
-            <select class="select2" name="contractor" id="plan_cashflow_item__edit__contractor">
-                <option></option>
-                <% for contractor in CashFlow.request('contractor:entities').models: %>
-                <option value="<%= contractor.id %>">
-                    <%= contractor.get('name') %>
-                </option>
-                <% end %>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-xs-12 col-sm-3 control-label" style="width: 149px;"
-               for="plan_cashflow_item__edit__account">
-            Счет<em>*</em>
-        </label>
-
-        <div class="col-xs-12 col-sm-9">
-            <select class="select2" name="account" id="plan_cashflow_item__edit__account">
-                <option></option>
-                <% for account in CashFlow.request 'enabled:account:entities', @idAccount: %>
-                <option value="<%= account.id %>">
-                    <%= account.get('name') %>
-                </option>
-                <% end %>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3 control-label" style="width: 149px;"
-               for="plan_cashflow_item__edit__category">
-            Категория<em>*</em>
-        </label>
-
-        <div class="col-xs-12 col-sm-9">
-            <select class="select2" name="category"
-                    id="plan_cashflow_item__edit__category">
-                <option></option>
-                <!--@formatter:off-->
-                <% for category in CashFlow.request('category:filtered:entities', {isEnabled: true, isSystem: false, idCategory: @idCategory}): %>
-                <option value="<%= category.id %>">
-                    <%= category.path(true) %>
-                </option>
-                <% end %>
-                <!--@formatter:on-->
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-xs-12 col-sm-3 control-label" style="wid1th: 149px;"
-               for="plan_cashflow_item__edit__sum">
-            Сумма<em>*</em>
-        </label>
-
-        <div class="col-xs-7 col-sm-5">
-            <div class="input-group">
-                <input type="text" class="form-control number" name="sum"
-                       id="plan_cashflow_item__edit__sum">
-
-                <div class="input-group-addon">
-                    <div class="btn-group" name="money">
-                        <a class="dropdown-toggle" type="button" data-toggle="dropdown"
-                           aria-expanded="false">
-                            <span name="money" data-id-money="<%= @idMoney %>">
-                                <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') %>
+                    <div class="col-xs-6 col-sm-4">
+                        <div class="input-group date" name="reportPeriod"
+                             data-provide="datepicker"
+                             data-date-format="MM yyyy" data-date-min-view-mode="1"
+                             data-is-linked="true">
+                            <input type="text" class="form-control"
+                                   id="plan_cashflow_item__edit__reportPeriod"
+                                   name="reportPeriod_"
+                                   data-toggle="tooltip"
+                                   title="Отчетный период">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
                             </span>
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-1">
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 control-label" style="width: 149px;"
+                           for="plan_cashflow_item__edit__account">
+                        Счет<em>*</em>
+                    </label>
+
+                    <div class="col-xs-12 col-sm-9">
+                        <select class="select2" name="account"
+                                id="plan_cashflow_item__edit__account">
+                            <option></option>
                             <!--@formatter:off-->
-                            <% for money in CashFlow.request 'enabled:money:entities', @idMoney: %>
-                            <li data-id-money="<%= money.id %>"
-                                data-text="<%- money.get('symbol') %>"
-                                <%- 'class="active"' if money.id is @idMoney %>>
-                                <a href="#">
-                                    <%- money.get('symbol') %>
-                                </a>
-                            </li>
+                            <% for account in CashFlow.request 'enabled:account:entities', @idAccount: %>
+                            <option value="<%= account.id %>">
+                                <%= account.get('name') %>
+                            </option>
                             <% end %>
                             <!--@formatter:on-->
-                        </ul>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" style="width: 149px;"
+                           for="plan_cashflow_item__edit__category">
+                        Категория<em>*</em>
+                    </label>
+
+                    <div class="col-xs-12 col-sm-9">
+                        <select class="select2" name="category"
+                                id="plan_cashflow_item__edit__category">
+                            <option></option>
+                            <!--@formatter:off-->
+                            <% for category in CashFlow.request('category:filtered:entities', {isEnabled: true, isSystem: false, idCategory: @idCategory}): %>
+                            <option value="<%= category.id %>">
+                                <%= category.path(true) %>
+                            </option>
+                            <% end %>
+                            <!--@formatter:on-->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 control-label" style="wid1th: 149px;"
+                           for="plan_cashflow_item__edit__sum">
+                        Сумма<em>*</em>
+                    </label>
+
+                    <div class="col-xs-6 col-sm-4">
+                        <input type="text" class="form-control number" name="sum"
+                               id="plan_cashflow_item__edit__sum">
+                    </div>
+
+                    <div class="col-xs-1 col-sm-1" style="padding: 5px 0 6px 0;">
+                        <div class="btn-group" name="money">
+                            <a class="dropdown-toggle" type="button" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <span name="money" data-id-money="<%= @idMoney %>">
+                                    <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') %>
+                                </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <!--@formatter:off-->
+                                <% for money in CashFlow.request 'enabled:money:entities', @idMoney: %>
+                                <li data-id-money="<%= money.id %>"
+                                    data-text="<%- money.get('symbol') %>"
+                                    <%- 'class="active"' if money.id is @idMoney %>>
+                                    <a href="#">
+                                        <%- money.get('symbol') %>
+                                    </a>
+                                </li>
+                                <% end %>
+                                <!--@formatter:on-->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-3 col-sm-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control number" name="quantity"
+                                   data-toggle="tooltip"
+                                   title="Количество"
+                                   id="plan_cashflow_item__edit__quantity">
+
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-sm-2" style="padding: 5px 15px 6px 0;">
+                        <div class="btn-group" name="unit">
+                            <a class="dropdown-toggle" type="button" data-toggle="dropdown"
+                               aria-expanded="false">
+                               <span name="unit"
+                                     data-id-unit="<%= if @idUnit is null then 'null' else @idUnit %>">
+                                    <!--@formatter:off-->
+                                    <%- CashFlow.entities.units.get(@idUnit).get('name') if @idUnit%>
+                                    <!--@formatter:on-->
+                                </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-id-unit="null"
+                                    data-text="">
+                                    <a href="#">
+                                        &nbsp;
+                                    </a>
+                                </li>
+                                <!--@formatter:off-->
+                                <% for unit in CashFlow.entities.units.models: %>
+                                <li data-id-unit="<%= unit.id %>"
+                                    data-text="<%- unit.get('name') %>"
+                                    <%- 'class="active"' if unit.id is @idUnit %>>
+                                    <a href="#">
+                                        <%- unit.get('name') %>
+                                    </a>
+                                </li>
+                                <% end %>
+                                <!--@formatter:on-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 control-label">
+                        Повторять
+                    </label>
+
+                    <div class="col-xs-6 col-sm-4">
+                        <select class="select2 form-control" name="repeatType">
+                            <option value="0" selected>
+                                Нет
+                            </option>
+                            <option value="1">
+                                Еженедельно
+                            </option>
+                            <option value="2">
+                                Ежемесячно
+                            </option>
+                            <option value="3">
+                                Ежеквартально
+                            </option>
+                            <option value="4">
+                                Ежегодно
+                            </option>
+                        </select>
+                    </div>
+                    <!--<div class="col-xs-7 col-sm-5" name="_repeatOptions" style="display: none">-->
+                    <!--<div class="input-group">-->
+                    <!--<span class="input-group-text" name="everyText">every</span>-->
+                    <!--<input type="number" class="form-control" value="1" name="repeatRate"/>-->
+                    <!--<span class="input-group-text" name="periodName">week/month</span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+
+                <div class="form-group" name="_weekDays" style="display: none">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default ">
+                                <input type="checkbox" name="weekDays" value="1"> Пн
+                            </label>
+                            <label class="btn btn-default ">
+                                <input type="checkbox" name="weekDays" value="2"> Вт
+                            </label>
+                            <label class="btn btn-default ">
+                                <input type="checkbox" name="weekDays" value="3"> Ср
+                            </label>
+                            <label class="btn btn-default ">
+                                <input type="checkbox" name="weekDays" value="4"> Чт
+                            </label>
+                            <label class="btn btn-default ">
+                                <input type="checkbox" name="weekDays" value="5"> Пт
+                            </label>
+                            <label class="btn btn-default ">
+                                <input type="checkbox" name="weekDays" value="6"> Сб
+                            </label>
+                            <label class="btn btn-default ">
+                                <input type="checkbox" name="weekDays" value="7"> Вс
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" name="_monthDays" style="display: none">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <select class="select2" multiple name="monthDays" title="Дни месяца">
+                            <option></option>
+                            <% for i in [1..31]: %>
+                            <option value="<%= i %>">
+                                <%= i %>
+                            </option>
+                            <% end %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" name="_end" style="display: none">
+                    <label class="col-xs-12 col-sm-3 control-label">
+                        Закончить
+                    </label>
+
+                    <div class="col-xs-6 col-sm-4">
+                        <select class="select2" name="endType">
+                            <option value="0" selected>Никогда</option>
+                            <option value="1">После</option>
+                            <option value="2">Дата окончания</option>
+                        </select>
+
+                    </div>
+
+                    <div class="col-xs-6 col-sm-4" name="_repeatCount" style="display: none">
+                        <div class="input-group">
+                            <input type="number" class="form-control" name="repeatCount" value="2"/>
+                            <span class="input-group-text">выполнений</span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-4" name="_dEnd" style="display: none">
+                        <div class="input-group">
+                            <div class="input-group date" name="dEnd" data-provide="datepicker">
+                                <input type="text" class="form-control"
+                                       id="plan_cashflow_item__edit__dEnd" name="dEnd_">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" style="width: 149px;"
+                           for="plan_cashflow_item__edit__note">
+                        Примечание
+                    </label>
+
+                    <div class="col-sm-9">
+                        <textarea class="form-control" name="note"
+                                  id="plan_cashflow_item__edit__note" rows="1">
+                        </textarea>
                     </div>
                 </div>
             </div>
-        </div>
+            <div role="tabpanel" class="tab-pane" id="moreTab">
 
-        <div class="col-xs-5 col-sm-4">
-            <div class="input-group">
-                <input type="text" class="form-control number" name="quantity"
-                       data-toggle="tooltip"
-                       title="Количество"
-                       id="plan_cashflow_item__edit__quantity">
+                <!--<div class="col-xs-6 col-sm-4">-->
+                <!--<div class="input-group date" name="reportPeriod"-->
+                <!--data-provide="datepicker"-->
+                <!--data-date-format="MM yyyy" data-date-min-view-mode="1"-->
+                <!--data-is-linked="true">-->
+                <!--<input type="text" class="form-control"-->
+                <!--id="plan_cashflow_item__edit__reportPeriod"-->
+                <!--name="reportPeriod_"-->
+                <!--data-toggle="tooltip"-->
+                <!--title="Отчетный период">-->
+                <!--<span class="input-group-addon">-->
+                <!--<i class="fa fa-calendar"></i>-->
+                <!--</span>-->
+                <!--</div>-->
+                <!--</div>-->
 
-                <div class="input-group-addon" style="min-width: 34px;">
-                    <div class="btn-group" name="unit">
-                        <a class="dropdown-toggle" type="button" data-toggle="dropdown"
-                           aria-expanded="false">
-                            <span name="unit"
-                                  data-id-unit="<%= if @idUnit is null then 'null' else @idUnit %>">
-                                <%- CashFlow.entities.units.get(@idUnit).get('name') if @idUnit%>
-                            </span>
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li data-id-unit="null"
-                                data-text="">
-                                <a href="#">
-                                    &lt;без ед.измерения&gt;
-                                </a>
-                            </li>
-                            <!--@formatter:off-->
-                            <% for unit in CashFlow.entities.units.models: %>
-                            <li data-id-unit="<%= unit.id %>"
-                                data-text="<%- unit.get('name') %>"
-                                <%- 'class="active"' if unit.id is @idUnit %>>
-                                <a href="#">
-                                    <%- unit.get('name') %>
-                                </a>
-                            </li>
+                <!--<div class="col-sm-1">-->
+                <!--</div>-->
+
+                <p></p>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 control-label" style="width: 149px;"
+                           for="plan_cashflow_item__edit__contractor">
+                        Контрагент
+                    </label>
+
+                    <div class="col-xs-12 col-sm-9">
+                        <select class="select2" name="contractor"
+                                id="plan_cashflow_item__edit__contractor">
+                            <option></option>
+                            <% for contractor in CashFlow.request('contractor:entities').models: %>
+                            <option value="<%= contractor.id %>">
+                                <%= contractor.get('name') %>
+                            </option>
                             <% end %>
-                            <!--@formatter:on-->
-                        </ul>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" style="width: 149px;"
+                           for="plan_cashflow_item__edit__operation_note">
+                        Примечание операции
+                    </label>
+
+                    <div class="col-sm-9">
+                        <textarea class="form-control" name="operationNote"
+                                  id="plan_cashflow_item__edit__operation_note" rows="2">
+                        </textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" style="width: 149px;"
+                           for="plan_cashflow_item__edit__operation_tags">
+                        Теги операции
+                    </label>
+
+                    <div class="col-sm-9">
+                        <div class="select2" name="operationTags"
+                             id="plan_cashflow_item__edit__operation_tags">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">
+                        Цветовая метка
+                    </label>
+
+                    <div class="col-sm-9">
+                        <div class="btn-group btn-group-justified btn-select-tick"
+                             data-toggle="buttons">
+                            <label class="btn bg-color-green">
+                                <input type="radio" name="color" value="bg-color-green">
+                                <i class="fa fa-check txt-color-white"></i>
+                            </label>
+                            <label class="btn bg-color-greenLight">
+                                <input type="radio" name="color" value="bg-color-greenLight">
+                                <i class="fa fa-check txt-color-white"></i>
+                            </label>
+                            <label class="btn bg-color-purple">
+                                <input type="radio" name="color" value="bg-color-purple">
+                                <i class="fa fa-check txt-color-white"></i>
+                            </label>
+                            <label class="btn bg-color-magenta">
+                                <input type="radio" name="color" value="bg-color-magenta">
+                                <i class="fa fa-check txt-color-white"></i>
+                            </label>
+                            <label class="btn bg-color-pink">
+                                <input type="radio" name="color" value="bg-color-pink">
+                                <i class="fa fa-check txt-color-white"></i>
+                            </label>
+                            <label class="btn bg-color-pinkDark">
+                                <input type="radio" name="color" value="bg-color-pinkDark">
+                                <i class="fa fa-check txt-color-white"></i>
+                            </label>
+                            <label class="btn bg-color-blue">
+                                <input type="radio" name="color" value="bg-color-blue">
+                                <i class="fa fa-check txt-color-white"></i>
+                            </label>
+                            <label class="btn bg-color-blueLight">
+                                <input type="radio" name="color" value="bg-color-blueLight">
+                                <i class="fa fa-check txt-color-white"></i>
+                            </label>
+                            <!--<label class="btn bg-color-blueDark">-->
+                            <!--<input type="radio" name="color" value="bg-color-blueDark">-->
+                            <!--<i class="fa fa-check txt-color-white"></i>-->
+                            <!--</label>-->
+                            <!--<label class="btn bg-color-teal">-->
+                            <!--<input type="radio" name="color" value="bg-color-teal">-->
+                            <!--<i class="fa fa-check txt-color-white"></i>-->
+                            <!--</label>-->
+                            <label class="btn bg-color-yellow">
+                                <input type="radio" name="color" value="bg-color-yellow">
+                                <i class="fa fa-check txt-color-white"></i>
+                            </label>
+                            <label class="btn bg-color-orangeDark">
+                                <input type="radio" name="color" value="bg-color-orangeDark">
+                                <i class="fa fa-check txt-color-white"></i>
+                            </label>
+                            <label class="btn bg-color-redLight">
+                                <input type="radio" name="color" value="bg-color-redLight">
+                                <i class="fa fa-check txt-color-white"></i>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3 control-label" style="width: 149px;"
-               for="plan_cashflow_item__edit__note">
-            Примечание
-        </label>
-
-        <div class="col-sm-9">
-            <textarea class="form-control" name="note" id="plan_cashflow_item__edit__note" rows="1">
-            </textarea>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3 control-label" style="width: 149px;"
-               for="plan_cashflow_item__edit__tags">
-            Теги
-        </label>
-
-        <div class="col-sm-9">
-            <div class="select2" name="tags" id="plan_cashflow_item__edit__tags">
+            <div role="tabpanel" class="tab-pane" id="excludeTab">
+                Исключить!
             </div>
         </div>
     </div>
-
-    <div class="form-group">
-        <label class="col-xs-12 col-sm-3 control-label">
-            Повторять
-        </label>
-
-        <div class="col-xs-5 col-sm-4">
-            <select class="select2 form-control" name="repeatType">
-                <option value="0" selected>
-                    Нет
-                </option>
-                <option value="1" data-every-text="каждую" data-period-name="неделю">
-                    Еженедельно
-                </option>
-                <option value="2" data-every-text="каждый" data-period-name="месяц">
-                    Ежемесячно
-                </option>
-                <option value="3">
-                    Ежегодно
-                </option>
-            </select>
-
-        </div>
-        <div class="col-xs-7 col-sm-5" name="_repeatOptions" style="display: none">
-            <div class="input-group">
-                <span class="input-group-text" name="everyText">every</span>
-                <input type="number" class="form-control" value="1" name="repeatRate"/>
-                <span class="input-group-text" name="periodName">week/month</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group" name="_weekDays" style="display: none">
-        <div class="col-sm-offset-3 col-sm-9">
-            <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-default ">
-                    <input type="checkbox" name="weekDays" value="1"> Пн
-                </label>
-                <label class="btn btn-default ">
-                    <input type="checkbox" name="weekDays" value="2"> Вт
-                </label>
-                <label class="btn btn-default ">
-                    <input type="checkbox" name="weekDays" value="3"> Ср
-                </label>
-                <label class="btn btn-default ">
-                    <input type="checkbox" name="weekDays" value="4"> Чт
-                </label>
-                <label class="btn btn-default ">
-                    <input type="checkbox" name="weekDays" value="5"> Пт
-                </label>
-                <label class="btn btn-default ">
-                    <input type="checkbox" name="weekDays" value="6"> Сб
-                </label>
-                <label class="btn btn-default ">
-                    <input type="checkbox" name="weekDays" value="7"> Вс
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group" name="_monthDays" style="display: none">
-        <div class="col-sm-offset-3 col-sm-9">
-            <select class="select2" multiple name="monthDays" title="Дни месяца">
-                <option></option>
-                <% for i in [1..31]: %>
-                <option value="<%= i %>">
-                    <%= i %>
-                </option>
-                <% end %>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group" name="_end" style="display: none">
-        <label class="col-xs-12 col-sm-3 control-label">
-            Закончить
-        </label>
-
-        <div class="col-xs-5 col-sm-4">
-            <select class="select2" name="endType">
-                <option value="0" selected>Никогда</option>
-                <option value="1">После</option>
-                <option value="2">Дата окончания</option>
-            </select>
-
-        </div>
-
-        <div class="col-xs-7 col-sm-5" name="_repeatCount" style="display: none">
-            <div class="input-group">
-                <input type="number" class="form-control" name="repeatCount" value="2"/>
-                <span class="input-group-text">выполнений</span>
-            </div>
-        </div>
-
-        <div class="col-xs-6 col-sm-4" name="_dEnd" style="display: none">
-            <div class="input-group">
-                <div class="input-group date" name="dEnd" data-provide="datepicker">
-                    <input type="text" class="form-control"
-                           id="plan_cashflow_item__edit__dEnd" name="dEnd_">
-                <span class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-                </span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="form-actions">
         <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal">
             Отмена

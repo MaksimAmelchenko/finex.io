@@ -15,7 +15,6 @@
       form: 'form'
       dBegin: '[name=dBegin]'
       reportPeriod: '[name=reportPeriod]'
-      contractor: '[name=contractor]'
       account: '[name=account]'
       category: '[name=category]'
       sum: '[name=sum]'
@@ -23,13 +22,12 @@
       quantity: '[name=quantity]'
       unit: 'span[name=unit]'
       note: '[name=note]'
-      tags: '[name=tags]'
 
       repeatType: '[name=repeatType]'
       _repeatOptions: 'div[name=_repeatOptions]'
-      everyText: 'span[name=everyText]'
-      repeatRate: '[name=repeatRate]'
-      periodName: 'span[name=periodName]'
+#      everyText: 'span[name=everyText]'
+#      repeatRate: '[name=repeatRate]'
+#      periodName: 'span[name=periodName]'
       _weekDays: 'div[name=_weekDays]'
       weekDays: '[name=weekDays]'
       _monthDays: 'div[name=_monthDays]'
@@ -41,6 +39,11 @@
       repeatCount: 'input[name=repeatCount]'
       _dEnd: 'div[name=_dEnd]'
       dEnd: '[name=dEnd]'
+
+      contractor: '[name=contractor]'
+      operationNote: '[name=operationNote]'
+      operationTags: '[name=operationTags]'
+      colorMark: '[name=colorMark]'
 
       btnSave: '.btn[name=btnSave]'
 
@@ -115,30 +118,21 @@
       switch +@ui.repeatType.select2('val')
         when 0
           # None
-          @ui._repeatOptions.hide()
           @ui._weekDays.hide()
           @ui._monthDays.hide()
           @ui._end.hide()
         when 1
           # Weekly
-          @ui._repeatOptions.show()
-          @ui.everyText.text option.everyText
-          @ui.periodName.text option.periodName
-
           @ui._weekDays.show()
           @ui._monthDays.hide()
           @ui._end.show()
         when 2
           # Monthly
-          @ui._repeatOptions.show()
-          @ui.everyText.text option.everyText
-          @ui.periodName.text option.periodName
           @ui._weekDays.hide()
           @ui._monthDays.show()
           @ui._end.show()
-        when 3
-          # Yearly
-          @ui._repeatOptions.hide()
+        when 3, 4
+          # Q, Yearly
           @ui._weekDays.hide()
           @ui._monthDays.hide()
           @ui._end.show()
@@ -214,18 +208,26 @@
 
       @ui.note.val @model.get('note')
 
-      @ui.tags.select2
+      @ui.operationNote.val @model.get('operationNote')
+
+      @ui.operationTags.select2
         tokenSeparators: [',']
         tags: CashFlow.entities.tags.map (tag) ->
           tag.get('name')
-      @ui.tags.select2('val', @model.get('tags'))
+      @ui.operationTags.select2('val', @model.get('tags'))
+
+      @ui.colorMark
+      .filter('[value=' + @model.get('colorMark') + ']')
+      .prop('checked', true)
+      .parent()
+      .addClass('active')
 
       @ui.repeatType.select2
         minimumResultsForSearch: Infinity
 
       @ui.repeatType.select2('val', @model.get('repeatType')).change()
 
-      @ui.repeatRate.val @model.get('repeatRate')  if @model.get('repeatRate')
+#      @ui.repeatRate.val @model.get('repeatRate')  if @model.get('repeatRate')
 
       @ui.monthDays.select2()
 
@@ -271,24 +273,19 @@
           quantity:
             number: true
             moreThan: 0
-          repeatRate:
-            required:
-              param: true
-              depends: =>
-                +@ui.repeatType.select2('val') isnt 0
-            number:
-              param: true
-              depends: =>
-                +@ui.repeatType.select2('val') isnt 0
-            moreThan:
-              param: 0
-              depends: =>
-                +@ui.repeatType.select2('val') isnt 0
-#          weekDays:
+#          repeatRate:
 #            required:
 #              param: true
 #              depends: =>
-#                +@ui.repeatType.select2('val') is 1
+#                +@ui.repeatType.select2('val') isnt 0
+#            number:
+#              param: true
+#              depends: =>
+#                +@ui.repeatType.select2('val') isnt 0
+#            moreThan:
+#              param: 0
+#              depends: =>
+#                +@ui.repeatType.select2('val') isnt 0
           monthDays:
             required:
               param: true
@@ -323,7 +320,7 @@
             required: 'Пожалуйста, выберете счет'
           category:
             required: 'Пожалуйста, выберете категорию'
-          dIEDetail_:
+          dBegin_:
             required: 'Пожалуйста, укажите дату',
           reportPeriod_:
             required: 'Пожалуйста, укажите отчетный период',
@@ -334,10 +331,10 @@
           quantity:
             number: 'Пожалуйста, введите в поле "Количество" число'
             moreThan: 'Количество должно быть больше 0'
-          repeatRate:
-            required: 'Пожалуйста, укажите частоту повторения'
-            number: 'Пожалуйста, введите в поле "Частота повторения" число'
-            moreThan: 'Частота повторения должно быть больше 0'
+#          repeatRate:
+#            required: 'Пожалуйста, укажите частоту повторения'
+#            number: 'Пожалуйста, введите в поле "Частота повторения" число'
+#            moreThan: 'Частота повторения должно быть больше 0'
           monthDays:
             required: 'Пожалуйста, укажите числа месяца'
           repeatCount:
@@ -386,39 +383,38 @@
         quantity: numToJSON @ui.quantity.val()
         idUnit: numToJSON @ui.unit.data 'idUnit'
         note: @ui.note.val()
-        tags: @ui.tags.select2 'val'
         repeatType: numToJSON repeatType
+        operationNote: @ui.operationNote.val()
+        operationTags: @ui.operationTags.select2 'val'
+        colorMark: @ui.colorMark.filter(':checked').val()
+
 
       # @formatter:off
       switch repeatType
         when 0
           # None
           _.extend result,
-            repeatRate: null
             repeatDays: null
             endType : null
             repeatCount: null
             dEnd: null
-        when 1, 2, 3
+        when 1, 2, 3, 4
           endType = +@ui.endType.select2 'val'
 
           switch repeatType
             when 1
               # Weekly
               _.extend result,
-                repeatRate: numToJSON @ui.repeatRate.val()
                 repeatDays: _.map @ui.weekDays.filter(':checked'), (item) ->
                   parseInt item.value
             when 2
               # Monthly
               _.extend result,
-                repeatRate: numToJSON @ui.repeatRate.val()
                 repeatDays: _.map @ui.monthDays.select2('val'), (item) ->
                   parseInt item
-            when 3
-              # Monthly
+            when 3, 4
+              # Quarterly, Yearly
               _.extend result,
-                repeatRate: 1
                 repeatDays: null
 
           # endType
@@ -483,7 +479,7 @@
       @ui.account.select2 'destroy'
       @ui.category.select2 'destroy'
       @ui.monthDays.select2 'destroy'
-      @ui.tags.select2 'destroy'
+      @ui.operationTags.select2 'destroy'
       @ui.repeatType.select2 'destroy'
       @ui.monthDays.select2 'destroy'
       @ui.endType.select2 'destroy'
