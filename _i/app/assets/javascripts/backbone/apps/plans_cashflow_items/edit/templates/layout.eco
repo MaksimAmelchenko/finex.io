@@ -11,11 +11,11 @@
                     Дополнительные поля
                 </a>
             </li>
-            <li role="excludeTab">
-                <a href="#excludeTab" aria-controls="moreTab" role="tab" data-toggle="tab">
-                    Исключенные периоды
-                </a>
-            </li>
+            <!--<li role="excludeTab">-->
+            <!--<a href="#excludeTab" aria-controls="moreTab" role="tab" data-toggle="tab">-->
+            <!--Исключенные периоды-->
+            <!--</a>-->
+            <!--</li>-->
         </ul>
 
         <div class="tab-content">
@@ -73,9 +73,24 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-1">
-                    </div>
+                    <div class="col-xs-1" style="padding-left: 0">
+                        <span class="tooltip-question-mark">
+                            <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus"
+                               tabindex="-1" data-content="
+                               <p>
+                                <strong>Отчетный месяц</strong> позволяет отнести приход или расход
+                                не к фактической дате, а к отчетному месяцу (используется для построения отчетов)
+                               </p>
+                               <p>
+                                При повторах запранированной операции будет учитваться разница между
+                                начальной датой и отчетным периодом.
+                               </p>
 
+                               ">
+                                <i class="fa fa-question-circle"></i>
+                            </a>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -168,6 +183,7 @@
                     <div class="col-xs-2 col-sm-2" style="padding: 5px 15px 6px 0;">
                         <div class="btn-group" name="unit">
                             <a class="dropdown-toggle" type="button" data-toggle="dropdown"
+                               title="Единица измерения"
                                aria-expanded="false">
                                <span name="unit"
                                      data-id-unit="<%= if @idUnit is null then 'null' else @idUnit %>">
@@ -398,35 +414,35 @@
                         <div class="btn-group btn-group-justified btn-select-tick"
                              data-toggle="buttons">
                             <label class="btn bg-color-green">
-                                <input type="radio" name="color" value="bg-color-green">
+                                <input type="radio" name="colorMark" value="bg-color-green">
                                 <i class="fa fa-check txt-color-white"></i>
                             </label>
                             <label class="btn bg-color-greenLight">
-                                <input type="radio" name="color" value="bg-color-greenLight">
+                                <input type="radio" name="colorMark" value="bg-color-greenLight">
                                 <i class="fa fa-check txt-color-white"></i>
                             </label>
                             <label class="btn bg-color-purple">
-                                <input type="radio" name="color" value="bg-color-purple">
+                                <input type="radio" name="colorMark" value="bg-color-purple">
                                 <i class="fa fa-check txt-color-white"></i>
                             </label>
                             <label class="btn bg-color-magenta">
-                                <input type="radio" name="color" value="bg-color-magenta">
+                                <input type="radio" name="colorMark" value="bg-color-magenta">
                                 <i class="fa fa-check txt-color-white"></i>
                             </label>
                             <label class="btn bg-color-pink">
-                                <input type="radio" name="color" value="bg-color-pink">
+                                <input type="radio" name="colorMark" value="bg-color-pink">
                                 <i class="fa fa-check txt-color-white"></i>
                             </label>
                             <label class="btn bg-color-pinkDark">
-                                <input type="radio" name="color" value="bg-color-pinkDark">
+                                <input type="radio" name="colorMark" value="bg-color-pinkDark">
                                 <i class="fa fa-check txt-color-white"></i>
                             </label>
                             <label class="btn bg-color-blue">
-                                <input type="radio" name="color" value="bg-color-blue">
+                                <input type="radio" name="colorMark" value="bg-color-blue">
                                 <i class="fa fa-check txt-color-white"></i>
                             </label>
                             <label class="btn bg-color-blueLight">
-                                <input type="radio" name="color" value="bg-color-blueLight">
+                                <input type="radio" name="colorMark" value="bg-color-blueLight">
                                 <i class="fa fa-check txt-color-white"></i>
                             </label>
                             <!--<label class="btn bg-color-blueDark">-->
@@ -438,15 +454,15 @@
                             <!--<i class="fa fa-check txt-color-white"></i>-->
                             <!--</label>-->
                             <label class="btn bg-color-yellow">
-                                <input type="radio" name="color" value="bg-color-yellow">
+                                <input type="radio" name="colorMark" value="bg-color-yellow">
                                 <i class="fa fa-check txt-color-white"></i>
                             </label>
                             <label class="btn bg-color-orangeDark">
-                                <input type="radio" name="color" value="bg-color-orangeDark">
+                                <input type="radio" name="colorMark" value="bg-color-orangeDark">
                                 <i class="fa fa-check txt-color-white"></i>
                             </label>
                             <label class="btn bg-color-redLight">
-                                <input type="radio" name="color" value="bg-color-redLight">
+                                <input type="radio" name="colorMark" value="bg-color-redLight">
                                 <i class="fa fa-check txt-color-white"></i>
                             </label>
                         </div>

@@ -84,13 +84,12 @@
 
     initialize: ->
       new Backbone.MultiChooser(@)
-      @on 'change:dNextExecute', =>
-        console.log '###'
+      @on 'change:dPlan', =>
         @sort()
 
     comparator: (plan1, plan2) ->
-      m1 = moment(plan1.get('dNextExecute'), 'YYYY-MM-DD')
-      m2 = moment(plan2.get('dNextExecute'), 'YYYY-MM-DD')
+      m1 = moment(plan1.get('dPlan'), 'YYYY-MM-DD')
+      m2 = moment(plan2.get('dPlan'), 'YYYY-MM-DD')
 
       if m1.isValid() then e1 = m1.toDate().getTime() else e1 = 0
       if m2.isValid() then e2 = m2.toDate().getTime() else e2 = 0
@@ -140,7 +139,7 @@
         dBegin: App.request 'default:date'
         reportPeriod: App.request 'default:reportPeriod'
         repeatType: 0
-        color: 'bg-color-green'
+        colorMark: 'bg-color-green'
 
     getPlanCashFlowItemEntities: (options = {})->
       _.defaults options,

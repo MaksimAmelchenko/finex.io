@@ -25,9 +25,9 @@
 
       repeatType: '[name=repeatType]'
       _repeatOptions: 'div[name=_repeatOptions]'
-#      everyText: 'span[name=everyText]'
-#      repeatRate: '[name=repeatRate]'
-#      periodName: 'span[name=periodName]'
+    #      everyText: 'span[name=everyText]'
+    #      repeatRate: '[name=repeatRate]'
+    #      periodName: 'span[name=periodName]'
       _weekDays: 'div[name=_weekDays]'
       weekDays: '[name=weekDays]'
       _monthDays: 'div[name=_monthDays]'
@@ -214,7 +214,7 @@
         tokenSeparators: [',']
         tags: CashFlow.entities.tags.map (tag) ->
           tag.get('name')
-      @ui.operationTags.select2('val', @model.get('tags'))
+      @ui.operationTags.select2('val', @model.get('operationTags'))
 
       @ui.colorMark
       .filter('[value=' + @model.get('colorMark') + ']')
@@ -227,8 +227,6 @@
 
       @ui.repeatType.select2('val', @model.get('repeatType')).change()
 
-#      @ui.repeatRate.val @model.get('repeatRate')  if @model.get('repeatRate')
-
       @ui.monthDays.select2()
 
       if @model.get('repeatType') is 1
@@ -238,7 +236,6 @@
           .prop('checked', true)
           .parent()
           .addClass('active')
-      #          @ui.weekDays.filter('[value=' + day + ']').click()
 
       if @model.get('repeatType') is 2
         @ui.monthDays.select2('val', @model.get('repeatDays'))
@@ -254,6 +251,11 @@
 
       if endType is 2 and @model.get('dEnd')
         @ui.dEnd.datepicker('setDate', moment(@model.get('dEnd'), 'YYYY-MM-DD').toDate())
+
+      @$('[data-toggle=popover]').popover
+        container: 'body'
+        html: true
+        trigger: 'hover click'
 
       @ui.form.validate
         onfocusout: false
@@ -273,19 +275,6 @@
           quantity:
             number: true
             moreThan: 0
-#          repeatRate:
-#            required:
-#              param: true
-#              depends: =>
-#                +@ui.repeatType.select2('val') isnt 0
-#            number:
-#              param: true
-#              depends: =>
-#                +@ui.repeatType.select2('val') isnt 0
-#            moreThan:
-#              param: 0
-#              depends: =>
-#                +@ui.repeatType.select2('val') isnt 0
           monthDays:
             required:
               param: true
@@ -314,7 +303,6 @@
               param: moment(@ui.dBegin.datepicker('getDate')).format('DD.MM.YYYY')
               depends: =>
                 +@ui.endType.select2('val') is 2
-
         messages:
           account:
             required: 'Пожалуйста, выберете счет'
@@ -331,18 +319,12 @@
           quantity:
             number: 'Пожалуйста, введите в поле "Количество" число'
             moreThan: 'Количество должно быть больше 0'
-#          repeatRate:
-#            required: 'Пожалуйста, укажите частоту повторения'
-#            number: 'Пожалуйста, введите в поле "Частота повторения" число'
-#            moreThan: 'Частота повторения должно быть больше 0'
           monthDays:
             required: 'Пожалуйста, укажите числа месяца'
           repeatCount:
             required: 'Пожалуйста, укажите количество повторений'
             number: 'Пожалуйста, введите в поле "Количество повторений" число'
             moreThan: 'Количество повторений должно быть больше 1'
-        #          weekDays:
-        #            required: 'Пожалуйста, укажите хотя бы один день недели'
           dEnd_:
             required: 'Пожалуйста, укажите дату окончания',
             dateMoreThan: 'Пожвлуйста, укажите дату окончания больше даты начала'
@@ -351,17 +333,17 @@
         e.preventDefault()
 
     onShow: ->
-#      if (@model.get('permit') & 3) isnt 3 and not @model.isNew()
-#        @$('.form-control, [type=radio], [type=checkbox]').prop('disabled', true)
-#
-#        @ui.account.select2 'enable', false
-#        @ui.category.select2 'enable', false
-#        @ui.tags.select2 'enable', false
-#        @ui.unit.select2 'enable', false
-#        @ui.money.select2 'enable', false
-#        @ui.btnAddCategory.prop 'disabled', true
-#        @ui.btnSave.prop 'disabled', true
-#        @ui.btnMore.prop 'disabled', true
+      #      if (@model.get('permit') & 3) isnt 3 and not @model.isNew()
+      #        @$('.form-control, [type=radio], [type=checkbox]').prop('disabled', true)
+      #
+      #        @ui.account.select2 'enable', false
+      #        @ui.category.select2 'enable', false
+      #        @ui.tags.select2 'enable', false
+      #        @ui.unit.select2 'enable', false
+      #        @ui.money.select2 'enable', false
+      #        @ui.btnAddCategory.prop 'disabled', true
+      #        @ui.btnSave.prop 'disabled', true
+      #        @ui.btnMore.prop 'disabled', true
       _.defer =>
         if @ui[@config.focusField].hasClass 'select2'
           @ui[@config.focusField].select2('focus')
@@ -389,13 +371,12 @@
         colorMark: @ui.colorMark.filter(':checked').val()
 
 
-      # @formatter:off
       switch repeatType
         when 0
-          # None
+        # None
           _.extend result,
             repeatDays: null
-            endType : null
+            endType: null
             repeatCount: null
             dEnd: null
         when 1, 2, 3, 4
@@ -403,17 +384,17 @@
 
           switch repeatType
             when 1
-              # Weekly
+            # Weekly
               _.extend result,
                 repeatDays: _.map @ui.weekDays.filter(':checked'), (item) ->
                   parseInt item.value
             when 2
-              # Monthly
+            # Monthly
               _.extend result,
                 repeatDays: _.map @ui.monthDays.select2('val'), (item) ->
                   parseInt item
             when 3, 4
-              # Quarterly, Yearly
+            # Quarterly, Yearly
               _.extend result,
                 repeatDays: null
 
@@ -438,7 +419,6 @@
               alert "Unknown 'endType'"
         else
           alert "Unknown 'repeatType'"
-      # @formatter:on
       result
 
     getPatch: ->

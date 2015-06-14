@@ -1,6 +1,6 @@
 <td colspan="12">
     <div class="well well-sm text-center">
         Нет запланировованных доходов и расходов.
-        <a href="#" name="btnAdd">Добавить.</a>
+        <a href="#" name="btnAdd">Запланировать</a> новую операцию.
     </div>
 </td>
