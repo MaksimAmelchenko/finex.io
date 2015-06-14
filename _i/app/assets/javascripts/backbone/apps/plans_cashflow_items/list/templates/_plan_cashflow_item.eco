@@ -5,16 +5,12 @@
     <i class="fa fa-fw"></i>
 </td>
 
-<td class="date dplan">
+<td class="date dplan" style="border-right: 1px solid #ddd;">
     <%= @formatDate(@dPlan) %>
 </td>
 
 <td style="text-align: right;">
     <%= @nRepeat%>
-</td>
-
-<td class="date">
-    <%= @formatDate(@dBegin) %>
 </td>
 
 <td style="width: 100px">
@@ -58,6 +54,10 @@
 
 <td>
     <%- @schedule %>
+</td>
+
+<td class="date">
+    <%= @formatDate(@dBegin) %>
 </td>
 
 <td class="hidden-xs hidden-sm">

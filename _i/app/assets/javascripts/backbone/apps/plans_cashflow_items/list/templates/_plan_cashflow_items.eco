@@ -8,15 +8,22 @@
                 <th class="tickbox">
                     <i class="fa fa-fw fa-square-o"></i>
                 </th>
-                <th>Дата следующего выполнения</th>
-                <th>Повтор</th>
-                <th>Дата начала</th>
-                <th>Счет | Контрагент</th>
+                <th>Следующее выполнение</th>
+                <th>
+                    Повтор
+                    <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus"
+                       data-content="Показывает, какой раз будет выполнена запланированная операция"
+                       tabindex="-1">
+                        <i class="fa fa-question-circle"></i>
+                    </a>
+
+                </th>
+                <th>Счет<br>Контрагент</th>
                 <th>Категория</th>
-                <th colspan="2">Доход/Расход</th>
+                <th colspan="2">Сумма</th>
                 <th>Расписание</th>
+                <th>Дата начала</th>
                 <th class="hidden-xs hidden-sm">Примечание</th>
-                <!--<th class="hidden-xs hidden-sm">Теги</th>-->
             </tr>
             </thead>
             <tbody>

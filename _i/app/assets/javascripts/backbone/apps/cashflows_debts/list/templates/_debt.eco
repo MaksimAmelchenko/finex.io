@@ -5,7 +5,7 @@
     <i class="fa fa-fw"></i>
 </td>
 
-<td class="date">
+<td class="date" style="border-right: 1px solid #ddd;">
     <%= @formatDate(@dDebt) %>
 </td>
 

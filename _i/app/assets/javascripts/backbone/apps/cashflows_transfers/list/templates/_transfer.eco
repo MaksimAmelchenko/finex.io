@@ -1,7 +1,7 @@
 <td>
     <i class="fa fa-fw"></i>
 </td>
-<td class="date">
+<td class="date" style="border-right: 1px solid #ddd;">
     <%= @formatDate(@dTransfer) %>
 </td>
 <!--<td style="width: 200px">-->

@@ -7,12 +7,12 @@
                 <th class="tickbox">
                     <i class="fa fa-fw fa-square-o"></i>
                 </th>
-                <th>Дата</th>
-                <th>Счет | Контрагент</th>
+                <th >Дата</th>
+                <th>Счет<br>Контрагент</th>
                 <th>Категория</th>
                 <th class="hidden-xs hidden-sm hidden-md" colspan="2">Доход</th>
                 <th class="hidden-xs hidden-sm hidden-md" colspan="2">Расход</th>
-                <th class="hidden-lg" colspan="2">Доход/расход</th>
+                <th class="hidden-lg" colspan="2">Сумма</th>
                 <th class="hidden-xs hidden-sm">Примечание</th>
                 <th class="hidden-xs hidden-sm">Теги</th>
             </tr>
