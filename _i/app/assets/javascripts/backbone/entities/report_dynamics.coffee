@@ -16,8 +16,8 @@
 
 
       @params =
-        dBegin: moment().add(-12, 'months').startOf('month').format('YYYY-MM-DD')
-        dEnd: moment().endOf('month').format('YYYY-MM-DD')
+        dBegin: App.params.dashboard.dBegin
+        dEnd: App.params.dashboard.dEnd
         isUseReportPeriod: true
         idMoney: null
         contractorsUsingType: 1

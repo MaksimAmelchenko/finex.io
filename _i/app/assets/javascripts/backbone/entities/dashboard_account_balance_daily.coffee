@@ -4,9 +4,8 @@
 
     initialize: ->
       @params =
-        dBegin: moment().subtract(12, 'months').format('YYYY-MM-DD')
-        dEnd: moment().add(6, 'months').format('YYYY-MM-DD')
-#        currency: App.request 'default:currency'
+        dBegin: App.params.dashboard.dBegin
+        dEnd: App.params.dashboard.dEnd
         idMoney: null
 #        accountsUsingType: 1
 #        accounts: []
