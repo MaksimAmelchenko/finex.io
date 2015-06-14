@@ -58,3 +58,8 @@ thead tr th.tickbox {
   width: 18px;
   font-size: 14px;
 }
+
+// Planned operation
+tr[role=planned] {
+  background-color: #fff6f6;
+}
