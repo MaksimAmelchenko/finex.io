@@ -1,20 +1,19 @@
 <% isNew = @idIEDetail is null%>
 <form class="form-horizontal" autocomplete="off">
     <div class="form-group">
-        <div class="col-sm-offset-3 col-xs-6" style="width: 160px;">
+        <div class="col-sm-offset-3 col-sm-4 col-xs-6">
             <div class="radio">
                 <label>
-                    <input type="radio" name="sign" value="1" tabindex="1"
+                    <input type="radio" name="sign" value="1"
                     <%= if @sign is 1 then 'checked'%> >
                     Доход
                 </label>
             </div>
         </div>
-
-        <div class="col-xs-6" style="width: 160px;">
+        <div class="col-sm-4 col-xs-6">
             <div class="radio">
                 <label>
-                    <input type="radio" name="sign" value="-1" tabindex="2"
+                    <input type="radio" name="sign" value="-1"
                     <%= if @sign is -1 then'checked'%>>
                     Расход
                 </label>
@@ -23,54 +22,63 @@
     </div>
 
     <div class="form-group">
-        <label class="col-xs-2 col-sm-3 control-label" style="width: 149px;"
+        <label class="col-xs-12 col-sm-3 control-label"
                for="cashflow_ies_details__edit__dIEDetail">
-            Дата и период<em>*</em>
+            Дата и период <em>*</em>
         </label>
 
-        <div class="col-xs-10 col-sm-9">
-            <div class="row">
-
-                <div class="col-xs-6" style="width: 170px;">
-                    <div class="input-group date" name="dIEDetail" data-provide="datepicker">
-                        <input type="text" class="form-control"
-                               id="cashflow_ies_details__edit__dIEDetail" name="dIEDetail_"
-                               tabindex="3">
-                        <span class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="col-xs-6" style="width: 190px;">
-                    <div class="input-group date" name="reportPeriod" data-provide="datepicker"
-                         data-date-format="MM yyyy" data-date-min-view-mode="1"
-                         data-is-linked="true">
-                        <input type="text" class="form-control"
-                               id="cashflow_ies_details__edit__reportPeriod" name="reportPeriod_"
-                               data-toggle="tooltip"
-                               title="Отчетный период" tabindex="-1">
-                        <span class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </div>
-                </div>
+        <div class="col-xs-6 col-sm-4">
+            <div class="input-group date" name="dIEDetail" data-provide="datepicker">
+                <input type="text" class="form-control"
+                       id="cashflow_ies_details__edit__dIEDetail" name="dIEDetail_">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
             </div>
+        </div>
+
+        <div class="col-xs-5 col-sm-4">
+            <div class="input-group date" name="reportPeriod" data-provide="datepicker"
+                 data-date-format="MM yyyy" data-date-min-view-mode="1"
+                 data-is-linked="true">
+                <input type="text" class="form-control"
+                       id="cashflow_ies_details__edit__reportPeriod" name="reportPeriod_"
+                       data-toggle="tooltip"
+                       title="Отчетный месяц" tabindex="-1">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-1" style="padding-left: 0">
+            <span class="tooltip-question-mark">
+                <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus"
+                   tabindex="-1" data-content="
+                   <p>
+                    <strong>Отчетный месяц</strong> позволяет отнести приход или расход
+                    не к фактической дате, а к отчетному месяцу (используется для построения отчетов)
+                   </p>
+                   ">
+                    <i class="fa fa-question-circle"></i>
+                </a>
+            </span>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-3 control-label" style="width: 149px;"
+        <label class="col-xs-12 col-sm-3 control-label" style="width: 149px;"
                for="cashflow_ies_details__edit__account">
             Счет<em>*</em>
         </label>
 
-        <div class="col-sm-9">
-            <select class="select2" name="account" id="cashflow_ies_details__edit__account"
-                    tabindex="4">
+        <div class="col-xs-12 col-sm-9">
+            <select class="select2" name="account" id="cashflow_ies_details__edit__account">
                 <option></option>
                 <% for account in CashFlow.request 'enabled:account:entities', @idAccount: %>
-                <option value="<%= account.id %>"><%= account.get('name') %></option>
+                <option value="<%= account.id %>">
+                    <%= account.get('name') %>
+                </option>
                 <% end %>
             </select>
         </div>
@@ -82,90 +90,112 @@
             Категория<em>*</em>
         </label>
 
-        <div class="col-sm-9">
-            <div class="input-group">
-                <select class="select2" name="category"
-                        id="cashflow_ies_details__edit__category" tabindex="5">
-                    <option></option>
-                    <!--@formatter:off-->
-                    <% for category in CashFlow.request('category:filtered:entities', {isEnabled: true, isSystem: false, idCategory: @idCategory}): %>
-                    <option value="<%= category.id %>">
-                        <%= category.path(true) %>
-                    </option>
-                    <% end %>
-                    <!--@formatter:on-->
-                </select>
-                <span class="input-group-delimiter"></span>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" name="btnAddCategory"
-                            tabindex="-1">
-                        <i class="fa fa-plus"></i>
-                    </button>
-                </span>
-            </div>
+        <div class="col-xs-10 col-sm-8">
+            <select class="select2" name="category"
+                    id="cashflow_ies_details__edit__category">
+                <option></option>
+                <!--@formatter:off-->
+                <% for category in CashFlow.request('category:filtered:entities', {isEnabled: true, isSystem: false, idCategory: @idCategory}): %>
+                <option value="<%= category.id %>">
+                    <%= category.path(true) %>
+                </option>
+                <% end %>
+                <!--@formatter:on-->
+            </select>
+        </div>
+        <div class="col-xs-2 col-sm-1" style="padding-left: 1px;">
+            <button class="btn btn-default" type="button" name="btnAddCategory"
+                    tabindex="-1"
+                    style="padding-left: 11px; padding-right: 11px; width: 34px;">
+                <i class="fa fa-plus"></i>
+            </button>
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="col-xs-2 col-sm-3 control-label" style="width: 149px;"
-               for="cashflow_ies_details__edit__quantity">
-            Количество<em>*</em>
-        </label>
-
-        <div class="col-xs-10 col-sm-9">
-            <div class="row">
-                <div class="col-xs-6" style="width:140px">
-                    <input type="number" class="form-control number" name="quantity"
-                           id="cashflow_ies_details__edit__quantity" tabindex="0">
-                </div>
-                <div class="col-xs-6" style="width: 120px">
-                    <select class="select2" name="unit" tabindex="0">
-                        <option></option>
-                        <% for unit in CashFlow.entities.units.models: %>
-                        <option value="<%= unit.id %>">
-                            <%= unit.get('name') %>
-                        </option>
-                        <% end %>
-                    </select>
-                </div>
-
-            </div>
-        </div>
-    </div>
 
     <div class="form-group">
-        <label class="col-xs-2 col-sm-3 control-label" style="width: 149px;"
+        <label class="col-xs-12 col-sm-3 control-label" style="wid1th: 149px;"
                for="cashflow_ies_details__edit__sum">
             Сумма<em>*</em>
         </label>
 
-        <div class="col-xs-10 col-sm-9">
-            <div class="row">
+        <div class="col-xs-6 col-sm-4">
+            <input type="text" class="form-control number" name="sum"
+                   id="cashflow_ies_details__edit__sum">
+        </div>
 
-                <div class="col-xs-6" style="width:140px">
-                    <input type="text" class="form-control number" name="sum"
-                           tabindex="6"
-                           id="cashflow_ies_details__edit__sum">
-                </div>
-
-                <div class="col-xs-6" style="width: 120px">
-                    <select class="select2" name="money" tabindex="0">
-                        <% for money in CashFlow.request 'enabled:money:entities', @idMoney: %>
-                        <option value="<%= money.id %>">
+        <div class="col-xs-1 col-sm-1" style="padding: 5px 0 6px 0;">
+            <div class="btn-group" name="money">
+                <a class="dropdown-toggle" type="button" data-toggle="dropdown"
+                   aria-expanded="false">
+                    <span name="money" data-id-money="<%= @idMoney %>">
+                        <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') %>
+                    </span>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <!--@formatter:off-->
+                    <% for money in CashFlow.request 'enabled:money:entities', @idMoney: %>
+                    <li data-id-money="<%= money.id %>"
+                        data-text="<%- money.get('symbol') %>"
+                        <%- 'class="active"' if money.id is @idMoney %>>
+                        <a href="#">
                             <%- money.get('symbol') %>
-                        </option>
-                        <% end %>
-                    </select>
-                </div>
+                        </a>
+                    </li>
+                    <% end %>
+                    <!--@formatter:on-->
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-xs-3 col-sm-2">
+            <div class="input-group">
+                <input type="text" class="form-control number" name="quantity"
+                       data-toggle="tooltip"
+                       title="Количество"
+                       id="cashflow_ies_details__edit__quantity">
+
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2" style="padding: 5px 15px 6px 0;">
+            <div class="btn-group" name="unit">
+                <a class="dropdown-toggle" type="button" data-toggle="dropdown"
+                   aria-expanded="false" title="Единица измерения">
+                   <span name="unit"
+                         data-id-unit="<%= if @idUnit is null then 'null' else @idUnit %>">
+                        <%- CashFlow.entities.units.get(@idUnit).get('name') if @idUnit%>
+                    </span>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li data-id-unit="null"
+                        data-text="">
+                        <a href="#">
+                            &nbsp;
+                        </a>
+                    </li>
+                    <!--@formatter:off-->
+                    <% for unit in CashFlow.entities.units.models: %>
+                    <li data-id-unit="<%= unit.id %>"
+                        data-text="<%- unit.get('name') %>"
+                        <%- 'class="active"' if unit.id is @idUnit %>>
+                        <a href="#">
+                            <%- unit.get('name') %>
+                        </a>
+                    </li>
+                    <% end %>
+                    <!--@formatter:on-->
+                </ul>
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
+        <div class="col-sm-offset-3 col-xs-12 col-sm-9">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="isNotConfirmed">
+                    <input type="checkbox" name="isNotConfirmed" tabindex="-1">
                     Неподтверждённая операция
                 </label>
 
@@ -178,21 +208,19 @@
                    tabindex="-1">
                     <i class="fa fa-question-circle"></i>
                 </a>
-
             </div>
-            <!--<p class="help-block">Неподтвержённые транзации будут выделены в журнале операций. В остальном они ничем не отличаются</p>-->
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-3 control-label" style="width: 149px;"
+        <label class="col-sm-3 control-label"
                for="cashflow_ies_details__edit__note">
             Примечание
         </label>
 
         <div class="col-sm-9">
             <textarea class="form-control" name="note" id="cashflow_ies_details__edit__note"
-                      rows="2" tabindex="7">
+                      rows="2">
             </textarea>
         </div>
     </div>
@@ -204,29 +232,28 @@
         </label>
 
         <div class="col-sm-9">
-            <div class="select2" name="tags" id="cashflow_ies_details__edit__tags"
-                 tabindex="8">
+            <div class="select2" name="tags" id="cashflow_ies_details__edit__tags">
             </div>
         </div>
     </div>
 
     <div class="form-actions">
-        <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal"
-                tabindex="11">
+        <button type="button" name="btnCancel" class="btn btn-default" data-dismiss="modal">
             Отмена
         </button>
-        <button type="<%= if isNew then 'button' else 'submit' %>" name="btnSave"
-                class="btn <%= if isNew then 'btn-default' else 'btn-primary'%>"
-                tabindex="<%= if isNew then '10' else '9'%>">
+        <button type="<%= if isNew and not @idPlan then 'button' else 'submit' %>"
+                name="btnSave"
+                class="btn <%= if isNew and not @idPlan then 'btn-default' else 'btn-primary'%>">
             Сохранить
         </button>
+        <% if not @idPlan: %>
         <button type="<%= if isNew then 'submit' else 'button' %>" name="btnMore"
                 class="btn <%= if isNew then 'btn-primary' else 'btn-default'%>"
                 data-toggle="tooltip"
-                title="Сохранить данные и внести новые"
-                tabindex="<%= if isNew then '9' else '10'%>">
+                title="Сохранить данные и внести новые">
             Еще
         </button>
+        <% end %>
     </div>
 
 </form>

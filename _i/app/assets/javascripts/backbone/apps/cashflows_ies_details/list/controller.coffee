@@ -32,13 +32,6 @@
     showList: (ieDetails) ->
       listView = @getListView ieDetails
 
-      @listenTo listView, 'childview:ie:detail:clicked', (child, args) ->
-        {model} = args
-
-        if not getSelection().toString()
-          model.collection.chooseNone()
-          model.choose()
-          App.request 'ie:detail:edit', model, model.collection
       @show listView,
         region: @layout.listRegion
 

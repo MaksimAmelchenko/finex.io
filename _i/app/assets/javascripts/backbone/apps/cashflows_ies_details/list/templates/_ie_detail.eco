@@ -1,3 +1,5 @@
+<% today = (new Date()).setHours(0,0,0,0) %>
+
 <td class="color-mark <%= @colorMark%>">
 </td>
 
@@ -5,9 +7,28 @@
     <i class="fa fa-fw"></i>
 </td>
 
-<td class="date">
+<% if @idPlan: %>
+<td class="date" style="border-right: 1px solid #ddd;">
+    <div class="row">
+        <div class="col-xs-12">
+            <%= @formatDate(@dIEDetail) %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <% if moment(@dIEDetail, 'YYYY-MM-DD').toDate().getTime() < today: %>
+            <small class="txt-color-red">Просрочено</small>
+            <% else: %>
+            <small class="text-info">Запланировано</small>
+            <% end %>
+        </div>
+    </div>
+</td>
+<% else: %>
+<td class="date" style="border-right: 1px solid #ddd;">
     <%= @formatDate(@dIEDetail) %>
 </td>
+<% end %>
 
 <!--<td style1="width: 200px">-->
 <td>

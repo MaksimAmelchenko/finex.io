@@ -16,11 +16,11 @@
       reportPeriod: '[name=reportPeriod]'
       account: '[name=account]'
       category: '[name=category]'
-      quantity: '[name=quantity]'
-      unit: '[name=unit]'
       sum: '[name=sum]'
+      money: 'span[name=money]'
+      quantity: '[name=quantity]'
+      unit: 'span[name=unit]'
       isNotConfirmed: '[name=isNotConfirmed]'
-      money: '[name=money]'
       note: '[name=note]'
       tags: '[name=tags]'
       form: 'form'
@@ -36,6 +36,8 @@
       'changeDate @ui.dIEDetail': 'changeDateDIEDetail'
       'keydown @ui.sum': 'keyPress'
       'focusout @ui.sum': 'recalculateSum'
+      'click div[name=money] ul.dropdown-menu li': 'selectMoney'
+      'click div[name=unit] ul.dropdown-menu li': 'selectUnit'
 
     initialize: (options = {}) ->
       options.config or= {}
@@ -63,6 +65,20 @@
       if code is 13
         @recalculateSum()
 
+    selectMoney: (e)->
+      e.preventDefault()
+      li = $(e.currentTarget)
+      li.siblings().removeClass('active').end().addClass('active')
+
+      @ui.money.text(li.data('text')).data('idMoney', li.data('idMoney'))
+
+    selectUnit: (e)->
+      e.preventDefault()
+      li = $(e.currentTarget)
+      li.siblings().removeClass('active').end().addClass('active')
+
+      @ui.unit.text(li.data('text')).data('idUnit', li.data('idUnit'))
+
     changeDateDIEDetail: ->
       # reportPeriod is dependence from dIEDetail unless it does not changed
       if @ui.reportPeriod.data('isLinked') and moment(@ui.reportPeriod.datepicker('getDate')).isValid()
@@ -79,7 +95,10 @@
 
 
     getTitle: ->
-      "Операция &gt; #{if @model.isNew() then 'Добавление' else 'Редактирование'}"
+      if @model.get('idPlan')
+        "Добавление запланированной операции"
+      else
+        "#{if @model.isNew() then 'Добавление' else 'Редактирование'} операции"
 
     onRender: ->
       @ui.dIEDetail.datepicker('setDate', moment(@model.get('dIEDetail'), 'YYYY-MM-DD').toDate())
@@ -116,17 +135,9 @@
 
       @ui.quantity.val @model.get('quantity')
 
-      @ui.unit.select2()
-#        allowClear: true
-
-      @ui.unit.select2 'val', @model.get('idUnit')
-
       @ui.sum.val @model.get('sum')
 
       @ui.isNotConfirmed.prop('checked', @model.get('isNotConfirmed'))
-
-      @ui.money.select2()
-      @ui.money.select2 'val', @model.get('idMoney')
 
       @ui.note.val @model.get('note')
 
@@ -138,7 +149,7 @@
 
       @$('[data-toggle=popover]').popover
         container: 'body'
-#        placement: 'right'
+      #        placement: 'right'
         html: true
         trigger: 'hover click'
 
@@ -158,7 +169,6 @@
             number: true
             moreThan: 0
           quantity:
-            required: true
             number: true
             moreThan: 0
         messages:
@@ -175,7 +185,6 @@
             number: 'Пожалуйста, введите в поле "Сумма" число'
             moreThan: 'Сумма должна быть больше 0'
           quantity:
-            required: 'Пожалуйста, укажите количество'
             number: 'Пожалуйста, введите в поле "Количество" число'
             moreThan: 'Количество должно быть больше 0'
 
@@ -190,8 +199,8 @@
         @ui.account.select2 'enable', false
         @ui.category.select2 'enable', false
         @ui.tags.select2 'enable', false
-        @ui.unit.select2 'enable', false
-        @ui.money.select2 'enable', false
+        #        @ui.unit.select2 'enable', false
+        #        @ui.money.select2 'enable', false
         @ui.btnAddCategory.prop 'disabled', true
         @ui.btnSave.prop 'disabled', true
         @ui.btnMore.prop 'disabled', true
@@ -209,10 +218,10 @@
       idAccount: numToJSON @ui.account.select2('data').id
       idCategory: numToJSON @ui.category.select2('data').id
       quantity: numToJSON @ui.quantity.val()
-      idUnit: numToJSON @ui.unit.val()
+      idUnit: numToJSON @ui.unit.data 'idUnit'
       sum: numToJSON @ui.sum.val()
+      idMoney: numToJSON @ui.money.data 'idMoney'
       isNotConfirmed: @ui.isNotConfirmed.prop('checked')
-      idMoney: numToJSON @ui.money.val()
       note: @ui.note.val()
       tags: @ui.tags.select2 'val'
 
@@ -267,8 +276,6 @@
       @ui.account.select2 'destroy'
       @ui.category.select2 'destroy'
       @ui.tags.select2 'destroy'
-      @ui.unit.select2 'destroy'
-      @ui.money.select2 'destroy'
 
     addCategory: ->
       model = App.request 'category:new:entity'

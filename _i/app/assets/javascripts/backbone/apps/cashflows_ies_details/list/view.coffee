@@ -117,7 +117,22 @@
       App.request 'ie:detail:edit', model, @collection
 
     del: ->
-      model.destroy()  for model in  @collection.getChosen()
+      for model in @collection.getChosen()
+        if model.get('idPlan')
+          do (model) ->
+            App.xhrRequest
+              type: 'POST'
+              url: "plans/#{model.get('idPlan')}/cancel"
+              data: JSON.stringify
+                dExclude: model.get('dIEDetail')
+              success: (res, textStatus, jqXHR) ->
+                model.collection.totalPlanned -= 1
+                App.execute('menu:set:badge', 'ies_details', model.collection.totalPlanned,
+                  'Количество запланированных операций')
+                model.destroy()
+
+        else
+          model.destroy()
 
     refresh: ->
       @collection.resetPagination()
@@ -228,16 +243,22 @@
     template: 'cashflows_ies_details/list/_ie_detail'
     tagName: 'tr'
 
-    triggers:
-      'click': 'ie:detail:clicked'
-
     modelEvents:
       'change': 'render'
+      'change:idPlan': ->
+        @model.collection.totalPlanned -= 1
+        App.execute('menu:set:badge', 'ies_details', @model.collection.totalPlanned,
+          'Количество запланированных операций')
 
     events:
       'click td.color-mark, td.tickbox, td.date': (e) ->
         e.stopPropagation()
         @model.toggleChoose()
+      'click': ->
+        if not getSelection().toString()
+          @model.collection.chooseNone()
+          @model.choose()
+          App.request 'ie:detail:edit', @model, @model.collection
 
     onRender: ->
       icon = @$('td.tickbox > i')
@@ -250,6 +271,8 @@
 
       @$el.toggleClass 'warning', @model.get('isNotConfirmed')
       @$el.toggleClass 'danger', @model.isExpired()
+
+      @$el.attr 'role', 'planned' if @model.get('idPlan')
 
   # --------------------------------------------------------------------------------
 
@@ -340,6 +363,11 @@
       selectedTotal: 'tr[name=selectedTotal]'
       total: 'tr[name=total]'
 
+    collectionEvents:
+      'sync:stop': ->
+        App.execute('menu:set:badge', 'ies_details', @collection.totalPlanned,
+          'Количество запланированных операций')
+
     events:
       'click @ui.tickbox': (e) ->
         e.stopPropagation()
@@ -367,7 +395,6 @@
 
       @total.render()
 
-
       @selectedTotal = new List.IEDetailSelectedTotal
         collection: @collection
 
@@ -379,33 +406,3 @@
     onDestroy: ->
       @total.destroy()
       @selectedTotal.destroy()
-
-
-# --------------------------------------------------------------------------------
-
-#  class List.IEItemPlanned extends App.Views.ItemView
-#    template: 'cashflows_ies_details/list/_ie_item_planned'
-#    tagName: 'tr'
-#
-#    #    triggers:
-#    #      'click': 'ie:detail:clicked'
-#
-#    modelEvents:
-#      'change': 'render'
-
-#    events:
-#      'click td:first-child, .date': (e) ->
-#        e.stopPropagation()
-#        @model.toggleChoose()
-
-#    onRender: ->
-#      icon = @$('td:first-child > i')
-#      if @model.isChosen()
-#        @$el.addClass 'info'
-#        icon.addClass('fa-check-square-o')
-#      else
-#        @$el.removeClass 'info'
-#        icon.addClass('fa-square-o')
-#
-#      @$el.toggleClass 'warning', @model.get('isNotConfirmed')
-#      @$el.toggleClass 'danger', @model.isExpired()

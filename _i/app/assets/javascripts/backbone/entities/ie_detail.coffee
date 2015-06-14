@@ -33,10 +33,11 @@
       response
 
     isExpired: ->
-      @get('isNotConfirmed') and moment(@get('dIEDetail'),
-        'YYYY-MM-DD').toDate().getTime() < Date.now()
+      dIEDetail = moment(@get('dIEDetail'), 'YYYY-MM-DD').toDate()
+      @get('isNotConfirmed') and dIEDetail.getTime() < Date.now()
 
   # --------------------------------------------------------------------------------
+
   class Entities.IEDetails extends Entities.Collection
     model: Entities.IEDetail
     url: 'cashflows/ie_details'
@@ -44,7 +45,8 @@
     initialize: ->
       new Backbone.MultiChooser(@)
 
-      @on 'change:dIEDetail', =>
+      # change a date or make a operation from a planned operation
+      @on 'change:dIEDetail, change:idPlan', =>
         @sort()
 
       @searchText = ''
@@ -99,6 +101,7 @@
 
     parse: (response, options)->
       @total = response.metadata.total
+      @totalPlanned = response.metadata.totalPlanned
       @limit = response.metadata.limit
       @offset = response.metadata.offset
       response.ieDetails
@@ -118,6 +121,8 @@
           categories: @filters.categories.toString()
           tags: @filters.tags.toString()
       result
+
+  # --------------------------------------------------------------------------------
 
   API =
     newIEDetailEntity: ->

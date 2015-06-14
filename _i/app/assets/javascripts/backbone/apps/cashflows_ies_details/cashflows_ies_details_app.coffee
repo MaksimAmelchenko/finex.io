@@ -29,7 +29,7 @@
     isNew = ieDetail.isNew()
 
     _.defaults config,
-      focusField: if isNew then 'account' else 'sum'
+      focusField: if isNew and not ieDetail.get('idPlan') then 'account' else 'sum'
       isSync: true
 
     editController = CashFlowsIEsDetailsApp.edit(ieDetail, App.request('dialog:region'), config)
