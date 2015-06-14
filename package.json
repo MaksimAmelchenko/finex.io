@@ -1,9 +1,9 @@
 {
   "name": "finex.io",
   "version": "0.9.5",
-  "devServer": "http://dev.finex.io:3000",
+  "devServer": "http://localhost:3000",
   "productionServer": "https://api.finex.io",
-  "description": "Frontend for a Personal Financial Management Services FINEX.io",
+  "description": "Frontend for a Personal Financial Management service FINEX.io",
   "author": "Maksim Amelchenko <m.amelchenko@gmail.com>",
   "repository": {
     "type": "git",
