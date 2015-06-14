@@ -66,9 +66,9 @@ do ($) ->
             $(this).parent("li").addClass("open")
             $(this).parent("li").find("b:first").delay(opts.speed).html(opts.openedSign)
 
-      else
-        $this.find('li.active').removeClass("active")
-        $(this).parent("li").addClass("active")
+#      else
+#        $this.find('li.active').removeClass("active")
+#        $(this).parent("li").addClass("active")
 
 
   window.showError = (message) ->

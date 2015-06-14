@@ -1,7 +1,8 @@
 @CashFlow.module 'Entities', (Entities, App, Backbone, Marionette, $, _) ->
   class Entities.MenuItem extends  Entities.Model
     initialize: ->
-      #      new Backbone.Chooser(@)
+      new Backbone.Chooser(@)
+
       items = @get 'items'
       if items
         @items = new Entities.MenuItems items
@@ -9,9 +10,19 @@
 
   class Entities.MenuItems extends Entities.Collection
     model: Entities.MenuItem
-  #    initialize: ->
-  #      new Backbone.SingleChooser(@)
 
+    getMenuItem: (attrValue, attribute = 'id') ->
+      obj = {}
+      obj[attribute] = attrValue
+      menuItem = undefined
+
+      @models.some (mi) ->
+        if mi.attributes[attribute] is attrValue
+          menuItem = mi
+        else
+          menuItem = mi.items.getMenuItem(attrValue, attribute) if mi.items
+
+      menuItem
 
   API =
   # @formatter:off
@@ -22,7 +33,7 @@
           label: 'Денежные потоки', id: 'cashFlows', url: '#', icon: 'fa fa-lg fa-fw fa-random',
           items: [
             {
-              label: 'Доходы и расходы', id: 'ies', url: '#', icon: 'fa fa-fw fa-flag'
+              label: 'Доходы и расходы', id: 'ies', url: '#', icon: 'fa fa-fw fa-flag',
               items: [
                 {label: 'Потоки', id: 'ies_list', url: '#cashflows/ies/list', icon: 'fa fa-fw fa-th-list'}
                 {label: 'Операции', id: 'ies_details', url: '#cashflows/ies/details', icon: 'fa fa-lg fa-fw fa-list'}
@@ -66,4 +77,9 @@
   # @formatter:on
 
   App.reqres.setHandler 'menu:entities', ->
-    API.getMenu()
+    if !App.entities.menu
+      App.entities.menu = API.getMenu()
+
+    App.entities.menu
+
+

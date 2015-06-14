@@ -36,15 +36,21 @@
     template: 'menu/list/_item'
     tagName: 'li'
 
-#    modelEvents:
-#      'change:chosen': 'render'
+    modelEvents:
+      'change': 'render'
+
     events:
       'click': ->
-#        App.xhrAbortAll()
+        # TODO при частых кликах проблемы с отменой
+        # App.xhrAbortAll()
+        if App.MenuApp.prevMenuItem.id isnt @model.id
+          App.MenuApp.prevMenuItem.unchoose()
+          @model.choose()
+          App.MenuApp.prevMenuItem = @model
 
     onRender: ->
-      if App.getCurrentRoute() is s.ltrim(@model.get('url'), '#')
-        @$el.addClass 'active'
+      # TODO убрать мерцание: сначало становится оранжевым, а потом "серым", т.к. срабатыает :hover
+      @$el.toggleClass('active', @model.isChosen())
 
 
   class List.Group extends App.Views.CompositeView
@@ -73,6 +79,9 @@
     tagName: 'nav'
 
     onRender: ->
+      App.MenuApp.prevMenuItem = @collection.getMenuItem('#' + App.getCurrentRoute(), 'url')
+      App.MenuApp.prevMenuItem.choose()
+
       @$('ul').jarvismenu({
         accordion: false,
         speed: 235,
@@ -80,11 +89,8 @@
         openedSign: '<em class="fa fa-minus-square-o"></em>'
       })
 
-
-
   class List.Project extends App.Views.ItemView
     template: 'menu/list/_project'
-#    tagName: 'li'
 
     collectionEvents:
       'add change:name remove reset': 'render'
