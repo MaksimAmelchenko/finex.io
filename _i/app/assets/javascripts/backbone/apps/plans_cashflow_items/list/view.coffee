@@ -21,7 +21,7 @@
     onDestroy: ->
       @addOpacityWrapper(false)
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.Pagination extends App.Views.ItemView
     template: 'plans_cashflow_items/list/_pagination'
@@ -54,7 +54,7 @@
       @ui.btnPrevious.amkDisable() if @collection.isFirstPage()
       @ui.btnNext.amkDisable() if @collection.isLastPage()
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.Panel extends App.Views.Layout
     template: 'plans_cashflow_items/list/_panel'
@@ -102,7 +102,8 @@
         collection: @collection
 
       @paginationRegion.show paginationView
-  #---------------------------------------------------------------------------------
+
+  # --------------------------------------------------------------------------------
 
   class List.PlanCashFlowItem extends App.Views.ItemView
     template: 'plans_cashflow_items/list/_plan_cashflow_item'
@@ -132,25 +133,31 @@
         @$el.removeClass 'info'
         icon.addClass('fa-square-o')
 
-  #      @$el.toggleClass 'warning', @model.get('isNotConfirmed')
-  #      @$el.toggleClass 'danger', @model.isExpired()
-
-  #---------------------------------------------------------------------------------
-
-
+  # --------------------------------------------------------------------------------
 
   class List.Empty extends App.Views.ItemView
     template: 'plans_cashflow_items/list/_empty'
     tagName: 'tr'
 
-  #--------------------------------------------------------------------------------
+    ui:
+      btnAdd: 'a[name=btnAdd]'
+
+    events:
+      'click @ui.btnAdd': 'add'
+
+    add: (e) ->
+      e.stopPropagation()
+      model = App.request 'plan:cashFlowItem:new:entity'
+      App.request 'plan:cashFlowItem:edit', model, App.request('plan:cashFlowItem:entities')
+      false
+
+  # --------------------------------------------------------------------------------
 
   class List.PlanCashFlowItems extends App.Views.CompositeView
     template: 'plans_cashflow_items/list/_plan_cashflow_items'
     childView: List.PlanCashFlowItem
     emptyView: List.Empty
     childViewContainer: 'tbody'
-#    className: 'container-fluid'
 
     ui:
       tickbox: 'th.tickbox'
@@ -158,12 +165,14 @@
     events:
       'click @ui.tickbox': (e) ->
         e.stopPropagation()
-        if $('i',
-          @ui.tickbox).toggleClass('fa-square-o').toggleClass('fa-check-square-o').hasClass('fa-square-o')
+        i = $('i', @ui.tickbox)
+        if i.toggleClass('fa-square-o').toggleClass('fa-check-square-o').hasClass('fa-square-o')
           @collection.chooseNone()
         else
           @collection.chooseAll()
 
-#    onBeforeShow: ->
-#      @$el.css
-#        'padding-top': '88px'
+    onRender: ->
+      @$('[data-toggle=popover]').popover
+        container: 'body'
+        html: true
+        trigger: 'hover click'

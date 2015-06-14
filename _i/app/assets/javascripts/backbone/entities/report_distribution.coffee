@@ -14,8 +14,6 @@
 
       @cache = {}
       @params =
-#        dBegin: moment().add(-5, 'months').startOf('month').add(-1, 'y').format('YYYY-MM-DD')
-#        dEnd: moment().endOf('month').add(-1, 'y').format('YYYY-MM-DD')
         dBegin: moment().add(-12, 'months').startOf('month').format('YYYY-MM-DD')
         dEnd: moment().endOf('month').format('YYYY-MM-DD')
         isUseReportPeriod: true
