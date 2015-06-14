@@ -55,7 +55,7 @@
   # TODO Application Regions is deprecated. Use a Layout View
   App.addRegions
     headerRegion: '#header-region'
-#    menuRegion: '#menu-region'
+  #    menuRegion: '#menu-region'
     leftPanelRegion: '[name=left-panel-region]'
     mainRegion: '#main'
 
@@ -138,6 +138,10 @@
         App.entities.tags.reset res.tags
         App.entities.moneys.reset res.moneys
 
+        App.params = res.params
+        App.entities.badges = res.badges
+        App.execute 'menu:set:badges'
+
         App.entities.dashboardBalances = new CashFlow.Entities.DashboardBalances
         App.entities.dashboardAccountsBalancesDaily =
           new CashFlow.Entities.DashboardAccountsBalancesDaily
@@ -193,6 +197,10 @@
         App.entities.tags.reset res.tags
         App.entities.moneys.reset res.moneys
 
+        App.params = res.params
+        App.entities.badges = res.badges
+        App.execute 'menu:set:badges'
+
         App.entities.reportDistribution.resetParams()
         App.entities.reportDynamics.resetParams()
         App.entities.ies?.resetFilters()
@@ -203,51 +211,51 @@
 
 
         if App.getCurrentRoute() is 'cashflows/ies/list'
-#          App.entities.ies.fetch
-#            reset: true
+          #          App.entities.ies.fetch
+          #            reset: true
           App.CashFlowsIEsListApp.list()
         else
           App.entities.ies?.reset()
 
         if App.getCurrentRoute() is 'cashflows/ies/details'
-#          App.entities.ieDetails.fetch
-#            reset: true
+          #          App.entities.ieDetails.fetch
+          #            reset: true
           App.CashFlowsIEsDetailsApp.list()
         else
           App.entities.ieDetails?.reset()
 
         if App.getCurrentRoute() is 'cashflows/debts'
-#          App.entities.debts.fetch
-#            reset: true
+          #          App.entities.debts.fetch
+          #            reset: true
           App.CashFlowsDebtsApp.list()
         else
           App.entities.debts?.reset()
 
         if App.getCurrentRoute() is 'cashflows/transfers'
-#          App.entities.transfers.fetch
-#            reset: true
+          #          App.entities.transfers.fetch
+          #            reset: true
           App.CashFlowsTransfersApp.list()
         else
           App.entities.transfers?.reset()
 
         if App.getCurrentRoute() is 'cashflows/exchanges'
-#          App.entities.exchanges.fetch
-#            reset: true
+          #          App.entities.exchanges.fetch
+          #            reset: true
           App.CashFlowsExchangesApp.list()
         else
           App.entities.exchanges?.reset()
 
         if App.getCurrentRoute() is 'dashboard'
-#          App.entities.dashboardAccountsBalances.fetch()
-#          App.entities.dashboardAccountsBalancesDaily.fetch()
+          #          App.entities.dashboardAccountsBalances.fetch()
+          #          App.entities.dashboardAccountsBalancesDaily.fetch()
           App.DashboardApp.show()
 
         if App.getCurrentRoute() is 'reports/dynamics'
-#          App.entities.reportDynamics.fetch()
+          #          App.entities.reportDynamics.fetch()
           App.ReportsDynamicsApp.show()
 
         if App.getCurrentRoute() is 'reports/distribution'
-#          App.entities.reportDistribution.fetch()
+          #          App.entities.reportDistribution.fetch()
           App.ReportsDistributionApp.show()
 
 
