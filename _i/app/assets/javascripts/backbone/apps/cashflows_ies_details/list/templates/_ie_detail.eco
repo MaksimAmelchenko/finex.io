@@ -7,8 +7,8 @@
     <i class="fa fa-fw"></i>
 </td>
 
-<% if @idPlan: %>
 <td class="date" style="border-right: 1px solid #ddd;">
+    <% if @idPlan: %>
     <div class="row">
         <div class="col-xs-12">
             <%= @formatDate(@dIEDetail) %>
@@ -23,12 +23,28 @@
             <% end %>
         </div>
     </div>
-</td>
-<% else: %>
-<td class="date" style="border-right: 1px solid #ddd;">
+    <% else: %>
+    <% if @isNotConfirmed: %>
+    <div class="row">
+        <div class="col-xs-12">
+            <%= @formatDate(@dIEDetail) %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <small class="txt-color-red">Не подтверждено</small>
+            <br>
+            <% if moment(@dIEDetail, 'YYYY-MM-DD').toDate().getTime() < today: %>
+            <small class="txt-color-red">Просрочено</small>
+            <% end %>
+        </div>
+    </div>
+
+    <% else: %>
     <%= @formatDate(@dIEDetail) %>
+    <% end %>
+    <% end %>
 </td>
-<% end %>
 
 <!--<td style1="width: 200px">-->
 <td>
