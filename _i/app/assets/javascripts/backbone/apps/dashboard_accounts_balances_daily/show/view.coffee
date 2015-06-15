@@ -25,7 +25,7 @@
     onDestroy: ->
       @addOpacityWrapper(false)
 
-  #-----------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class Show.Panel extends App.Views.Layout
     template: 'dashboard_accounts_balances_daily/show/_panel'
@@ -68,7 +68,7 @@
 
     onDestroy: ->
       @ui.money.select2 'destroy'
-#      @ui.accountsUsingType.select2 'destroy'
+    #      @ui.accountsUsingType.select2 'destroy'
 
     toggleParams: ->
       @ui.params.slideToggle
@@ -106,6 +106,7 @@
           dEnd_:
             required: 'Пожалуйста, укажите конечную дату',
 
+  # --------------------------------------------------------------------------------
 
   class Show.Graph extends App.Views.ItemView
     template: 'dashboard_accounts_balances_daily/show/_graph'
@@ -125,8 +126,7 @@
         d.idMoney
       .entries @model.get 'balances'
 
-      #      moneys = App.Entities.sortListByMoney moneys
-      # sort according to the list of moneys in the project properties
+      # sort according to the list of moneys in the reference
       c = _.map App.request('enabled:money:entities'), (money) ->
         money.get('idMoney')
 
@@ -159,38 +159,50 @@
       y = d3.scale.linear().range([height, 0])
       yContext = d3.scale.linear().range([heightContext, 0])
 
-      #      ru_RU =
-      #        "decimal": ","
-      #        "thousands": "\xa0"
-      #        "grouping": [3]
-      #        "money": ["", " руб."]
-      #        "dateTime": "%A, %e %B %Y г. %X"
-      #        "date": "%d.%m.%Y"
-      #        "time": "%H:%M:%S"
-      #        "periods": ["AM", "PM"]
-      #        "days": ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"]
-      #        "shortDays": ["вс", "пн", "вт", "ср", "чт", "пт", "сб"]
-      #        "months": ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
-      #        "shortMonths": ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"]
-      #
-      #      RU = d3.locale(ru_RU)
+      RU = d3.locale
+        "decimal": ","
+        "thousands": "\xa0"
+        "grouping": [3]
+        "money": ["", " руб."]
+        "dateTime": "%A, %e %B %Y г. %X"
+        "date": "%d.%m.%Y"
+        "time": "%H:%M:%S"
+        "periods": ["AM", "PM"]
+        "days": ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"]
+        "shortDays": ["вс", "пн", "вт", "ср", "чт", "пт", "сб"]
+        "months": ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август",
+                   "сентябрь", "октябрь", "ноябрь", "декабрь"]
+        "shortMonths": ["янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя",
+                        "дек"]
 
-      xAxis = d3.svg.axis().scale(x).orient("bottom") #.tickFormat(RU.timeFormat("%B"));
+      customTimeFormat = RU.timeFormat.multi([
+        [".%L", (d)  -> d.getMilliseconds()]
+        [":%S", (d)  -> d.getSeconds()]
+        ["%I:%M", (d) -> d.getMinutes()]
+        ["%I %p", (d) -> d.getHours()],
+        ["%d,%a", (d) -> d.getDay() && d.getDate() != 1],
+        ["%d %b", (d) -> d.getDate() != 1],
+        ["%b", (d) -> d.getMonth()],
+        ["%Y", -> true]
+      ])
+
+      xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(8).tickFormat(customTimeFormat)
+
       yAxis = d3.svg.axis().scale(y).orient("left")
 
-      xAxisContext = d3.svg.axis().scale(xContext).orient("bottom")
+      xAxisContext = d3.svg.axis().scale(xContext).orient("bottom").ticks(5).tickFormat(customTimeFormat)
 
       line = d3.svg.line()
-#      .interpolate("basis")
+      #      .interpolate("basis")
       .interpolate("linear")
-#      .interpolate("step")
+      #      .interpolate("step")
       .x (d) ->
         x(d.date)
       .y (d) ->
         y(d.sum)
 
       lineContext = d3.svg.line()
-#      .interpolate("basis")
+      #      .interpolate("basis")
       .interpolate("step")
       .x (d) ->
         xContext(d.date)
@@ -207,33 +219,6 @@
         item.sum = Math.round(item.sum)
       )
 
-      # fill gaps
-      #      a = []
-      #      _.each accountsNest.entries(items), (account) =>
-      #        prevItem = {}
-      #        _.each account.values, (item, i) =>
-      #          if i isnt 0
-      #            if moment(item.date).diff(moment(prevItem.date), 'days') > 1 and prevItem.sum isnt item.sum
-      #              a.push
-      #                idMoney: prevItem.idMoney
-      #                date: moment(item.date).subtract(1, 'days').toDate()
-      #                idAccount: prevItem.idAccount
-      #                sumIn: 0
-      #                sumOut: 0
-      #                sum: prevItem.sum
-      #
-      #          prevItem = item
-      #
-      #
-      #      items = items.concat(a)
-      #      items = _.sortBy(items, (item) ->
-      #        item.date.getTime()
-      #      )
-
-      #      x.domain(d3.extent(items, (d) ->
-      #        d.date
-      #      ))
-      #      debugger
       x.domain([moment(@model.params.dBegin, 'YYYY-MM-DD').toDate(),
                 moment(@model.params.dEnd, 'YYYY-MM-DD').toDate()])
 
