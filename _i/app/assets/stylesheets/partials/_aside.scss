@@ -140,6 +140,9 @@ aside {
   nav > ul > li {
     border-bottom: none;
     border-top: none;
+    & > ul, & > ul > li, & > ul > li > ul > li {
+      background: #4d5a75;
+    }
   }
 
   .login-info {
