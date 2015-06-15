@@ -12,7 +12,7 @@
                 <th>
                     Повтор
                     <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus"
-                       data-content="Показывает, какой раз будет выполнена запланированная операция"
+                       data-content="Показывает, какой по счету раз будет выполнена запланированная операция"
                        tabindex="-1">
                         <i class="fa fa-question-circle"></i>
                     </a>
