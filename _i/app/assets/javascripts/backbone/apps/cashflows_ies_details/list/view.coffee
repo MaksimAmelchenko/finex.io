@@ -94,7 +94,7 @@
 
       @listenTo @collection, 'collection:chose:some collection:chose:all', =>
         @ui.btnDel.amkEnable()
-        if @collection.getChosen().length is 1
+        if @collection.getChosen().length is 1 and @collection.getChosen()[0].get('idIE')
           @ui.btnShowIE.amkEnable()
         else
           @ui.btnShowIE.amkDisable()
