@@ -77,7 +77,7 @@
     url: 'categories'
 
     # system category 'Debt'
-    _debtCategory: null
+#    _debtCategory: null
 
     parse: (response, options)->
       response.categories
