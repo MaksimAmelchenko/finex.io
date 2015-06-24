@@ -2,7 +2,8 @@
   class List.Controller extends App.Controllers.Application
 
     initialize: (options = {})->
-      planCashFlowItems = App.request 'plan:cashFlowItem:entities'
+      planCashFlowItems = App.request 'plan:cashFlowItem:entities',
+        force: true
 
       @layout = @getLayoutView planCashFlowItems
 
