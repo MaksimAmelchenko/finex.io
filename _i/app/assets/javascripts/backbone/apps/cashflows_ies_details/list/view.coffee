@@ -250,6 +250,9 @@
         App.execute('menu:set:badge', 'ies_details', @model.collection.totalPlanned,
           'Количество запланированных операций')
 
+    ui:
+      tickbox: 'td.tickbox'
+
     events:
       'click td.color-mark, td.tickbox, td.date': (e) ->
         e.stopPropagation()
@@ -261,13 +264,12 @@
           App.request 'ie:detail:edit', @model, @model.collection
 
     onRender: ->
-      icon = @$('td.tickbox > i')
-      if @model.isChosen()
-        @$el.addClass 'info'
-        icon.addClass('fa-check-square-o')
-      else
-        @$el.removeClass 'info'
-        icon.addClass('fa-square-o')
+      isChosen = @model.isChosen()
+      @$el.toggleClass('info', isChosen)
+
+      $('i', @ui.tickbox)
+      .toggleClass('fa-square-o', !isChosen)
+      .toggleClass('fa-check-square-o', isChosen)
 
       @$el.toggleClass 'warning', @model.get('isNotConfirmed')
       @$el.toggleClass 'danger', @model.isExpired()
@@ -371,8 +373,12 @@
     events:
       'click @ui.tickbox': (e) ->
         e.stopPropagation()
-        if $('i',
-          @ui.tickbox).toggleClass('fa-square-o').toggleClass('fa-check-square-o').hasClass('fa-square-o')
+
+        i = $('i', @ui.tickbox)
+        .toggleClass('fa-square-o')
+        .toggleClass('fa-check-square-o')
+
+        if i.hasClass('fa-square-o')
           @collection.chooseNone()
         else
           @collection.chooseAll()
