@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-hover table-condensed">
+            <thead>
+            <tr>
+                <th style="width: 5px">
+                </th>
+                <th class="tickbox">
+                    <i class="fa fa-fw fa-square-o"></i>
+                </th>
+                <th>Следующее выполнение</th>
+                <th>
+                    Повтор
+                    <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus"
+                       data-content="Показывает, какой по счету раз будет выполнена запланированная операция"
+                       tabindex="-1">
+                        <i class="fa fa-question-circle"></i>
+                    </a>
+
+                </th>
+                <th>Со счета</th>
+                <th>На счет</th>
+                <th colspan="2">Сумма</th>
+                <th colspan="3">Комиссия</th>
+                <th>Расписание</th>
+                <th>Дата начала</th>
+                <th class="hidden-xs hidden-sm">Примечание</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>

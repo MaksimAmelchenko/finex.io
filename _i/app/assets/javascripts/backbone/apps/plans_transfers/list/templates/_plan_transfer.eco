@@ -1,0 +1,53 @@
+<td class="color-mark <%= @colorMark%>">
+</td>
+
+<td class="tickbox">
+    <i class="fa fa-fw"></i>
+</td>
+
+<td class="date dplan" style="border-right: 1px solid #ddd;">
+    <%= @formatDate(@dPlan) %>
+</td>
+
+<td style="text-align: right;">
+    <%= @nRepeat%>
+</td>
+
+<td>
+    <%= CashFlow.entities.accounts.get(@idAccountFrom).get('name') %>
+</td>
+<td>
+    <%= CashFlow.entities.accounts.get(@idAccountTo).get('name') %>
+</td>
+
+<td class="sum">
+    <%- @numberToMoney(@sum, @idMoney) %>
+</td>
+
+<td class="symbol">
+    <%- CashFlow.entities.moneys.get(@idMoney).get('symbol')%>
+</td>
+
+<td>
+    <%= CashFlow.entities.accounts.get(@idAccountFee).get('name') if @idAccountFee %>
+</td>
+
+<td class="sum">
+    <%- @numberToMoney(@fee, @idMoneyFee) if @idAccountFee %>
+</td>
+
+<td class="symbol">
+    <%- CashFlow.entities.moneys.get(@idMoneyFee).get('symbol') if @idAccountFee %>
+</td>
+
+<td>
+    <%- @schedule %>
+</td>
+
+<td class="date">
+    <%= @formatDate(@dBegin) %>
+</td>
+
+<td class="hidden-xs hidden-sm">
+    <%= @note %>
+</td>

@@ -1,0 +1,6 @@
+<td colspan="15">
+    <div class="well well-sm text-center">
+        Нет запланировованных переводов.
+        <a href="#" name="btnAdd">Запланировать</a> новую операцию.
+    </div>
+</td>
