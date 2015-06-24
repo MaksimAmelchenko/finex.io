@@ -16,10 +16,11 @@
       accountFrom: '[name=accountFrom]'
       accountTo: '[name=accountTo]'
       sum: '[name=sum]'
-      money: '[name=money]'
+      money: 'span[name=money]'
+
       isFee: '[name=isFee]'
       fee: '[name=fee]'
-      moneyFee: '[name=moneyFee]'
+      moneyFee: 'span[name=moneyFee]'
       accountFee: '[name=accountFee]'
       note: '[name=note]'
       tags: '[name=tags]'
@@ -33,6 +34,8 @@
       'changeDate @ui.dTransfer': 'changeDateDTransfer'
       'keydown @ui.sum': 'keyPress'
       'focusout @ui.sum': 'recalculateSum'
+      'click div[name=money] ul.dropdown-menu li': 'selectMoney'
+      'click div[name=moneyFee] ul.dropdown-menu li': 'selectMoneyFee'
 
     initialize: (options = {}) ->
       options.config or= {}
@@ -59,6 +62,20 @@
       if code is 13
         @recalculateSum()
 
+    selectMoney: (e)->
+      e.preventDefault()
+      li = $(e.currentTarget)
+      li.siblings().removeClass('active').end().addClass('active')
+
+      @ui.money.text(li.data('text')).data('idMoney', li.data('idMoney'))
+
+    selectMoneyFee: (e)->
+      e.preventDefault()
+      li = $(e.currentTarget)
+      li.siblings().removeClass('active').end().addClass('active')
+
+      @ui.moneyFee.text(li.data('text')).data('idMoney', li.data('idMoney'))
+
     changeDateDTransfer: ->
       # reportPeriod is dependence from dTransfer unless it does not changed
       if @ui.reportPeriod.data('isLinked') and moment(@ui.reportPeriod.datepicker('getDate')).isValid()
@@ -75,7 +92,10 @@
 
 
     getTitle: ->
-      "Перевод &gt; #{if @model.isNew() then 'Добавление' else 'Редактирование'}"
+      if @model.get('idPlan')
+        "Добавление запланированного перевода"
+      else
+        "#{if @model.isNew() then 'Добавление' else 'Редактирование'} перевода"
 
 
     serialize: ->
@@ -85,7 +105,7 @@
         idAccountFrom: numToJSON @ui.accountFrom.select2('data').id
         idAccountTo: numToJSON @ui.accountTo.select2('data').id
         sum: numToJSON @ui.sum.val()
-        idMoney: numToJSON @ui.money.val()
+        idMoney: numToJSON @ui.money.data 'idMoney'
         isFee: @ui.isFee.prop('checked')
         note: @ui.note.val()
         tags: @ui.tags.select2 'val'
@@ -94,7 +114,7 @@
         _.extend result,
           idAccountFee: numToJSON @ui.accountFee.select2('data').id
           fee: numToJSON @ui.fee.val()
-          idMoneyFee: numToJSON @ui.moneyFee.val()
+          idMoneyFee: numToJSON @ui.moneyFee.data 'idMoney'
 
       result
 
@@ -161,17 +181,11 @@
 
       @ui.sum.val @model.get('sum')
 
-      @ui.money.select2()
-      @ui.money.select2('val', @model.get('idMoney'))
-
       @ui.isFee
       .prop('checked', @model.get('isFee'))
       .change()
 
       @ui.fee.val @model.get('fee')
-
-      @ui.moneyFee.select2()
-      @ui.moneyFee.select2('val', @model.get('idMoneyFee'))
 
       @ui.accountFee.select2
         placeholder: 'Выберете счет'
@@ -188,6 +202,11 @@
         tags: CashFlow.entities.tags.map (tag) ->
           tag.get('name')
       @ui.tags.select2('val', @model.get('tags'))
+
+      @$('[data-toggle=popover]').popover
+        container: 'body'
+        html: true
+        trigger: 'hover click'
 
       @ui.form.validate
         onfocusout: false
@@ -258,8 +277,6 @@
     onDestroy: ->
       @ui.accountFrom.select2 'destroy'
       @ui.accountTo.select2 'destroy'
-      @ui.money.select2 'destroy'
-      @ui.moneyFee.select2 'destroy'
       @ui.accountFee.select2 'destroy'
       @ui.tags.select2 'destroy'
 

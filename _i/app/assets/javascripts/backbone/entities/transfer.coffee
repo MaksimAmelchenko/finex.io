@@ -9,13 +9,28 @@
     defaults:
       idTransfer: null
       idUser: null
+      dTransfer: null
+      reportPeriod: null
+      note: ''
+      idAccountFrom: null
+      sum: null
+      idMoney: null
+      idAccountTo: null
+      isFee: false
+      idAccountFee: null
+      fee: null
+      idMoneyFee: null
+      tags: []
+      idPlan: null
+      nRepeat: null
+
 
     parse: (response, options)->
       if not _.isUndefined response.transfer
         response = response.transfer
       response
 
-  #-----------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class Entities.Transfers extends Entities.Collection
 
@@ -23,7 +38,8 @@
     url: 'cashflows/transfers'
     initialize: ->
       new Backbone.MultiChooser(@)
-      @on 'change:dTransfer', =>
+
+      @on 'change:dTransfer change:idPlan', =>
         @sort()
 
       @searchText = ''
@@ -42,26 +58,36 @@
       @filters.tags = []
 
     comparator: (transfer1, transfer2) ->
-      dTransfer1 = moment(transfer1.get('dTransfer'), 'YYYY-MM-DD').toDate().getTime()
-      dTransfer2 = moment(transfer2.get('dTransfer'), 'YYYY-MM-DD').toDate().getTime()
-      if dTransfer1 > dTransfer2
-        -1
-      else
-        if dTransfer1 < dTransfer2
-          1
+      isPlan1 = if transfer1.get('idPlan') then true else false
+      isPlan2 = if transfer2.get('idPlan') then true else false
+
+      if isPlan1 is isPlan2
+        dTransfer1 = moment(transfer1.get('dTransfer'), 'YYYY-MM-DD').toDate().getTime()
+        dTransfer2 = moment(transfer2.get('dTransfer'), 'YYYY-MM-DD').toDate().getTime()
+        if dTransfer1 > dTransfer2
+          -1
         else
-          idTransfer1 = transfer1.get('idTransfer')
-          idTransfer2 = transfer2.get('idTransfer')
-          if idTransfer1 > idTransfer2
-            -1
+          if dTransfer1 < dTransfer2
+            1
           else
-            if idTransfer1 < idTransfer2
-              1
+            idTransfer1 = transfer1.get('idTransfer')
+            idTransfer2 = transfer2.get('idTransfer')
+            if idTransfer1 > idTransfer2
+              -1
             else
-              0
+              if idTransfer1 < idTransfer2
+                1
+              else
+                0
+      else
+        if isPlan1
+          -1
+        else
+          1
 
     parse: (response, options)->
       @total = response.metadata.total
+      @totalPlanned = response.metadata.totalPlanned
       @limit = response.metadata.limit
       @offset = response.metadata.offset
       response.transfers
@@ -80,6 +106,8 @@
           tags: @filters.tags.toString()
       result
 
+  # --------------------------------------------------------------------------------
+
   API =
     newTransferEntity: ->
       new Entities.Transfer
@@ -87,8 +115,6 @@
         reportPeriod: App.request 'default:reportPeriod'
         idMoney: (App.request 'default:money')?.get('idMoney')
         isFee: false
-        idMoneyFee: (App.request 'default:money')?.get('idMoney')
-
 
     getTransferEntities: (options = {})->
       _.defaults options,

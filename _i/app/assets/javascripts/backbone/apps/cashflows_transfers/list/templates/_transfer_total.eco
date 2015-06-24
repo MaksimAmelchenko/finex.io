@@ -1,7 +1,7 @@
 <% balance = @balance() %>
 <% moneys = @moneys() %>
 
-<td colspan="4">
+<td colspan="5">
     Итого:
 </td>
 

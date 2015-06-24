@@ -1,33 +1,47 @@
 <form class="form-horizontal" autocomplete="off">
+
     <div class="form-group">
-        <label class="col-xs-2 col-sm-3 control-label" style="width: 149px;"
+        <label class="col-xs-12 col-sm-3 control-label"
                for="cashflow_transfers__edit__dTransfer">
-            Дата и период<em>*</em>
+            Дата и период <em>*</em>
         </label>
 
-        <div class="col-xs-10 col-sm-9">
-            <div class="row">
-                <div class="col-xs-6" style="width: 170px;">
-                    <div class="input-group date" name="dTransfer" data-provide="datepicker">
-                        <input type="text" class="form-control"
-                               id="cashflow_transfers__edit__dTransfer" name="dTransfer_">
-                        <span class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="col-xs-6" style="width: 190px;">
-                    <div class="input-group date" name="reportPeriod" data-provide="datepicker"
-                         data-date-format="MM yyyy" data-date-min-view-mode="1"
-                         data-is-linked="true">
-                        <input type="text" class="form-control" name="reportPeriod_">
-                        <span class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </div>
-                </div>
+        <div class="col-xs-6 col-sm-4">
+            <div class="input-group date" name="dTransfer" data-provide="datepicker">
+                <input type="text" class="form-control"
+                       id="cashflow_transfers__edit__dTransfer" name="dTransfer_">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
             </div>
+        </div>
+
+        <div class="col-xs-5 col-sm-4">
+            <div class="input-group date" name="reportPeriod" data-provide="datepicker"
+                 data-date-format="MM yyyy" data-date-min-view-mode="1"
+                 data-is-linked="true">
+                <input type="text" class="form-control"
+                       id="cashflow_transfers__edit__reportPeriod" name="reportPeriod_"
+                       data-toggle="tooltip"
+                       title="Отчетный месяц" tabindex="-1">
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-xs-1" style="padding-left: 0">
+            <span class="tooltip-question-mark">
+                <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus"
+                   tabindex="-1" data-content="
+                   <p>
+                    <strong>Отчетный месяц</strong> позволяет отнести перевод
+                    не к фактической дате, а к отчетному месяцу (используется для построения отчетов)
+                   </p>
+                   ">
+                    <i class="fa fa-question-circle"></i>
+                </a>
+            </span>
         </div>
     </div>
 
@@ -67,29 +81,39 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="margin-bottom: 5px;">
         <label class="col-xs-2 col-sm-3 control-label" style="width: 149px;"
                for="cashflow_transfers__edit__sum">
             Сумма<em>*</em>
         </label>
 
-        <div class="col-xs-10 col-sm-9">
-            <div class="row">
+        <div class="col-xs-6 col-sm-4">
+            <input type="text" class="form-control number" name="sum"
+                   id="cashflow_transfers__edit__sum">
+        </div>
 
-                <div class="col-xs-6" style="width:170px">
-                    <input type="text" class="form-control" name="sum"
-                           id="cashflow_transfers__edit__sum">
-                </div>
-
-                <div class="col-xs-6" style="width: 120px">
-                    <select class="select2" name="money">
-                        <% for money in CashFlow.request 'enabled:money:entities', @idMoney: %>
-                        <option value="<%= money.id %>">
+        <div class="col-xs-1 col-sm-1" style="padding: 5px 0 6px 0;">
+            <div class="btn-group" name="money">
+                <a class="dropdown-toggle" type="button" data-toggle="dropdown"
+                   aria-expanded="false">
+                    <span name="money" data-id-money="<%= @idMoney %>">
+                        <%- CashFlow.entities.moneys.get(@idMoney).get('symbol') %>
+                    </span>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <!--@formatter:off-->
+                    <% for money in CashFlow.request 'enabled:money:entities', @idMoney: %>
+                    <li data-id-money="<%= money.id %>"
+                        data-text="<%- money.get('symbol') %>"
+                        <%- 'class="active"' if money.id is @idMoney %>>
+                        <a href="#">
                             <%- money.get('symbol') %>
-                        </option>
-                        <% end %>
-                    </select>
-                </div>
+                        </a>
+                    </li>
+                    <% end %>
+                    <!--@formatter:on-->
+                </ul>
             </div>
         </div>
     </div>
@@ -133,25 +157,34 @@
                 Комиссия<em>*</em>
             </label>
 
-            <div class="col-xs-10 col-sm-9">
-                <div class="row">
+            <div class="col-xs-6 col-sm-4">
+                <input type="text" class="form-control number" name="fee"
+                       id="cashflow_transfers__edit__fee">
+            </div>
 
-                    <div class="col-xs-6" style="width:160px">
-                        <input type="number" class="form-control" name="fee"
-                               id="cashflow_transfers__edit__fee">
-                    </div>
-
-                    <div class="col-xs-6" style="width: 120px">
-                        <select class="select2" name="moneyFee">
-                            <!--@formatter:off-->
-                            <% for money in CashFlow.request 'enabled:money:entities', @idMoneyFee: %>
-                            <option value="<%= money.id %>">
+            <div class="col-xs-1 col-sm-1" style="padding: 5px 0 6px 0;">
+                <% idMoney = if @idMoneyFee then @idMoneyFee else @idMoney %>
+                <div class="btn-group" name="moneyFee">
+                    <a class="dropdown-toggle" type="button" data-toggle="dropdown"
+                       aria-expanded="false">
+                        <span name="moneyFee" data-id-money="<%= idMoney %>">
+                            <%- CashFlow.entities.moneys.get(idMoney).get('symbol') %>
+                        </span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!--@formatter:off-->
+                        <% for money in CashFlow.request 'enabled:money:entities', @idMoney: %>
+                        <li data-id-money="<%= money.id %>"
+                            data-text="<%- money.get('symbol') %>"
+                            <%- 'class="active"' if money.id is idMoney %>>
+                            <a href="#">
                                 <%- money.get('symbol') %>
-                            </option>
-                            <% end %>
-                            <!--@formatter:on-->
-                        </select>
-                    </div>
+                            </a>
+                        </li>
+                        <% end %>
+                        <!--@formatter:on-->
+                    </ul>
                 </div>
             </div>
         </div>

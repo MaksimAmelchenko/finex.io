@@ -17,11 +17,13 @@
 
     syncStop: ->
       @addOpacityWrapper(false)
+      App.execute('menu:set:badge', 'transfers', @collection.totalPlanned,
+        'Количество запланированных переводов')
 
     onDestroy: ->
       @addOpacityWrapper(false)
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.Pagination extends App.Views.ItemView
     template: 'cashflows_transfers/list/_pagination'
@@ -55,7 +57,7 @@
       @ui.btnPrevious.amkDisable() if @collection.isFirstPage()
       @ui.btnNext.amkDisable() if @collection.isLastPage()
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.Panel extends App.Views.Layout
     template: 'cashflows_transfers/list/_panel'
@@ -106,7 +108,24 @@
       App.request 'transfer:edit', model, @collection
 
     del: ->
-      model.destroy()  for model in  @collection.getChosen()
+#      model.destroy()  for model in  @collection.getChosen()
+      for model in @collection.getChosen()
+        if model.get('idPlan')
+          do (model) ->
+            App.xhrRequest
+              type: 'POST'
+              url: "plans/#{model.get('idPlan')}/cancel"
+              data: JSON.stringify
+                dExclude: model.get('dTransfer')
+              success: (res, textStatus, jqXHR) ->
+                model.collection.totalPlanned -= 1
+                App.execute('menu:set:badge', 'transfers', model.collection.totalPlanned,
+                  'Количество запланированных переводов')
+                model.destroy()
+
+        else
+          model.destroy()
+
 
     refresh: ->
       @collection.resetPagination()
@@ -196,7 +215,7 @@
       App.vent.trigger 'cashflows_transfers:panel:resize', @$el.height()
 
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.Transfer extends App.Views.ItemView
     template: 'cashflows_transfers/list/_transfer'
@@ -206,13 +225,18 @@
       'click': 'transfer:clicked'
 
     modelEvents:
-      'change:chosen': 'render'
+#      'change:chosen': 'render'
+      'change': 'render'
+      'change:idPlan': ->
+        @model.collection.totalPlanned -= 1
+        App.execute('menu:set:badge', 'transfers', @model.collection.totalPlanned,
+          'Количество запланированных переводов')
 
     ui:
-      tickbox: 'td:first-child'
+      tickbox: 'td.tickbox'
 
     events:
-      'click @ui.tickbox, .date': (e) ->
+      'click td.color-mark, td.tickbox, td.date': (e) ->
         e.stopPropagation()
         @model.toggleChoose()
 
@@ -224,7 +248,10 @@
       .toggleClass('fa-square-o', !isChosen)
       .toggleClass('fa-check-square-o', isChosen)
 
-  #--------------------------------------------------------------------------------
+      @$el.attr 'role', 'planned' if @model.get('idPlan')
+
+
+  # --------------------------------------------------------------------------------
 
   class List.TransferTotal extends App.Views.ItemView
     template: 'cashflows_transfers/list/_transfer_total'
@@ -258,7 +285,7 @@
 
           balance
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.TransferSelectedTotal extends App.Views.ItemView
     template: 'cashflows_transfers/list/_transfer_selected_total'
@@ -296,13 +323,13 @@
 
           balance
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.Empty extends App.Views.ItemView
     template: 'cashflows_transfers/list/_empty'
     tagName: 'tr'
 
-  #--------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class List.Transfers extends App.Views.CompositeView
     template: 'cashflows_transfers/list/_transfers'
@@ -315,7 +342,7 @@
       'sync': 'render'
 
     ui:
-      tickbox: 'th:first-child'
+      tickbox: 'th.tickbox'
       selectedTotal: 'tr[name=selectedTotal]'
       total: 'tr[name=total]'
 
