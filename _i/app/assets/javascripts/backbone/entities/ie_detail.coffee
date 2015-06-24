@@ -46,7 +46,7 @@
       new Backbone.MultiChooser(@)
 
       # change a date or make a operation from a planned operation
-      @on 'change:dIEDetail, change:idPlan', =>
+      @on 'change:dIEDetail change:idPlan', =>
         @sort()
 
       @searchText = ''
