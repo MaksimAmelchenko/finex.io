@@ -149,7 +149,6 @@
 
       @$('[data-toggle=popover]').popover
         container: 'body'
-      #        placement: 'right'
         html: true
         trigger: 'hover click'
 
