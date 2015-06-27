@@ -13,27 +13,22 @@
       reportPeriod: null
       idAccountFrom: null
       sumFrom: null
-      idCurrencyFrom: null
+      idMoneyFrom: null
       idAccountTo: null
       sumTo: null
-      idCurrencyTo: null
-    #
-      isFee: false
+      idMoneyTo: null
       idAccountFee: null
       fee: null
-      idCurrencyFee: null
-    #
+      idMoneyFee: null
       note: ''
       tags: []
-
-
 
     parse: (response, options)->
       if not _.isUndefined response.exchange
         response = response.exchange
       response
 
-  #-----------------------------------------------------------------------
+  # --------------------------------------------------------------------------------
 
   class Entities.Exchanges extends Entities.Collection
 
@@ -41,7 +36,7 @@
     url: 'cashflows/exchanges'
     initialize: ->
       new Backbone.MultiChooser(@)
-      @on 'change:dExchange', =>
+      @on 'change:dExchange change:idPlan', =>
         @sort()
 
       @searchText = ''
@@ -62,24 +57,34 @@
       @filters.tags = []
 
     comparator: (exchange1, exchange2) ->
-      dExchange1 = moment(exchange1.get('dExchange'), 'YYYY-MM-DD').toDate().getTime()
-      dExchange2 = moment(exchange2.get('dExchange'), 'YYYY-MM-DD').toDate().getTime()
-      if dExchange1 > dExchange2
-        -1
-      else
-        if dExchange1 < dExchange2
-          1
+      isPlan1 = if exchange1.get('idPlan') then true else false
+      isPlan2 = if exchange2.get('idPlan') then true else false
+
+      if isPlan1 is isPlan2
+        dExchange1 = moment(exchange1.get('dExchange'), 'YYYY-MM-DD').toDate().getTime()
+        dExchange2 = moment(exchange2.get('dExchange'), 'YYYY-MM-DD').toDate().getTime()
+        if dExchange1 > dExchange2
+          -1
         else
-          if exchange1.id > exchange2.id
-            -1
+          if dExchange1 < dExchange2
+            1
           else
-            if exchange1.id < exchange2.id
-              1
+            if exchange1.id > exchange2.id
+              -1
             else
-              0
+              if exchange1.id < exchange2.id
+                1
+              else
+                0
+      else
+        if isPlan1
+          -1
+        else
+          1
 
     parse: (response, options)->
       @total = response.metadata.total
+      @totalPlanned = response.metadata.totalPlanned
       @limit = response.metadata.limit
       @offset = response.metadata.offset
       response.exchanges
@@ -104,8 +109,8 @@
       new Entities.Exchange
         dExchange: App.request 'default:date'
         reportPeriod: App.request 'default:reportPeriod'
-        idMoneyFrom: (App.request 'default:money')?.get('idMoney')
-        isFee: false
+        idMoneyFrom: (App.request 'default:money').get('idMoney')
+        idMoneyTo: (App.request 'default:money').get('idMoney')
 
 
     getExchangeEntities: (options = {})->

@@ -9,24 +9,30 @@
 
     form:
       focusFirstInput: false
+      syncing: true
 
     ui:
+      form: 'form'
       dExchange: '[name=dExchange]'
       reportPeriod: '[name=reportPeriod]'
+
       accountFrom: '[name=accountFrom]'
-      accountTo: '[name=accountTo]'
       sumFrom: '[name=sumFrom]'
-      moneyFrom: '[name=moneyFrom]'
+      moneyFrom: 'span[name=moneyFrom]'
+
+      accountTo: '[name=accountTo]'
       sumTo: '[name=sumTo]'
-      moneyTo: '[name=moneyTo]'
+      moneyTo: 'span[name=moneyTo]'
+
       isFee: '[name=isFee]'
+
+      feeFieldSet: '[name=feeFieldSet]'
       fee: '[name=fee]'
-      moneyFee: '[name=moneyFee]'
+      moneyFee: 'span[name=moneyFee]'
       accountFee: '[name=accountFee]'
+
       note: '[name=note]'
       tags: '[name=tags]'
-      feeFieldSet: '[name=feeFieldSet]'
-      form: 'form'
 
     events:
       'click .btn[name=btnSave]': 'save'
@@ -37,6 +43,11 @@
       'focusout @ui.sumFrom': 'recalculateSum'
       'keydown @ui.sumTo': 'keyPress'
       'focusout @ui.sumTo': 'recalculateSum'
+      'keydown @ui.sumFee': 'keyPress'
+      'focusout @ui.sumFee': 'recalculateSum'
+      'click div[name=moneyFrom] ul.dropdown-menu li': 'selectMoneyFrom'
+      'click div[name=moneyTo] ul.dropdown-menu li': 'selectMoneyTo'
+      'click div[name=moneyFee] ul.dropdown-menu li': 'selectMoneyFee'
 
 
     initialize: (options = {}) ->
@@ -65,6 +76,7 @@
       if code is 13
         @recalculateSum(e)
 
+
     changeDateDExchange: ->
       # reportPeriod is dependence from dTransfer unless it does not changed
       if @ui.reportPeriod.data('isLinked') and moment(@ui.reportPeriod.datepicker('getDate')).isValid()
@@ -80,8 +92,43 @@
       @ui.dExchange.data('oldDate', @ui.dExchange.datepicker('getDate'))
 
 
+
+#    selectMoneyFrom: (e) ->
+#      e.preventDefault()
+#      $el = $(e.target)
+#      li = $(e.currentTarget)
+#      li.siblings().removeClass('active').end().addClass('active')
+#
+#      @ui.moneyFrom.text(li.data('text')).data('idMoney', li.data('idMoney'))
+
+    selectMoneyFrom: (e) ->
+      e.preventDefault()
+      li = $(e.currentTarget)
+      li.siblings().removeClass('active').end().addClass('active')
+
+      @ui.moneyFrom.text(li.data('text')).data('idMoney', li.data('idMoney'))
+
+
+    selectMoneyTo: (e) ->
+      e.preventDefault()
+      li = $(e.currentTarget)
+      li.siblings().removeClass('active').end().addClass('active')
+
+      @ui.moneyTo.text(li.data('text')).data('idMoney', li.data('idMoney'))
+
+
+    selectMoneyFee: (e)->
+      e.preventDefault()
+      li = $(e.currentTarget)
+      li.siblings().removeClass('active').end().addClass('active')
+
+      @ui.moneyFee.text(li.data('text')).data('idMoney', li.data('idMoney'))
+
     getTitle: ->
-      "Обмен валюты &gt; #{if @model.isNew() then 'Добавление' else 'Редактирование'}"
+      if @model.get('idPlan')
+        "Добавление запланированного обмена"
+      else
+        "#{if @model.isNew() then 'Добавление' else 'Редактирование'} обмена валюты"
 
 
     serialize: ->
@@ -89,12 +136,11 @@
         dExchange: moment(@ui.dExchange.datepicker('getDate')).format('YYYY-MM-DD')
         reportPeriod: moment(@ui.reportPeriod.datepicker('getDate')).format('YYYY-MM-DD')
         idAccountFrom: numToJSON @ui.accountFrom.select2('data').id
-        idAccountTo: numToJSON @ui.accountTo.select2('data').id
         sumFrom: numToJSON @ui.sumFrom.val()
-        idMoneyFrom: numToJSON @ui.moneyFrom.val()
+        idMoneyFrom: numToJSON @ui.moneyFrom.data 'idMoney'
+        idAccountTo: numToJSON @ui.accountTo.select2('data').id
         sumTo: numToJSON @ui.sumTo.val()
-        idMoneyTo: numToJSON @ui.moneyTo.val()
-        isFee: @ui.isFee.prop('checked')
+        idMoneyTo: numToJSON @ui.moneyTo.data 'idMoney'
         note: @ui.note.val()
         tags: @ui.tags.select2 'val'
 
@@ -102,7 +148,12 @@
         _.extend result,
           idAccountFee: numToJSON @ui.accountFee.select2('data').id
           fee: numToJSON @ui.fee.val()
-          idMoneyFee: numToJSON @ui.moneyFee.val()
+          idMoneyFee: numToJSON @ui.moneyFee.data 'idMoney'
+      else
+        _.extend result,
+          idAccountFee: null
+          fee: null
+          idMoneyFee: null
 
       result
 
@@ -114,6 +165,10 @@
     save: (e) ->
       e.preventDefault()
       return if not @ui.form.valid()
+
+      if @ui.moneyTo.data('idMoney') is @ui.moneyFrom.data('idMoney')
+        showError 'Пожалуйста, укажите валюту покупки отличную от валюты продажи'
+        return
 
       if @model.isNew()
         @model.save @serialize(),
@@ -155,6 +210,7 @@
       @ui.accountFrom.select2
         placeholder: 'Выберете счет'
       @ui.accountFrom.select2('val', @model.get('idAccountFrom'))
+
       # for jQuery Validation Plugin
       @ui.accountFrom.on 'change', ->
         $(@).trigger 'blur'
@@ -162,22 +218,17 @@
       @ui.accountTo.select2
         placeholder: 'Выберете счет'
       @ui.accountTo.select2('val', @model.get('idAccountTo'))
+
       # for jQuery Validation Plugin
       @ui.accountTo.on 'change', ->
         $(@).trigger 'blur'
 
       @ui.sumFrom.val @model.get('sumFrom')
 
-      @ui.moneyFrom.select2()
-      @ui.moneyFrom.select2 'val', @model.get('idMoneyFrom')
-
       @ui.sumTo.val @model.get('sumTo')
 
-      @ui.moneyTo.select2()
-      @ui.moneyTo.select2 'val', @model.get('idMoneyTo')
-
       @ui.isFee
-      .prop('checked', @model.get('isFee'))
+      .prop('checked', @model.get('idAccountFee'))
       .change()
 
       @ui.accountFee.select2
@@ -190,9 +241,6 @@
 
       @ui.fee.val @model.get('fee')
 
-      @ui.moneyFee.select2()
-      @ui.moneyFee.select2 'val', @model.get('idMoneyFee')
-
       @ui.note.val @model.get('note')
 
       @ui.tags.select2
@@ -200,6 +248,11 @@
         tags: CashFlow.entities.tags.map (tag) ->
           tag.get('name')
       @ui.tags.select2('val', @model.get('tags'))
+
+      @$('[data-toggle=popover]').popover
+        container: 'body'
+        html: true
+        trigger: 'hover click'
 
       @ui.form.validate
         onfocusout: false
@@ -214,18 +267,12 @@
             required: true
             number: true
             moreThan: 0
-          moneyFrom:
-            required: true
           accountTo:
             required: true
           sumTo:
             required: true
             number: true
             moreThan: 0
-          moneyTo:
-            required: true
-            notEqualTo: =>
-              @ui.moneyFrom.val()
           accountFee:
             required:
               depends: =>
@@ -257,25 +304,18 @@
             required: 'Пожалуйста, укажите сумму продажи'
             number: 'Пожалуйста, введите в поле "Продажа" число'
             moreThan: 'Сумма продажи должна быть больше 0'
-          moneyFrom:
-            required: 'Пожалуйста, укажите валюту продажи'
           accountTo:
             required: 'Пожалуйста, выберете счет, на который покупаете валюту'
           sumTo:
             required: 'Пожалуйста, укажите сумму покупки'
             number: 'Пожалуйста, введите в поле "Покупка" число'
             moreThan: 'Сумма покупки должна быть больше 0'
-          moneyTo:
-            required: 'Пожалуйста, укажите валюту покупки'
-            notEqualTo: 'Пожалуйста, укажите валюту покупки отличную от валюты продажи'
           accountFee:
             required: 'Пожалуйста, выберете счет, с которого будет списана комиссия'
           fee:
             required: 'Пожалуйста, укажите комиссию'
             number: 'Пожалуйста, введите в поле "Комиссия" число'
             moreThan: 'Комиссия должна быть больше 0'
-          moneyFee:
-            required: 'Пожалуйста, укажите валюту комиссии'
 
       @ui.form.submit (e) ->
         e.preventDefault()
@@ -291,9 +331,6 @@
 
     onDestroy: ->
       @ui.accountFrom.select2 'destroy'
-      @ui.moneyFrom.select2 'destroy'
       @ui.accountTo.select2 'destroy'
-      @ui.moneyTo.select2 'destroy'
       @ui.accountFee.select2 'destroy'
-      @ui.moneyFee.select2 'destroy'
       @ui.tags.select2 'destroy'

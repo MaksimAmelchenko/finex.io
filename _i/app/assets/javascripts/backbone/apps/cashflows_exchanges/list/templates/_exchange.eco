@@ -1,10 +1,51 @@
-<td>
+<% today = (new Date()).setHours(0,0,0,0) %>
+
+<td class="color-mark <%= @colorMark%>">
+</td>
+
+<td class="tickbox">
     <i class="fa fa-fw"></i>
 </td>
+
 <td class="date" style="border-right: 1px solid #ddd;">
+    <% if @idPlan: %>
+    <div class="row">
+        <div class="col-xs-12">
+            <%= @formatDate(@dExchange) %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <% if moment(@dExchange, 'YYYY-MM-DD').toDate().getTime() < today: %>
+            <small class="txt-color-red">Просрочено</small>
+            <% else: %>
+            <small class="text-info">Запланировано</small>
+            <% end %>
+        </div>
+    </div>
+    <% else: %>
+    <% if @isNotConfirmed: %>
+    <div class="row">
+        <div class="col-xs-12">
+            <%= @formatDate(@dExchange) %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <small class="txt-color-red">Не подтверждено</small>
+            <br>
+            <% if moment(@dExchange, 'YYYY-MM-DD').toDate().getTime() < today: %>
+            <small class="txt-color-red">Просрочено</small>
+            <% end %>
+        </div>
+    </div>
+
+    <% else: %>
     <%= @formatDate(@dExchange) %>
+    <% end %>
+    <% end %>
 </td>
-<!--<td style="min-width: 100px">-->
+
 <td>
     <%= CashFlow.entities.accounts.get(@idAccountFrom).get('name')%>
 </td>
@@ -27,7 +68,6 @@
 
 <td class="sum">
     <%- if @sumTo > @sumFrom then (@sumTo/@sumFrom).toFixed(2) else (@sumFrom/@sumTo).toFixed(2) %>
-    <% Math.abs(@sumFrom/@sumTo).toFixed(2) %>
 </td>
 
 <td style="width: 100px" class="hidden-xs hidden-sm">
