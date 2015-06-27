@@ -1,0 +1,6 @@
+<td colspan="18">
+    <div class="well well-sm text-center">
+        Нет запланировованных обменов валют.
+        <a href="#" name="btnAdd">Запланировать</a> новый обмен.
+    </div>
+</td>

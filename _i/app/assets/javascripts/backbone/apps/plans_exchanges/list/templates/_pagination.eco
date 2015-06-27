@@ -1,0 +1,17 @@
+<% if @items.length isnt 0:%>
+<div class="hidden-xs hidden-xs" style="font-size: 12px; display: inline-table;">
+    <%= "#{s.numberFormat(@offset + 1, 0, '.', ' ')} - #{s.numberFormat(@offset + @items.length, 0, '.', ' ')} из #{s.numberFormat(@total, 0, '.', ' ')}" %>
+</div>
+<% end %>
+
+<div class="btn-group">
+    <button type="button" class="btn btn-default btn-sm no-border-transparent"
+            name="btnPreviousPage" data-toggle="tooltip" title="Предыдущая">
+        <i class="fa fa-angle-left fa-lg"></i>
+    </button>
+    <button type="button" class="btn btn-default btn-sm no-border-transparent"
+            name="btnNextPage" data-toggle="tooltip" title="Следующая">
+        <i class="fa fa-angle-right fa-lg"></i>
+    </button>
+</div>
+
