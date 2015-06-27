@@ -27,7 +27,7 @@
     <% if @isNotConfirmed: %>
     <div class="row">
         <div class="col-xs-12">
-            <%= @formatDate(@dIEDetail) %>
+            <%= @formatDate(@dTransfer) %>
         </div>
     </div>
     <div class="row">

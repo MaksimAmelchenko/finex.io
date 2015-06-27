@@ -63,7 +63,7 @@
                                 не к фактической дате, а к отчетному месяцу (используется для построения отчетов)
                                </p>
                                <p>
-                                При повторах запранированной операции будет учитваться разница между
+                                При повторах запранированной операции будет учитываться разница между
                                 начальной датой и отчетным периодом.
                                </p>
                                ">
@@ -84,7 +84,7 @@
                                 id="plan_transfer__edit__accountFrom">
                             <option></option>
                             <!--@formatter:off-->
-                            <% for account in CashFlow.request 'enabled:account:entities', @idAccount: %>
+                            <% for account in CashFlow.request 'enabled:account:entities', @idAccountFrom: %>
                             <option value="<%= account.id %>">
                                 <%= account.get('name') %>
                             </option>
@@ -105,7 +105,7 @@
                                 id="plan_transfer__edit__accountTo">
                             <option></option>
                             <!--@formatter:off-->
-                            <% for account in CashFlow.request 'enabled:account:entities', @idAccount: %>
+                            <% for account in CashFlow.request 'enabled:account:entities', @idAccountTo: %>
                             <option value="<%= account.id %>">
                                 <%= account.get('name') %>
                             </option>
