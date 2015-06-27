@@ -10,7 +10,6 @@
       sum: null
       idMoney: null
       idAccountFee: null
-      isFee: null
       fee: null
       idMoneyFee: null
       dBegin: null
@@ -39,7 +38,7 @@
       days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
       result = ''
       dBegin = moment(@get('dBegin'), 'YYYY-MM-DD')
-      # @formatter:off
+      month = dBegin.month() + 1
       switch @get('repeatType')
         when 1
           d = _.map @get('repeatDays'), (day) ->
@@ -57,7 +56,8 @@
         when 3
           result =
             "
-            Ежеквартально <strong>#{dBegin.format('DD')}</strong> числа <strong>#{((dBegin.month() + 1) % 3)+ 1}-го </strong> месяца.
+            Ежеквартально <strong>#{dBegin.format('DD')}</strong> числа
+            <strong>#{(month - Math.trunc((month - 1) / 3) * 3)}-го</strong> месяца.
             "
         when 4
           result =
@@ -69,8 +69,8 @@
         when 1
           result += '<br>Закончить после <strong>' + @get('repeatCount') + '</strong> выполнений.'
         when 2
-          result += '<br>Закончить <strong>' + moment(@get('dEnd'), 'YYYY-MM-DD').format('DD.MM.YYYY') + '</strong>'
-      # @formatter:on
+          result += '<br>Закончить <strong>' + moment(@get('dEnd'),
+              'YYYY-MM-DD').format('DD.MM.YYYY') + '</strong>'
 
       result
 
@@ -133,10 +133,9 @@
     newPlanTransferEntity: ->
       new Entities.PlanTransfer
         idMoney: (App.request 'default:money')?.get('idMoney')
-#        idMoneyFee: (App.request 'default:money')?.get('idMoney')
+      #        idMoneyFee: (App.request 'default:money')?.get('idMoney')
         dBegin: App.request 'default:date'
         reportPeriod: App.request 'default:reportPeriod'
-        isFee: false
         repeatType: 0
         colorMark: 'bg-color-green'
 
@@ -146,7 +145,9 @@
       {force} = options
 
       if !App.entities.planTransfers
-        App.entities.planTransfers = new Entities.PlanTransfers()
+        App.entities.planTransfers = new Entities.PlanTransfers
+          limit: 10
+
         force = true
 
       planTransfers = App.entities.planTransfers

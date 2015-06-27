@@ -17,7 +17,7 @@
       sum: null
       note: ''
       repeatType: null
-#      repeatRate: null
+    #      repeatRate: null
       repeatDays: null
       endType: null
       reportCount: null
@@ -40,7 +40,7 @@
       days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
       result = ''
       dBegin = moment(@get('dBegin'), 'YYYY-MM-DD')
-      # @formatter:off
+      month = dBegin.month() + 1
       switch @get('repeatType')
         when 1
           d = _.map @get('repeatDays'), (day) ->
@@ -58,7 +58,8 @@
         when 3
           result =
             "
-            Ежеквартально <strong>#{dBegin.format('DD')}</strong> числа <strong>#{((dBegin.month() + 1) % 3)+ 1}-го </strong> месяца.
+            Ежеквартально <strong>#{dBegin.format('DD')}</strong> числа
+            <strong>#{(month - Math.trunc((month - 1) / 3) * 3)}-го</strong> месяца.
             "
         when 4
           result =
@@ -70,8 +71,8 @@
         when 1
           result += '<br>Закончить после <strong>' + @get('repeatCount') + '</strong> выполнений.'
         when 2
-          result += '<br>Закончить <strong>' + moment(@get('dEnd'), 'YYYY-MM-DD').format('DD.MM.YYYY') + '</strong>'
-      # @formatter:on
+          result += '<br>Закончить <strong>' + moment(@get('dEnd'),
+              'YYYY-MM-DD').format('DD.MM.YYYY') + '</strong>'
 
       result
 
@@ -147,7 +148,9 @@
       {force} = options
 
       if !App.entities.planCashFlowItems
-        App.entities.planCashFlowItems = new Entities.PlanCashFlowItems()
+        App.entities.planCashFlowItems = new Entities.PlanCashFlowItems
+          limit: 10
+
         force = true
 
       planCashFlowItems = App.entities.planCashFlowItems
