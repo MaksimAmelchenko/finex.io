@@ -214,7 +214,6 @@
 
       App.vent.trigger 'cashflows_transfers:panel:resize', @$el.height()
 
-
   # --------------------------------------------------------------------------------
 
   class List.Transfer extends App.Views.ItemView
