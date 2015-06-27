@@ -195,7 +195,7 @@
       @ui.sum.val @model.get('sum')
 
       @ui.isFee
-      .prop('checked', @model.get('isFee'))
+      .prop('checked', @model.get('idAccountFee'))
       .change()
 
       @ui.accountFee.select2
@@ -377,7 +377,6 @@
         idAccountTo: numToJSON @ui.accountTo.select2('data').id
         sum: numToJSON @ui.sum.val()
         idMoney: numToJSON @ui.money.data 'idMoney'
-        isFee: @ui.isFee.prop('checked')
         note: @ui.note.val()
         repeatType: numToJSON repeatType
         operationNote: @ui.operationNote.val()
@@ -389,6 +388,11 @@
           idAccountFee: numToJSON @ui.accountFee.select2('data').id
           fee: numToJSON @ui.fee.val()
           idMoneyFee: numToJSON @ui.moneyFee.data 'idMoney'
+      else
+        _.extend result,
+          idAccountFee: null
+          fee: null
+          idMoneyFee: null
 
       switch repeatType
         when 0
