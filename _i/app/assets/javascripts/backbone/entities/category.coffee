@@ -116,7 +116,7 @@
       items = @
       items.filter (item) ->
         if not _.isNull(options.idCategory)
-          if options.idCategory = item.id
+          if options.idCategory is item.id
             return true
 
         if not _.isNull(options.isEnabled)
