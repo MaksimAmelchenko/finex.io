@@ -198,9 +198,11 @@
         App.entities.moneys.reset res.moneys
 
         App.params = res.params
+
         App.entities.badges = res.badges
         App.execute 'menu:set:badges'
 
+        App.entities.dashboardAccountsBalancesDaily.resetParams()
         App.entities.reportDistribution.resetParams()
         App.entities.reportDynamics.resetParams()
         App.entities.ies?.resetFilters()

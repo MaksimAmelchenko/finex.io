@@ -19,3 +19,7 @@
       idMoney: @params.idMoney
 #      accountsUsingType: @params.accountsUsingType
 #      accounts: @params.accounts.toString()
+
+    resetParams: ->
+      @params.dBegin = App.params.dashboard.dBegin
+      @params.dEnd = App.params.dashboard.dEnd
