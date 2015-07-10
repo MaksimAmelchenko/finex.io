@@ -45,7 +45,7 @@
           ]
         }
         {label: 'Планирование', id: 'plans', url: '#plans', icon: 'fa fa-lg fa-fw fa-calendar'}
-#        {label: 'Бюджет', id: 'budget', url: '#budget', icon: 'fa fa-lg fa-fw fa-suitcase'}
+#        {label: 'Бюджет', id: 'budget', url: '#budget', icon: 'fa fa-lg fa-fw fa-calculator'}
         {
           label: 'Отчеты', id: 'reports', url: '#', icon: 'fa fa-lg fa-fw fa-file-text-o',
           items: [
