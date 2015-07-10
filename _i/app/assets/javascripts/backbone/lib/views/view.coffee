@@ -16,7 +16,6 @@
         @[key] = val
 
     remove: (args...) ->
-#      console.log 'removing view', @
       fadeOutTime = 400
 
       if @model?.isDestroyed?()
@@ -47,9 +46,11 @@
 
       formatDate: (value, isShort = false) ->
         if value
+          d = moment(value, 'YYYY-MM-DD')
           if isShort
-            moment(value, 'YYYY-MM-DD').format('DD.MM.YY')
+            d.format('DD.MM.YY')
           else
-            moment(value, 'YYYY-MM-DD').format('DD.MM.YYYY')
+            #            '<div> ' + s.titleize(d.format('DD<br> MMM')) + '</div>'
+            d.format('DD.MM.YYYY')
 
 

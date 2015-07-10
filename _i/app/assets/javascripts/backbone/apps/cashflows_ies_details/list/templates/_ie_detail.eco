@@ -11,7 +11,7 @@
     <% if @idPlan: %>
     <div class="row">
         <div class="col-xs-12">
-            <%= @formatDate(@dIEDetail) %>
+            <%- @formatDate(@dIEDetail) %>
         </div>
     </div>
     <div class="row">
@@ -27,7 +27,7 @@
     <% if @isNotConfirmed: %>
     <div class="row">
         <div class="col-xs-12">
-            <%= @formatDate(@dIEDetail) %>
+            <%- @formatDate(@dIEDetail) %>
         </div>
     </div>
     <div class="row">
@@ -41,7 +41,7 @@
     </div>
 
     <% else: %>
-    <%= @formatDate(@dIEDetail) %>
+    <%- @formatDate(@dIEDetail) %>
     <% end %>
     <% end %>
 </td>
