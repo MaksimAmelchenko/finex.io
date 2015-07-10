@@ -260,6 +260,8 @@
           #          App.entities.reportDistribution.fetch()
           App.ReportsDistributionApp.show()
 
+        if App.getCurrentRoute() is 'plans'
+          App.PlansApp.show()
 
   App
 
