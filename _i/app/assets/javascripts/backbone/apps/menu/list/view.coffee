@@ -8,7 +8,7 @@
 
     ui:
       btnMinify: '.minifyme'
-      btnFeedBack: '.feedback'
+      btnFeedBack: '.btn-feedback'
       userName: '[name=userName]'
 
     events:
@@ -17,6 +17,7 @@
         UE.Popin.show()
       'mouseover @ui.btnFeedBack': ->
         UE.Popin.preload()
+
 
     minify: (e) ->
       e.preventDefault()
