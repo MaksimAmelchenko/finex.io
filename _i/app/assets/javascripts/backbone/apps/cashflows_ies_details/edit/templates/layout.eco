@@ -202,7 +202,7 @@
                 <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus"
                    data-content="<p><strong>Неподтвержённые операции</strong> будут выделены в журнале операций
                    <span class='bg-warning'> желтым фоном </span>
-                   (простроченные неподтверждённые &mdash;
+                   (просроченные неподтверждённые &mdash;
                    <span class='bg-danger'> красным </span>).</p>
                    <p>В остальном они ничем не отличаются от обычных операций.</p>"
                    tabindex="-1">
