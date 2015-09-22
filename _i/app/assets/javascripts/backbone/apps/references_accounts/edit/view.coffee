@@ -115,7 +115,7 @@
             maxlength: 'Пожалуйста, введите не более 100 символов'
             required: 'Пожалуйста, введите наименование счета'
           accountType:
-            required: 'Пожалуйста, выберете тип счет'
+            required: 'Пожалуйста, выберите тип счет'
 
       @ui.form.submit (e) ->
         e.preventDefault()

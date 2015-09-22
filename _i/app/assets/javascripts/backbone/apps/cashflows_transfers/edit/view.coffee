@@ -54,6 +54,7 @@
         try
           sum = eval(value)
         catch
+          undefined
 
         @ui.sum.val(round(sum, 2)) if _.isNumber(sum)
 
@@ -164,7 +165,7 @@
         moment(@model.get('reportPeriod'), 'YYYY-MM-DD').toDate())
 
       @ui.accountFrom.select2
-        placeholder: 'Выберете счет'
+        placeholder: 'Выберите счет'
       @ui.accountFrom.select2('val', @model.get('idAccountFrom'))
 
       # for jQuery Validation Plugin
@@ -172,7 +173,7 @@
         $(@).trigger 'blur'
 
       @ui.accountTo.select2
-        placeholder: 'Выберете счет'
+        placeholder: 'Выберите счет'
       @ui.accountTo.select2('val', @model.get('idAccountTo'))
 
       # for jQuery Validation Plugin
@@ -188,7 +189,7 @@
       @ui.fee.val @model.get('fee')
 
       @ui.accountFee.select2
-        placeholder: 'Выберете счет'
+        placeholder: 'Выберите счет'
       @ui.accountFee.select2('val', @model.get('idAccountFee'))
 
       # for jQuery Validation Plugin
@@ -247,16 +248,16 @@
           reportPeriod_:
             required: 'Пожалуйста, укажите отчетный период',
           accountFrom:
-            required: 'Пожалуйста, выберете счет, с которого переводите деньги'
+            required: 'Пожалуйста, выберите счет, с которого переводите деньги'
           accountTo:
-            required: 'Пожалуйста, выберете счет, на который переводите деньги'
-            notEqualTo: 'Пожалуйста, выберете счет, отличный от счета, с которого переводите деньги'
+            required: 'Пожалуйста, выберите счет, на который переводите деньги'
+            notEqualTo: 'Пожалуйста, выберите счет, отличный от счета, с которого переводите деньги'
           sum:
             required: 'Пожалуйста, укажите сумму перевода'
             number: 'Пожалуйста, введите в поле "Сумма" число'
             moreThan: 'Сумма перевода должна быть больше 0'
           accountFee:
-            required: 'Пожалуйста, выберете счет, с которого будет списана комиссия'
+            required: 'Пожалуйста, выберите счет, с которого будет списана комиссия'
           fee:
             required: 'Пожалуйста, укажите комиссию'
             number: 'Пожалуйста, введите в поле "Комиссия" число'

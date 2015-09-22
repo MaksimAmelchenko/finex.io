@@ -191,7 +191,7 @@
             required: true
         messages:
           contractor:
-            required: 'Пожалуйста, выберете контрагента',
+            required: 'Пожалуйста, выберите контрагента',
 
 
     onDestroy: ->

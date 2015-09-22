@@ -76,6 +76,7 @@
         try
           sum = eval(value)
         catch
+          undefined
 
         @ui.sum.val(round(sum, 2)) if _.isNumber(sum)
 
@@ -170,12 +171,12 @@
       .datepicker('setDate', moment(@model.get('reportPeriod'), 'YYYY-MM-DD').toDate())
 
       @ui.contractor.select2
-        placeholder: 'Выберете контрагента'
+        placeholder: 'Выберите контрагента'
         allowClear: true
       @ui.contractor.select2('val', @model.get('idContractor'))
 
       @ui.account.select2
-        placeholder: 'Выберете счет'
+        placeholder: 'Выберите счет'
       @ui.account.select2('val', @model.get('idAccount'))
 
       # for jQuery Validation Plugin
@@ -184,7 +185,7 @@
 
       @ui.category.select2
         minimumInputLength: if @ui.category.children().size() > 300 then 2 else 0
-        placeholder: 'Выберете категорию'
+        placeholder: 'Выберите категорию'
         matcher: (term, text, opt) ->
           App.Entities.categoryMatcher term, text, opt
 
@@ -305,9 +306,9 @@
                 +@ui.endType.select2('val') is 2
         messages:
           account:
-            required: 'Пожалуйста, выберете счет'
+            required: 'Пожалуйста, выберите счет'
           category:
-            required: 'Пожалуйста, выберете категорию'
+            required: 'Пожалуйста, выберите категорию'
           dBegin_:
             required: 'Пожалуйста, укажите дату',
           reportPeriod_:

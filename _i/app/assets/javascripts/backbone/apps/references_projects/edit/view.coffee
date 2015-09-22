@@ -44,7 +44,7 @@
       data = @serialize()
 #      if data.currencies.length is 0
 #        @ui.currencies.addClass 'has-error'
-#        showError 'Пожалуйста, выберете хотя бы одну валюту'
+#        showError 'Пожалуйста, выберите хотя бы одну валюту'
 #        return
 
       if @model.isNew()
