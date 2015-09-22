@@ -1,6 +1,6 @@
 {
   "name": "finex.io",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "devServer": "http://localhost:3000",
   "productionServer": "https://api.finex.io",
   "description": "Frontend for a Personal Financial Management service FINEX.io",
