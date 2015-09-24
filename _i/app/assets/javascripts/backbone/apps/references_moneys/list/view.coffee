@@ -124,8 +124,8 @@
     events:
       'click @ui.tickbox': (e) ->
         e.stopPropagation()
-        if $('i',
-          @ui.tickbox).toggleClass('fa-square-o').toggleClass('fa-check-square-o').hasClass('fa-square-o')
+        i = $('i', @ui.tickbox)
+        if i.toggleClass('fa-square-o').toggleClass('fa-check-square-o').hasClass('fa-square-o')
           @collection.chooseNone()
         else
           @collection.chooseAll()

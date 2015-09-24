@@ -45,6 +45,7 @@
         try
           sum = eval(value)
         catch
+          undefined
 
         @ui.sum.val(round(sum, 2)) if _.isNumber(sum)
 
@@ -75,14 +76,14 @@
       @ui.reportPeriod.datepicker('setDate', moment(@model.get('reportPeriod'), 'YYYY-MM-DD').toDate())
 
       @ui.account.select2
-        placeholder: 'Выберете счет'
+        placeholder: 'Выберите счет'
       @ui.account.select2('val', @model.get('idAccount'))
       # for jQuery Validation Plugin
       @ui.account.on 'change', ->
         $(@).trigger 'blur'
 
       @ui.category.select2
-        placeholder: 'Выберете категорию'
+        placeholder: 'Выберите категорию'
       @ui.category.select2('val', @model.get('idCategory'))
       # for jQuery Validation Plugin
       @ui.category.on 'change', ->
@@ -125,9 +126,9 @@
           reportPeriod_:
             required: 'Пожалуйста, укажите отчетный период',
           account:
-            required: 'Пожалуйста, выберете счет'
+            required: 'Пожалуйста, выберите счет'
           category:
-            required: 'Пожалуйста, выберете категорию'
+            required: 'Пожалуйста, выберите категорию'
           sum:
             required: 'Пожалуйста, укажите сумму'
             number: 'Пожалуйста, введите в поле "Сумма" число'

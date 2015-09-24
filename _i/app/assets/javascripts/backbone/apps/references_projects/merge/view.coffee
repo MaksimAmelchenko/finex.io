@@ -92,9 +92,9 @@
             required: true
         messages:
           targetProject:
-            required: 'Пожалуйста, выберете целевой проект.'
+            required: 'Пожалуйста, выберите целевой проект.'
           projects:
-            required: 'Пожалуйста, выберете хотя бы один объединяемый проект.'
+            required: 'Пожалуйста, выберите хотя бы один объединяемый проект.'
 
       @ui.form.submit (event) =>
         # prevent default browser behaviour

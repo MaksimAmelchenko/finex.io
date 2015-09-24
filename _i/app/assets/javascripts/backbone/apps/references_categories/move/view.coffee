@@ -87,9 +87,9 @@
             required: true
         messages:
           categoryFrom:
-            required: 'Пожалуйста, выберете категорию, из которой переносить данные'
+            required: 'Пожалуйста, выберите категорию, из которой переносить данные'
           categoryTo:
-            required: 'Пожалуйста, выберете категорию, в которую переносить данные'
+            required: 'Пожалуйста, выберите категорию, в которую переносить данные'
 
       @ui.form.submit (event) =>
         # prevent default browser behaviour

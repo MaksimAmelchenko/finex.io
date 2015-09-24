@@ -51,7 +51,7 @@
       @ui.importSourceType.select2 'data', null
 
       @ui.importSourceType.empty()
-      @ui.helpContent.html 'Выберете тип данных'
+      @ui.helpContent.html 'Выберите тип данных'
       idImportSource = @ui.importSource.select2('data')?.id
       if idImportSource
         html = '<option></option>'
@@ -139,11 +139,11 @@
             required: true
         messages:
           importSource:
-            required: 'Пожалуйста, выберете источник данных'
+            required: 'Пожалуйста, выберите источник данных'
           importSourceType:
-            required: 'Пожалуйста, выберете тип данных'
+            required: 'Пожалуйста, выберите тип данных'
           fileName:
-            required: 'Пожалуйста, выберете файл для загрузки.'
+            required: 'Пожалуйста, выберите файл для загрузки.'
 
       @$('form').submit (e) ->
         e.preventDefault()

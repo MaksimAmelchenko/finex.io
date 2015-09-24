@@ -57,6 +57,7 @@
         try
           sum = eval(value)
         catch
+          undefined
 
         @ui.sum.val(round(sum, 2)) if _.isNumber(sum)
 
@@ -106,7 +107,7 @@
         moment(@model.get('reportPeriod'), 'YYYY-MM-DD').toDate())
 
       @ui.account.select2
-        placeholder: 'Выберете счет'
+        placeholder: 'Выберите счет'
       #        nextSearchTerm: (selectedObject, currentSearchTerm) ->
       #          currentSearchTerm
       @ui.account.select2('val', @model.get('idAccount'))
@@ -116,7 +117,7 @@
 
       @ui.category.select2
         minimumInputLength: if @ui.category.children().size() > 300 then 2 else 0
-        placeholder: 'Выберете категорию'
+        placeholder: 'Выберите категорию'
         matcher: (term, text, opt) ->
           App.Entities.categoryMatcher term, text, opt
 
@@ -172,9 +173,9 @@
             moreThan: 0
         messages:
           account:
-            required: 'Пожалуйста, выберете счет'
+            required: 'Пожалуйста, выберите счет'
           category:
-            required: 'Пожалуйста, выберете категорию'
+            required: 'Пожалуйста, выберите категорию'
           dIEDetail_:
             required: 'Пожалуйста, укажите дату',
           reportPeriod_:
