@@ -18,7 +18,6 @@
     "gulp-cached": "^1.1.0",
     "gulp-coffee": "^2.3.1",
     "gulp-coffeelint": "^0.5.0",
-    "gulp-cssimport": "^2.1.1",
     "gulp-concat": "^2.6.0",
     "gulp-eco": "0.0.2",
     "gulp-if": "^1.2.5",
