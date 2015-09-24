@@ -299,7 +299,7 @@ function construct_scripts(app) {
         )
       }))
 
-      .pipe(plugins.if(argv.production, plugins.replace('{server}',  p.productionServer)))
+      .pipe(plugins.if(argv.production, plugins.replace('{server}', p.productionServer)))
       .pipe(plugins.if(!argv.production, plugins.replace('{server}', p.devServer)))
 
       .pipe(plugins.if(/[.]coffee$/, plugins.coffeelint({max_line_length: {value: 200}})))
@@ -337,23 +337,15 @@ function construct_scripts(app) {
 
 function construct_styles(app) {
   gulp.task('styles:' + app.name, function () {
-    //return sass (app.css.src, {lineNumbers: true})
     return gulp.src(app.tasks.styles.src)
-      .pipe(plugins.cssimport({extensions: ['css']}))
-      .pipe(plugins.if(!argv.production, plugins.sourcemaps.init()))
-      .pipe(plugins.sass())
-      .pipe(plugins.if(argv.production, plugins.minifyCSS()))
-      //.pipe(plugins.minifycss({keepBreaks: true}))
+      //.pipe(plugins.if(!argv.production, plugins.sourcemaps.init()))
+      .pipe(plugins.sass().on('error', plugins.sass.logError))
+      .pipe(plugins.if(argv.production, plugins.minifyCSS({processImport: true, advanced: false})))
       .pipe(plugins.if(argv.production, plugins.rev()))
-      .pipe(plugins.if(!argv.production, plugins.sourcemaps.write('./')))
+      //.pipe(plugins.if(!argv.production, plugins.sourcemaps.write('./')))
       .pipe(gulp.dest(app.tasks.styles.dest))
-
-      //.pipe(plugins.gzip())
-      //.pipe(gulp.dest(app.tasks.styles.dest))
-
       .pipe(plugins.if(argv.production, plugins.rev.manifest(app.tasks.styles.dest + '/rev-manifest.json', {merge: true})))
       .pipe(plugins.if(argv.production, gulp.dest('')));
-
   });
 }
 
