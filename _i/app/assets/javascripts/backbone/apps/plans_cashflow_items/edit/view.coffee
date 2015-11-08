@@ -68,11 +68,9 @@
       @config = options.config
 
     recalculateSum: ->
-      value = s.trim @ui.sum.val()
+      value = _.trim @ui.sum.val()
       if value isnt ''
-        value = s.replaceAll(value, ',', '.')
-        value = s.replaceAll(value, ' ', '')
-        value = s.replaceAll(value, 'ю', '.')
+        value = value.replace(/[,ю]/g, '.').replace(/\s/g, '')
         try
           sum = eval(value)
         catch
@@ -194,6 +192,7 @@
         # step back in category hierarchy
         el = $(@).data('select2')
         if el.data() and el.search.val() is ''
+          # TODO уйти от s
           el.search.val s.strLeft(el.data().text, '&rarr;').trim()
           el.updateResults false
       .on 'change', ->

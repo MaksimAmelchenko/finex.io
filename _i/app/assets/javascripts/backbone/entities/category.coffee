@@ -18,11 +18,11 @@
       note: ''
 
     # сильно проседает производительность JSON (c 30 до 70 мс), поэтому эти мутаторы уберем
-#    mutators:
-#      fullPath: ->
-#        @path true
-#      path: ->
-#        @path false
+    #    mutators:
+    #      fullPath: ->
+    #        @path true
+    #      path: ->
+    #        @path false
 
     parse: (response, options)->
       if not _.isUndefined response.category
@@ -43,14 +43,14 @@
       @path true
 
     path: (isFull = false) ->
-      if isFull then path = s.escapeHTML(@get('name')) else path = ''
+      if isFull then path = _.escape(@get('name')) else path = ''
       categories = @collection
 
       idParent = @get('parent')
       #      level = 0
       while  not _.isNull(idParent)
         parent = categories.get(idParent)
-        path = s.escapeHTML(parent.get('name')) + if path then ' &rarr; ' + path else ''
+        path = _.escape(parent.get('name')) + if path then ' &rarr; ' + path else ''
         #        path = s.escapeHTML(parent.get('name')) + if path then ' > ' + path else ''
         idParent = parent.get('parent')
       #        level = level + 1
@@ -77,7 +77,7 @@
     url: 'categories'
 
     # system category 'Debt'
-#    _debtCategory: null
+    #    _debtCategory: null
 
     parse: (response, options)->
       response.categories
@@ -89,8 +89,8 @@
       @on 'reset', =>
         @_debtCategory = @findWhere({idCategoryPrototype: 1}).get('idCategory')
 
-#    comparator: (category) ->
-#      category.path(true)
+    #    comparator: (category) ->
+    #      category.path(true)
 
     comparator: (category1, category2) ->
       if category1.get('isEnabled') > category2.get('isEnabled')
@@ -183,4 +183,6 @@
 
 
   @categoryMatcher = (term, text, opt) ->
-    s.clean(s.replaceAll(text, '&rarr;', '')).toUpperCase().indexOf(term.toUpperCase()) >= 0
+    # удаляем стрелку и множественные пробелы
+    s = text.replace(/&rarr;/g, '').replace(/\s{2,}/g, ' ')
+    _.trim(s).toUpperCase().indexOf(term.toUpperCase()) >= 0

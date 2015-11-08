@@ -121,7 +121,7 @@ do (Backbone) ->
 
       eventShouldTrigger = false
 
-      for model in _([args]).flatten()
+      for model in _.flatten([args])
         ## break if the model is already chosen
         break if @modelInChosen(model)
 
@@ -143,7 +143,7 @@ do (Backbone) ->
 
       eventShouldTrigger = false
 
-      for model in _([args]).flatten()
+      for model in _.flatten([args])
         ## break if the model is already chosen
         break if !@modelInChosen(model)
 
@@ -177,7 +177,7 @@ do (Backbone) ->
       _.defaults options, chooseNone: true
 
       @chooseNone options if options.chooseNone
-      for id in _([ids]).flatten()
+      for id in _.flatten([ids])
         @chooseById id, options
 
     _getEvent: ->

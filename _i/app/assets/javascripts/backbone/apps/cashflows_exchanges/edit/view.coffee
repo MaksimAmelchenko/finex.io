@@ -60,11 +60,9 @@
 
     recalculateSum: (e) ->
       $el = $(e.target)
-      value = s.trim($el.val())
+      value = _.trim $el.val()
       if value isnt ''
-        value = s.replaceAll(value, ',', '.')
-        value = s.replaceAll(value, ' ', '')
-        value = s.replaceAll(value, 'ю', '.')
+        value = value.replace(/[,ю]/g, '.').replace(/\s/g, '')
         try
           sum = eval(value)
         catch

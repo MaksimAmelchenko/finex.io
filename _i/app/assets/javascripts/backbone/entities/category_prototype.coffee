@@ -16,13 +16,13 @@
       @path true
 
     path: (isFull = false) ->
-      if isFull then path = s.escapeHTML(@get('name')) else path = ''
+      if isFull then path = _.escape(@get('name')) else path = ''
       categoryPrototypes = @collection
 
       idParent = @get('parent')
       while  not _.isNull(idParent)
         parent = categoryPrototypes.get(idParent)
-        path = s.escapeHTML(parent.get('name')) + if path then ' &rarr; ' + path else ''
+        path = _.escape(parent.get('name')) + if path then ' &rarr; ' + path else ''
         idParent = parent.get('parent')
       path
 

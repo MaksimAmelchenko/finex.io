@@ -8,7 +8,7 @@
 
       # Pass all events from 'form' to 'Edit.Controller'
       @listenTo @form, 'all', (event, model, options) ->
-        @trigger event, model, options if s.startsWith(event, 'form:')
+        @trigger event, model, options if _.startsWith(event, 'form:')
 
       App.execute 'when:fetched', ie, =>
         # Make a copy of ieDetail's collection and edit it
