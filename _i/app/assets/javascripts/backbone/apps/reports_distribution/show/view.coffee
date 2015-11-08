@@ -370,7 +370,7 @@
       .on 'mouseover', (d, i) =>
         @ui.tooltip.html(
           (if d.idCategory
-            s.escapeHTML(App.entities.categories.get(d.idCategory).get('name'))
+            _.escape(App.entities.categories.get(d.idCategory).get('name'))
           else
             (if d.parent then 'Другое' else 'Всего')) + ": " + s.numberFormat(d.value, 0, '.', ' ')
         )

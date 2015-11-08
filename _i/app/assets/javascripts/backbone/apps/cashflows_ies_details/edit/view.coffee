@@ -48,12 +48,9 @@
       @config = options.config
 
     recalculateSum: ->
-      value = s.trim(@ui.sum.val())
+      value = _.trim @ui.sum.val()
       if value isnt ''
-        value = s.replaceAll(value, ',', '.')
-        value = s.replaceAll(value, ' ', '')
-        value = s.replaceAll(value, 'ю', '.')
-        #        debugger
+        value = value.replace(/[,ю]/g, '.').replace(/\s/g, '')
         try
           sum = eval(value)
         catch

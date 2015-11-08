@@ -23,7 +23,7 @@
       @listenTo @formLayout, 'show', @formContentRegion
 
       @listenTo @contentView, 'all', (event, model, options) ->
-        @trigger event, model, options if s.startsWith(event, 'form:')
+        @trigger event, model, options if _.startsWith(event, 'form:')
 
 #      @listenTo @contentView, 'form:after:save', (model)->
 #        @trigger 'form:after:save', model
@@ -42,7 +42,7 @@
 
       config = @mergeDefaultsInto(form)
 
-      _.extend config, _(options).omit('contentView', 'model', 'collection')
+      _.extend config, _.omit(options, 'contentView', 'model', 'collection')
 
     getModel: (options) ->
       ## pull model off of contentView by default
@@ -58,7 +58,7 @@
 #      options.collection or @contentView.collection
 
     parseProxys: (proxys) ->
-      for proxy in _([proxys]).flatten()
+      for proxy in _.flatten([proxys])
         @formLayout[proxy] = _.result @contentView, proxy
 
 #      formCancel: (config) ->

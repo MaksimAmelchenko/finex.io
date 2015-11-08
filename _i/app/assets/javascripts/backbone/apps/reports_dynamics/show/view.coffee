@@ -517,7 +517,7 @@
       .selectAll("text")
       .text (d, i) ->
         date = dBegin.clone().add(d, 'months')
-        if date.months() is 0 or i is 0
+        if date.month() is 0 or i is 0
           date.format('MMM YYYY')
         else
           date.format('MMM')

@@ -90,7 +90,7 @@ var apps = [
           'bower_components/jquery-ui/ui/droppable.js',
           'bower_components/jquery-ui/ui/sortable.js',
 
-          'bower_components/underscore/underscore.js',
+          'bower_components/lodash/lodash.min.js',
           'bower_components/backbone/backbone.js',
           'bower_components/backbone.marionette/lib/backbone.marionette.js',
 
@@ -338,11 +338,11 @@ function construct_scripts(app) {
 function construct_styles(app) {
   gulp.task('styles:' + app.name, function () {
     return gulp.src(app.tasks.styles.src)
-      //.pipe(plugins.if(!argv.production, plugins.sourcemaps.init()))
+      .pipe(plugins.if(!argv.production, plugins.sourcemaps.init()))
       .pipe(plugins.sass().on('error', plugins.sass.logError))
-      .pipe(plugins.if(argv.production, plugins.minifyCSS({processImport: true, advanced: false})))
+      .pipe(plugins.minifyCSS({processImport: true, advanced: false}))
       .pipe(plugins.if(argv.production, plugins.rev()))
-      //.pipe(plugins.if(!argv.production, plugins.sourcemaps.write('./')))
+      .pipe(plugins.if(!argv.production, plugins.sourcemaps.write('./')))
       .pipe(gulp.dest(app.tasks.styles.dest))
       .pipe(plugins.if(argv.production, plugins.rev.manifest(app.tasks.styles.dest + '/rev-manifest.json', {merge: true})))
       .pipe(plugins.if(argv.production, gulp.dest('')));
