@@ -117,3 +117,11 @@ blockquote {
   font-style: italic;
   color: #777777;
 }
+
+.navbar-brand {
+  padding: 0;
+  img {
+    width: 100px;
+    margin: 10px 0 0 20px;
+  }
+}
