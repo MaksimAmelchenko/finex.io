@@ -41,9 +41,13 @@ var apps = [
       cp: {
         src: ['_/cp/*'],
         dest: 'public'
+      },
+      images: {
+        src: ['_/app/assets/images/**/*'],
+        dest: 'public/assets'
       }
     },
-    build: ['scripts:', 'styles:', ['html:', 'fonts:', 'cp:']]
+    build: ['scripts:', 'styles:', ['html:', 'fonts:', 'cp:', 'images:']]
   },
   {
     name: 'about',
@@ -370,10 +374,18 @@ function construct_fonts(app) {
 
 // Простое копирование файлов
 function construct_cp(app) {
-  if (!app.tasks.fonts) return;
+  if (!app.tasks.cp) return;
   gulp.task('cp:' + app.name, function () {
     return gulp.src(app.tasks.cp.src)
       .pipe(gulp.dest(app.tasks.cp.dest));
+  });
+}
+
+function construct_images(app) {
+  if (!app.tasks.images) return;
+  gulp.task('images:' + app.name, function () {
+    return gulp.src(app.tasks.images.src)
+      .pipe(gulp.dest(app.tasks.images.dest));
   });
 }
 
@@ -395,6 +407,7 @@ for (var i = 0; i < apps.length; i++) {
   construct_html(apps[i]);
   construct_fonts(apps[i]);
   construct_cp(apps[i]);
+  construct_images(apps[i]);
 
   construct_build(apps[i]);
 
