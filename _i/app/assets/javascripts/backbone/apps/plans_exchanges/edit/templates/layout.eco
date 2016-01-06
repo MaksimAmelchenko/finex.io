@@ -321,12 +321,12 @@
 
                 <div class="form-group" name="_monthDays" style="display: none">
                     <label class="col-xs-12 col-sm-3 control-label">
-                        Дни месяца<em>*</em>
+                        Числа месяца<em>*</em>
                     </label>
 
-                    <div class="col-sm-9">
+                    <div class="col-xs-12 col-sm-9">
                         <select class="select2" multiple name="monthDays"
-                                title="Дни месяца, в которые будет выполняться запланированный обмен">
+                                title="Числа месяца, по которым будет выполняться запланированный обмен">
                             <option></option>
                             <% for i in [1..31]: %>
                             <option value="<%= i %>">
