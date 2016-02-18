@@ -42,4 +42,5 @@
       when 1 then sum[0]
       when 2 then sum[1]
       when 3 then Math.max(sum[1] - sum[0], 0)
+      when 4 then sum[0] - sum[1]
 

@@ -19,6 +19,7 @@
                         <option value="1">Доход</option>
                         <option value="2">Расход</option>
                         <option value="3">«Чистый» расход</option>
+                        <option value="4">Сальдо (доход - расход)</option>
                     </select>
                 </div>
 
