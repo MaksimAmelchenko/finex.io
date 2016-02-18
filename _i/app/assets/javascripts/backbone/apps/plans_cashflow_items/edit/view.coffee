@@ -461,5 +461,4 @@
       @ui.monthDays.select2 'destroy'
       @ui.operationTags.select2 'destroy'
       @ui.repeatType.select2 'destroy'
-      @ui.monthDays.select2 'destroy'
       @ui.endType.select2 'destroy'

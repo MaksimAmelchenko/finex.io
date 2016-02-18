@@ -16,9 +16,10 @@
             <div class="form-group toolbar">
                 <div class="input-group col-xs-1" style="width: 200px">
                     <select class="select2" name="valueType">
-                        <option value="1">Поступление</option>
+                        <option value="1">Доход</option>
                         <option value="2">Расход</option>
                         <option value="3">«Чистый» расход</option>
+                        <option value="4">Сальдо (доход - расход)</option>
                     </select>
                 </div>
 

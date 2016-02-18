@@ -279,8 +279,12 @@
                 </div>
 
                 <div class="form-group" name="_monthDays" style="display: none">
-                    <div class="col-sm-offset-3 col-sm-9">
-                        <select class="select2" multiple name="monthDays" title="Дни месяца">
+                    <label class="col-xs-12 col-sm-3 control-label">
+                        Числа месяца<em>*</em>
+                    </label>
+                    <div class="col-xs-12 col-sm-9">
+                        <select class="select2" multiple name="monthDays"
+                                title="Числа месяца, по которым будет выполняться запланированный перевод">
                             <option></option>
                             <% for i in [1..31]: %>
                             <option value="<%= i %>">

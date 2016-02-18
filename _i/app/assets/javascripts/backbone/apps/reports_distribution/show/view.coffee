@@ -283,7 +283,7 @@
             table.treetable('loadBranch', this, view.renderRows(this.id))
             this.isRendered = true
 #        onNodeCollapse: ->
-#          table.treetable('unloadBranch', this);
+#          table.treetable('unloadBranch', this)
 
     templateHelpers: ->
       _.extend super,

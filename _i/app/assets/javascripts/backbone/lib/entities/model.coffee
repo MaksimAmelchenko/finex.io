@@ -50,7 +50,6 @@
       #        success: _.bind(@saveSuccess, @)
       #        error: _.bind(@saveError, @)
 
-      #      debugger;
       super data, options
 
   #    saveSuccess: (isNew, collection, callback) =>
