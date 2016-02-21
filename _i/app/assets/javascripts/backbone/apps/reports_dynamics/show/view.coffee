@@ -48,6 +48,7 @@
       categories: '[name=categories]'
       tagsUsingType: '[name=tagsUsingType]'
       tags: '[name=tags]'
+      isUsePlan: '[name=isUsePlan]'
 
     events:
       'click @ui.btnRefresh': 'refresh'
@@ -101,6 +102,8 @@
       @model.params.tagsUsingType = parseInt(@ui.tagsUsingType.select2 'val')
       @model.params.tags = _.map @ui.tags.select2('val'), (item) ->
         parseInt item
+
+      @model.params.isUsePlan = @ui.isUsePlan.prop 'checked'
 
       @model.fetch
         reset: true
@@ -170,6 +173,8 @@
         placeholder: 'Все'
 
       @ui.tags.select2('val', @model.params.tags)
+
+      @ui.isUsePlan.prop 'checked', @model.params.isUsePlan
 
       @ui.btnToggleParams.trigger 'click' if @model.isShowParams
 

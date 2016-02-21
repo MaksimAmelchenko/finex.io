@@ -28,6 +28,7 @@
         categories: []
         tagsUsingType: 1
         tags: []
+        isUsePlan: true
 
       @resetParams()
 
@@ -84,3 +85,4 @@
       categories: @params.categories.toString()
       tagsUsingType: @params.tagsUsingType
       tags: @params.tags.toString()
+      isUsePlan: @params.isUsePlan
