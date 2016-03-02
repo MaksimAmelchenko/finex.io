@@ -117,6 +117,9 @@
       App.request 'ie:detail:edit', model, @collection
 
     del: ->
+      if @collection.getChosen().length > 1
+        return if not confirm("Вы действительно хотите удалить несколько записей \n(#{@collection.getChosen().length} шт.) ?")
+
       for model in @collection.getChosen()
         if model.get('idPlan')
           do (model) ->
