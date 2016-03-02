@@ -108,7 +108,9 @@
       App.request 'transfer:edit', model, @collection
 
     del: ->
-#      model.destroy()  for model in  @collection.getChosen()
+      if @collection.getChosen().length > 1
+        return if not confirm("Вы действительно хотите удалить несколько записей \n(#{@collection.getChosen().length} шт.) ?")
+
       for model in @collection.getChosen()
         if model.get('idPlan')
           do (model) ->

@@ -103,7 +103,10 @@
       App.request 'debt:edit', model
 
     del: ->
-      model.destroy()  for model in  @collection.getChosen()
+      if @collection.getChosen().length > 1
+        return if not confirm("Вы действительно хотите удалить несколько записей \n(#{@collection.getChosen().length} шт.) ?")
+
+      model.destroy() for model in  @collection.getChosen()
 
     refresh: ->
       @collection.resetPagination()
