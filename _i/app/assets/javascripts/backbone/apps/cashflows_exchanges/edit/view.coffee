@@ -40,11 +40,11 @@
       'change @ui.isFee': 'changeIsFee'
       'changeDate @ui.dExchange': 'changeDateDExchange'
       'keydown @ui.sumFrom': 'keyPress'
-      'focusout @ui.sumFrom': 'recalculateSum'
+      'focusout @ui.sumFrom': 'recalculateSumFrom'
       'keydown @ui.sumTo': 'keyPress'
-      'focusout @ui.sumTo': 'recalculateSum'
-      'keydown @ui.sumFee': 'keyPress'
-      'focusout @ui.sumFee': 'recalculateSum'
+      'focusout @ui.sumTo': 'recalculateSumTo'
+      'keydown @ui.fee': 'keyPress'
+      'focusout @ui.fee': 'recalculateSumFee'
       'click div[name=moneyFrom] ul.dropdown-menu li': 'selectMoneyFrom'
       'click div[name=moneyTo] ul.dropdown-menu li': 'selectMoneyTo'
       'click div[name=moneyFee] ul.dropdown-menu li': 'selectMoneyFee'
@@ -58,7 +58,19 @@
 
       @config = options.config
 
-    recalculateSum: (e) ->
+    updateMoneyFromPrecision: (idMoney) ->
+      money = App.entities.moneys.findWhere({idMoney})
+      @precisionFrom = if money then money.get('precision') else 2
+
+    updateMoneyToPrecision: (idMoney) ->
+      money = App.entities.moneys.findWhere({idMoney})
+      @precisionTo = if money then money.get('precision') else 2
+
+    updateMoneyFeePrecision: (idMoney) ->
+      money = App.entities.moneys.findWhere({idMoney})
+      @precisionFee = if money then money.get('precision') else 2
+
+    recalculateSumFrom: (e) ->
       $el = $(e.target)
       value = _.trim $el.val()
       if value isnt ''
@@ -68,12 +80,38 @@
         catch
           undefined
 
-        $el.val(round(sum, 2)) if _.isNumber(sum)
+        @ui.sumFrom.val(round(sum, @precisionFrom)) if _.isNumber(sum)
+
+
+    recalculateSumTo: (e) ->
+      $el = $(e.target)
+      value = _.trim $el.val()
+      if value isnt ''
+        value = value.replace(/[,ю]/g, '.').replace(/\s/g, '')
+        try
+          sum = eval(value)
+        catch
+          undefined
+
+        @ui.sumTo.val(round(sum, @precisionTo)) if _.isNumber(sum)
+
+    recalculateSumFee: (e) ->
+      $el = $(e.target)
+      value = _.trim $el.val()
+      if value isnt ''
+        value = value.replace(/[,ю]/g, '.').replace(/\s/g, '')
+        try
+          sum = eval(value)
+        catch
+          undefined
+        @ui.fee.val(round(sum, @precisionFee)) if _.isNumber(sum)
 
     keyPress: (e) ->
       code = e.keyCode || e.which
       if code is 13
-        @recalculateSum(e)
+        @recalculateSumFrom(e)
+        @recalculateSumTo(e)
+        @recalculateSumFee(e)
 
 
     changeDateDExchange: ->
@@ -106,6 +144,7 @@
       li.siblings().removeClass('active').end().addClass('active')
 
       @ui.moneyFrom.text(li.data('text')).data('idMoney', li.data('idMoney'))
+      @updateMoneyFromPrecision(li.data('idMoney'))
 
 
     selectMoneyTo: (e) ->
@@ -114,6 +153,7 @@
       li.siblings().removeClass('active').end().addClass('active')
 
       @ui.moneyTo.text(li.data('text')).data('idMoney', li.data('idMoney'))
+      @updateMoneyToPrecision(li.data('idMoney'))
 
 
     selectMoneyFee: (e)->
@@ -122,6 +162,7 @@
       li.siblings().removeClass('active').end().addClass('active')
 
       @ui.moneyFee.text(li.data('text')).data('idMoney', li.data('idMoney'))
+      @updateMoneyFeePrecision(li.data('idMoney'))
 
     getTitle: ->
       if @model.get('idPlan')
@@ -202,6 +243,10 @@
 
 
     onRender: ->
+      @updateMoneyFromPrecision(@model.get('idMoneyFrom'))
+      @updateMoneyToPrecision(@model.get('idMoneyTo'))
+      @updateMoneyFeePrecision(@model.get('idMoneyFee'))
+
       @ui.dExchange.datepicker('setDate', moment(@model.get('dExchange'), 'YYYY-MM-DD').toDate())
       @ui.reportPeriod.datepicker('setDate',
         moment(@model.get('reportPeriod'), 'YYYY-MM-DD').toDate())

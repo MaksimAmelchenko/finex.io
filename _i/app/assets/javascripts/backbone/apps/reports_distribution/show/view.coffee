@@ -95,7 +95,7 @@
       @model.params.accounts = _.map @ui.accounts.select2('val'), (item) ->
         parseInt item
 
-      @model.params.categories = parseInt(@ui.categoriesUsingType.select2 'val')
+      @model.params.categoriesUsingType = parseInt(@ui.categoriesUsingType.select2 'val')
       @model.params.categories = _.map @ui.categories.select2('val'), (item) ->
         parseInt item
 

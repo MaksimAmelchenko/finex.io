@@ -216,7 +216,6 @@
 
       _.each(items, (item) ->
         item.date = moment(item.dBalance, 'YYYY-MM-DD').toDate()
-        item.sum = Math.round(item.sum)
       )
 
       x.domain([moment(@model.params.dBegin, 'YYYY-MM-DD').toDate(),

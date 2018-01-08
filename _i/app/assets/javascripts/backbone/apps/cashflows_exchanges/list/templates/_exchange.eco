@@ -74,7 +74,7 @@
     <%= CashFlow.entities.accounts.get(@idAccountFee).get('name') unless _.isNull @idAccountFee %>
 </td>
 <td class="sum hidden-xs hidden-sm">
-    <%- @numberToMoney(@fee, @idMoney) unless _.isNull @fee %>
+    <%- @numberToMoney(@fee, @idMoneyFee) unless _.isNull @fee %>
 </td>
 <td class="symbol hidden-xs hidden-sm">
     <%- CashFlow.entities.moneys.get(@idMoneyFee).get('symbol') unless _.isNull @idMoneyFee %>

@@ -96,7 +96,7 @@
       else
         'dashboard_balances/list/_empty'
 
-#    template: 'dashboard_accounts_balances/list/_balances'
+    #    template: 'dashboard_accounts_balances/list/_balances'
 
     modelEvents:
       'sync refresh': 'render'
@@ -109,7 +109,7 @@
         sums += """
           <div class="row">
             <div class="col-xs-12">
-              #{'<nobr>' + s.numberFormat(balance.sum, 2, '.', ' ') + '</nobr>'}
+              #{App.Utilities.numberToMoney(balance.sum, balance.idMoney)}
             </div>
           </div>
           """
@@ -193,7 +193,6 @@
               'id' + item.idAccount, accountType.id, item.balances)
 
 
-
       @$('table[name=accountBalances] > tbody').append tbody
       @$('table[name=accountBalances]').treetable
         expandable: true
@@ -237,7 +236,7 @@
         clickableNodeNames: true
         stringCollapse: ''
         stringExpand: ''
-#        initialState: 'expanded'
+      #        initialState: 'expanded'
         indent: 0
 
       @$('tr.branch').addClass 'active'
