@@ -42,7 +42,7 @@
         "<a href='#{url}'>#{@escape(name)}</a>"
 
       numberToMoney: (value, idMoney) ->
-        '<nobr>' + s.numberFormat(value, 2, '.', ' ') + '</nobr>'
+        App.Utilities.numberToMoney(value, idMoney)
 
       formatDate: (value, isShort = false) ->
         if value

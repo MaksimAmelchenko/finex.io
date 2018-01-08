@@ -13,6 +13,7 @@
       name: ''
       symbol: ''
       isEnabled: true
+      precision: 2
 
     parse: (response, options)->
       if not _.isUndefined response.money

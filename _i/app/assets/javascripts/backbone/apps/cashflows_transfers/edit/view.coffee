@@ -34,6 +34,8 @@
       'changeDate @ui.dTransfer': 'changeDateDTransfer'
       'keydown @ui.sum': 'keyPress'
       'focusout @ui.sum': 'recalculateSum'
+      'focusout @ui.fee': 'recalculateSumFee'
+      'keydown @ui.fee': 'keyPress'
       'click div[name=money] ul.dropdown-menu li': 'selectMoney'
       'click div[name=moneyFee] ul.dropdown-menu li': 'selectMoneyFee'
 
@@ -45,6 +47,14 @@
 
       @config = options.config
 
+    updateMoneyPrecision: (idMoney) ->
+      money = App.entities.moneys.findWhere({idMoney})
+      @precision = if money then money.get('precision') else 2
+
+    updateMoneyFeePrecision: (idMoney) ->
+      money = App.entities.moneys.findWhere({idMoney})
+      @precisionFee = if money then money.get('precision') else 2
+
     recalculateSum: ->
       value = _.trim(@ui.sum.val())
       if value isnt ''
@@ -54,12 +64,24 @@
         catch
           undefined
 
-        @ui.sum.val(round(sum, 2)) if _.isNumber(sum)
+        @ui.sum.val(round(sum, @precision)) if _.isNumber(sum)
+
+    recalculateSumFee: (e) ->
+      $el = $(e.target)
+      value = _.trim $el.val()
+      if value isnt ''
+        value = value.replace(/[,ю]/g, '.').replace(/\s/g, '')
+        try
+          sum = eval(value)
+        catch
+          undefined
+        @ui.fee.val(round(sum, @precisionFee)) if _.isNumber(sum)
 
     keyPress: (e) ->
       code = e.keyCode || e.which
       if code is 13
         @recalculateSum()
+        @recalculateSumFee()
 
     selectMoney: (e)->
       e.preventDefault()
@@ -67,6 +89,7 @@
       li.siblings().removeClass('active').end().addClass('active')
 
       @ui.money.text(li.data('text')).data('idMoney', li.data('idMoney'))
+      @updateMoneyPrecision(li.data('idMoney'))
 
     selectMoneyFee: (e)->
       e.preventDefault()
@@ -74,6 +97,7 @@
       li.siblings().removeClass('active').end().addClass('active')
 
       @ui.moneyFee.text(li.data('text')).data('idMoney', li.data('idMoney'))
+      @updateMoneyFeePrecision(li.data('idMoney'))
 
     changeDateDTransfer: ->
       # reportPeriod is dependence from dTransfer unless it does not changed
@@ -158,6 +182,8 @@
 
 
     onRender: ->
+      @updateMoneyPrecision(@model.get('idMoney'))
+      @updateMoneyFeePrecision(@model.get('idMoneyFee'))
       @ui.dTransfer.datepicker('setDate', moment(@model.get('dTransfer'), 'YYYY-MM-DD').toDate())
       @ui.reportPeriod.datepicker('setDate',
         moment(@model.get('reportPeriod'), 'YYYY-MM-DD').toDate())

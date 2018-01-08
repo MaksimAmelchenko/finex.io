@@ -7,6 +7,7 @@
       name: '[name=name]'
       symbol: '[name=symbol]'
       isEnabled: '[name=isEnabled]'
+      precision: '[name=precision]'
       form: 'form'
 
     form:
@@ -41,6 +42,7 @@
       name: @ui.name.val()
       symbol: @ui.symbol.val()
       isEnabled: @ui.isEnabled.prop('checked')
+      precision: @ui.precision.val()
 
     getPatch: ->
       compareJSON @model.toJSON(), @serialize()
@@ -78,6 +80,7 @@
       @ui.currency.select2('val', @model.get('idCurrency'))
 
       @ui.name.val @model.get('name')
+      @ui.precision.val @model.get('precision')
       @ui.symbol.val @model.get('symbol')
 
       @ui.isEnabled.prop('checked', @model.get('isEnabled'))

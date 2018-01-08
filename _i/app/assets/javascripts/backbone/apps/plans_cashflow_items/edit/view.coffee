@@ -67,6 +67,10 @@
 
       @config = options.config
 
+    updateMoneyPrecision: (idMoney) ->
+      money = App.entities.moneys.findWhere({idMoney})
+      @precision = money.get('precision')
+
     recalculateSum: ->
       value = _.trim @ui.sum.val()
       if value isnt ''
@@ -76,7 +80,7 @@
         catch
           undefined
 
-        @ui.sum.val(round(sum, 2)) if _.isNumber(sum)
+        @ui.sum.val(round(sum, @precision)) if _.isNumber(sum)
 
     keyPress: (e) ->
       code = e.keyCode || e.which
@@ -103,6 +107,7 @@
       li.siblings().removeClass('active').end().addClass('active')
 
       @ui.money.text(li.data('text')).data('idMoney', li.data('idMoney'))
+      @updateMoneyPrecision(li.data('idMoney'))
 
     selectUnit: (e)->
       e.preventDefault()
@@ -163,6 +168,7 @@
       "Запланированная операция &gt; #{if @model.isNew() then 'Добавление' else 'Редактирование'}"
 
     onRender: ->
+      @updateMoneyPrecision(@model.get('idMoney'))
       @ui.dBegin.datepicker('setDate', moment(@model.get('dBegin'), 'YYYY-MM-DD').toDate())
 
       @ui.reportPeriod
