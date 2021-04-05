@@ -52,13 +52,13 @@ do ($) ->
     ui.error.empty().hide()
     return if not ui.form.valid()
 
-    if not $('#g-recaptcha-response').val()
-      alert "Пожалуйста, подтвердите, что вы не робот"
-      return
+#    if not $('#g-recaptcha-response').val()
+#      alert "Пожалуйста, подтвердите, что вы не робот"
+#      return
 
     ui.btnSignUp.amkDisable()
     $.ajax
-      url: '{server}/v1/signup'
+      url: '{server}/v2/sign-up'
       type: 'POST'
       contentType: 'application/json'
       dataType: 'json'

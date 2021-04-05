@@ -3,7 +3,7 @@ do ($) ->
 
   if token
     $.ajax
-      url: '{server}/v1/signup/confirm'
+      url: '{server}/v2/sign-up/confirm'
       type: 'POST'
       contentType: 'application/json'
       dataType: 'json'

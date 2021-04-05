@@ -38,7 +38,7 @@ do ($) ->
     ui.btnRecovery.amkDisable()
 
     $.ajax
-      url: '{server}/v1/password_recovery'
+      url: '{server}/v2/reset-password'
       type: 'POST'
       contentType: 'application/json'
       dataType: 'json'

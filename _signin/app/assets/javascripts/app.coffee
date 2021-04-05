@@ -37,12 +37,12 @@ do ($) ->
     ui.btnSignIn.amkDisable()
 
     $.ajax
-      url: '{server}/v1/signin'
+      url: '{server}/v2/sign-in'
       type: 'POST'
       contentType: 'application/json'
       dataType: 'json'
       data: JSON.stringify
-        login: ui.email.val()
+        username: ui.email.val()
         password: ui.password.val()
       success: (res, textStatus, jqXHR)->
         ui.btnSignIn.amkEnable()
