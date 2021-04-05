@@ -8,13 +8,14 @@
   "author": "Maksim Amelchenko <m.amelchenko@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/maksim-amko/finex.io.git"
+    "url": "https://gitlab.com/finex.io/app/frontend.git"
   },
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=development http-server -a localhost -p 8080 & gulp"
+    "start": "NODE_ENV=development http-server -a localhost -p 8080 & gulp",
+    "build": "gulp build --production"
   },
-  "devDependencies": {
+  "dependencies": {
     "gulp": "^3.9.1",
     "gulp-cached": "^1.1.1",
     "gulp-coffee": "^2.3.3",
@@ -37,9 +38,7 @@
     "gulp-uglify": "^2.0.1",
     "gulp-util": "^3.0.8",
     "run-sequence": "^1.2.2",
-    "yargs": "^6.6.0"
-  },
-  "dependencies": {
+    "yargs": "^6.6.0",
     "gulp-sass": "^3.1.0"
   }
 }

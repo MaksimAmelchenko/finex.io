@@ -1,0 +1,31 @@
+server {
+  listen 80;
+
+  charset utf-8;
+  server_name localhost;
+
+  root "/usr/share/nginx/html";
+
+  # Media: images, icons, video, audio
+  location ~* \.(?:png|gif|jpe?g|webm|ico|svg|woff2?)$ {
+    expires max;
+    add_header Cache-Control "public";
+  }
+
+  location ~* \.(?:css|js)$ {
+    expires max;
+    add_header Access-Control-Allow-Origin *;
+    add_header Cache-Control "public";
+  }
+
+  location /api {
+    return 510 'the reverse proxy for /api is not implemented';
+  }
+
+  location / {
+    etag on;
+    add_header Cache-Control "no-cache";
+    try_files $uri /index.html;
+#    add_header X-Version ${VERSION};
+  }
+}
